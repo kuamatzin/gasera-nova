@@ -73,10 +73,10 @@ class Record extends Resource
             Text::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
             Text::make('Celular, Teléfono local o para recados', 'telefono_recados'),
             Text::make('Nombre del propietario y/o Dependencia', 'correo_electronico'),
-            Text::make('Nombre del propietario y/o Dependencia', 'calificacion_propietario'),
-            Text::make('Dirección del propietario para notificaciones (Debe incluir link de Google Street)', 'direccion_propietario_notificaciones'),
-            Text::make('Código de Google Street', 'codigo_google_street'),
-            Boolean::make('Representante Legal', 'representante_legal'),
+            Text::make('Nombre del propietario y/o Dependencia', 'calificacion_propietario')->hideFromIndex(),
+            Text::make('Dirección del propietario para notificaciones (Debe incluir link de Google Street)', 'direccion_propietario_notificaciones')->hideFromIndex(),
+            Text::make('Código de Google Street', 'codigo_google_street')->hideFromIndex(),
+            Boolean::make('Representante Legal', 'representante_legal')->hideFromIndex(),
             Text::make('Representante Legal', 'nombre_representante_legal')
                 ->hide()
                 ->dependsOn(
@@ -86,7 +86,7 @@ class Record extends Resource
                             $field->show()->rules('required');
                         }
                     }
-                ),
+                )->hideFromIndex(),
             Text::make('Celular, Teléfono local para recados', 'telefono_recados_representante_legal')->nullable()->hide()
                 ->dependsOn(
                     ['representante_legal'],
@@ -95,7 +95,7 @@ class Record extends Resource
                             $field->show()->rules('required');
                         }
                     }
-                ),
+                )->hideFromIndex(),
             Text::make('Correo electrónico', 'correo_electronico_representante_legal')->nullable()->hide()
                 ->dependsOn(
                     ['representante_legal'],
@@ -104,7 +104,7 @@ class Record extends Resource
                             $field->show()->rules('required');
                         }
                     }
-                ),
+                )->hideFromIndex(),
             Text::make('Observaciones o comentarios', 'observaciones_representante_legal')->nullable()->hide()
                 ->dependsOn(
                     ['representante_legal'],
@@ -113,18 +113,18 @@ class Record extends Resource
                             $field->show()->rules('required');
                         }
                     }
-                ),
+                )->hideFromIndex(),
         ];
     }
 
     public function inmuebleFields()
     {
         return [
-            Text::make('Dirección', 'direccion_inmueble'),
+            Text::make('Dirección', 'direccion_inmueble')->hideFromIndex(),
             Select::make('Estado', 'estado_inmueble')->options([
                 'chihuahua' => 'Chihuahua',
                 'sonora' => 'Sonora',
-            ]),
+            ])->hideFromIndex(),
             Select::make('Municipio', 'municipio_inmueble')->options([])->hide()->dependsOn(
                 ['estado_inmueble'],
                 function (Select $field, NovaRequest $request, FormData $formData) {
@@ -155,16 +155,16 @@ class Record extends Resource
                         $field->hide();
                     }
                 }
-            ),
-            Text::make('Poblado', 'poblado_inmueble'),
+            )->hideFromIndex(),
+            Text::make('Poblado', 'poblado_inmueble')->hideFromIndex(),
             Select::make('Régimen de propiedad', 'regimen_propiedad_inmueble')->options([
                 'pr' => 'Propiedad privada',
                 'ej' => 'Propiedad ejidal',
                 'pa' => 'Parcela',
                 'po' => 'Posesión',
                 'ca' => 'Comunidad Agraria',
-            ]),
-            Text::make('Uso de suelo', 'uso_suelo_inmueble'),
+            ])->hideFromIndex(),
+            Text::make('Uso de suelo', 'uso_suelo_inmueble')->hideFromIndex(),
         ];
     }
 
@@ -175,16 +175,16 @@ class Record extends Resource
                 'servidumbre_voluntaria' => 'Servidumbre voluntaria',
                 'estacion_medicion' => 'Estación de medición',
                 'valvula_seccionamiento' => 'Válvula de seccionamiento',
-            ]),
-            Text::make('Superficie contratada m2', 'superficie_contratada_m2_superficie'),
-            Text::make('Superficie m2 franja de uso temporal', 'superficia_m2_franja_uso_temporal_superficie'),
-            Text::make('Superficie m2 FUTE', 'superficie_m2_fute_superficie'),
-            Text::make('Superficie total contratada m2', 'superficie_total_contratada_m2_superficie'),
-            Text::make('Km inicial', 'km_inicial_superficie'),
-            Text::make('Km final', 'km_final_superficie'),
-            Text::make('Longitud de afectación ML', 'longitud_afectacion_superficie'),
-            Text::make('Coordenada E', 'coordenada_e_superficie'),
-            Text::make('Coordenada N', 'coordenada_n_superficie'),
+            ])->hideFromIndex(),
+            Text::make('Superficie contratada m2', 'superficie_contratada_m2_superficie')->hideFromIndex(),
+            Text::make('Superficie m2 franja de uso temporal', 'superficia_m2_franja_uso_temporal_superficie')->hideFromIndex(),
+            Text::make('Superficie m2 FUTE', 'superficie_m2_fute_superficie')->hideFromIndex(),
+            Text::make('Superficie total contratada m2', 'superficie_total_contratada_m2_superficie')->hideFromIndex(),
+            Text::make('Km inicial', 'km_inicial_superficie')->hideFromIndex(),
+            Text::make('Km final', 'km_final_superficie')->hideFromIndex(),
+            Text::make('Longitud de afectación ML', 'longitud_afectacion_superficie')->hideFromIndex(),
+            Text::make('Coordenada E', 'coordenada_e_superficie')->hideFromIndex(),
+            Text::make('Coordenada N', 'coordenada_n_superficie')->hideFromIndex(),
         ];
     }
 
@@ -233,16 +233,18 @@ class Record extends Resource
     public function ejidoFields()
     {
         return [
-            JSON::make('', 'documentacion', $this->addHideFieldUntilOptionIsSelected(File::make('Acta de elección de los órganos', 'ae_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Resolución presidencial de dotación de tierras', 'rp_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Carpeta básica del ejido', 'cb_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Plano general del ejido', 'pg_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Identificación oficial de los representantes ejidales', 'id_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Padrón vigente de ejidatarios', 'pv_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Acta de asamblea autorizando el proyecto', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Certificado parcelario con destino específico', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Reglamento del ejido', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Otro', 'ot_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),)
+            JSON::make('', 'documentacion', [
+                $this->addHideFieldUntilOptionIsSelected(File::make('Acta de elección de los órganos', 'ae_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Resolución presidencial de dotación de tierras', 'rp_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Carpeta básica del ejido', 'cb_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Plano general del ejido', 'pg_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Identificación oficial de los representantes ejidales', 'id_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Padrón vigente de ejidatarios', 'pv_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Acta de asamblea autorizando el proyecto', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Certificado parcelario con destino específico', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Reglamento del ejido', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Otro', 'ot_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej')
+            ])
         ];
     }
 
@@ -252,16 +254,18 @@ class Record extends Resource
             [$option],
             function (File $field, NovaRequest $request, FormData $formData) use ($option, $optionSelected) {
                 if ($formData[$option] === $optionSelected) {
-                    $field->show()->rules('required');
+                    $field->show();
                 }
             }
-        );
+        )->showOnDetail(function (NovaRequest $request, $resource) use ($option, $optionSelected) {
+            return $this[$option] === $optionSelected;
+        });
     }
 
     public function mapaFields()
     {
         return [
-            Text::make('Dirección', 'direccion_inmueble'),
+            Text::make('Dirección', 'direccion_inmueble')->hideFromIndex(),
         ];
     }
 
