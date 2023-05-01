@@ -12,6 +12,16 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class User extends Resource
 {
+    public static function label()
+    {
+        return __('Usuarios');
+    }
+
+
+    public static function singularLabel()
+    {
+        return __('Usuario');
+    }
     /**
      * The model the resource corresponds to.
      *

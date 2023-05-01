@@ -45,6 +45,7 @@ return new class extends Migration
             $table->string('coordenada_n_superficie');
             //Mapa afectacion
             $table->string('mapa_afectacion_path');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -4,7 +4,10 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\File;
+use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
@@ -56,11 +59,15 @@ class Record extends Resource
         return [
             ID::make()->sortable(),
             new Panel('Propietario', $this->propietarioFields()),
-            new Panel('Datos del inmueble a contratar', $this->inmuebleFields())
+            new Panel('Datos del inmueble a contratar', $this->inmuebleFields()),
+            new Panel('Superficies a contratar', $this->superficieFields()),
+            new Panel('Mapa de afectación', $this->mapaFields()),
+            new Panel('Documentación', $this->documentacionFields())
         ];
     }
 
-    public function propietarioFields() {
+    public function propietarioFields()
+    {
         return [
             Text::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
             Text::make('Celular, Teléfono local o para recados', 'telefono_recados'),
@@ -69,21 +76,182 @@ class Record extends Resource
             Text::make('Dirección del propietario para notificaciones (Debe incluir link de Google Street)', 'direccion_propietario_notificaciones'),
             Text::make('Código de Google Street', 'codigo_google_street'),
             Boolean::make('Representante Legal', 'representante_legal'),
-            Text::make('Representante Legal', 'nombre_representante_legal')->nullable(),
-            Text::make('Celular, Teléfono local para recados', 'telefono_recados_representante_legal')->nullable(),
-            Text::make('Correo electrónico', 'correo_electronico_representante_legal')->nullable(),
-            Text::make('Observaciones o comentarios', 'observaciones_representante_legal')->nullable(),
+            Text::make('Representante Legal', 'nombre_representante_legal')
+                ->hide()
+                ->dependsOn(
+                    ['representante_legal'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->representante_legal) {
+                            $field->show()->rules('required');
+                        }
+                    }
+                ),
+            Text::make('Celular, Teléfono local para recados', 'telefono_recados_representante_legal')->nullable()->hide()
+                ->dependsOn(
+                    ['representante_legal'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->representante_legal) {
+                            $field->show()->rules('required');
+                        }
+                    }
+                ),
+            Text::make('Correo electrónico', 'correo_electronico_representante_legal')->nullable()->hide()
+                ->dependsOn(
+                    ['representante_legal'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->representante_legal) {
+                            $field->show()->rules('required');
+                        }
+                    }
+                ),
+            Text::make('Observaciones o comentarios', 'observaciones_representante_legal')->nullable()->hide()
+                ->dependsOn(
+                    ['representante_legal'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->representante_legal) {
+                            $field->show()->rules('required');
+                        }
+                    }
+                ),
         ];
     }
 
-    public function inmuebleFields() {
+    public function inmuebleFields()
+    {
         return [
             Text::make('Dirección', 'direccion_inmueble'),
+            Select::make('Estado', 'estado_inmueble')->options([
+                'chihuahua' => 'Chihuahua',
+                'sonora' => 'Sonora',
+            ]),
+            Select::make('Municipio', 'municipio_inmueble')->options([])->hide()->dependsOn(
+                ['estado_inmueble'],
+                function (Select $field, NovaRequest $request, FormData $formData) {
+                    if ($formData->estado_inmueble === 'sonora') {
+                        $field->show()->rules('required');
+                        $field->options([
+                            '10' => 'Bacerac',
+                            '23' => 'Cumpas',
+                            '31' => 'Hachinera',
+                            '47' => 'Pitiquito',
+                            '64' => 'Trincheras',
+                            '22' => 'Cucurpe',
+                            '58' => 'Santa Ana',
+                            '06' => 'Arizpe',
+                            '67' => 'Villa Hidalgo',
+                        ]);
+                    } else if ($formData->estado_inmueble === 'chihuahua') {
+                        $field->show()->rules('required');
+                        $field->options([
+                            '01' => 'Villa Ahumada',
+                            '10' => 'Buenaventura',
+                            '13' => 'Casas Grandes',
+                            '23' => 'Galeana',
+                            '28' => 'Guadalupe',
+                            '50' => 'Nuevo Casas Grandes',
+                        ]);
+                    } else {
+                        $field->hide();
+                    }
+                }
+            ),
             Text::make('Poblado', 'poblado_inmueble'),
-            Text::make('Municipio', 'municipio_inmueble'),
-            Text::make('Estado', 'estado_inmueble'),
-            Text::make('Régimen de propiedad', 'regimen_propiedad_inmueble'),
+            Select::make('Régimen de propiedad', 'regimen_propiedad_inmueble')->options([
+                'pr' => 'Propiedad privada',
+                'ej' => 'Propiedad ejidal',
+                'pa' => 'Parcela',
+                'po' => 'Posesión',
+                'ca' => 'Comunidad Agraria',
+            ]),
             Text::make('Uso de suelo', 'uso_suelo_inmueble'),
+        ];
+    }
+
+    public function superficieFields()
+    {
+        return [
+            Select::make('Tipo de afectación', 'tipo_afectacion_superficie')->options([
+                'servidumbre_voluntaria' => 'Servidumbre voluntaria',
+                'estacion_medicion' => 'Estación de medición',
+                'valvula_seccionamiento' => 'Válvula de seccionamiento',
+            ]),
+            Text::make('Superficie contratada m2', 'superficie_contratada_m2_superficie'),
+            Text::make('Superficie m2 franja de uso temporal', 'superficia_m2_franja_uso_temporal_superficie'),
+            Text::make('Superficie m2 FUTE', 'superficie_m2_fute_superficie'),
+            Text::make('Superficie total contratada m2', 'superficie_total_contratada_m2_superficie'),
+            Text::make('Km inicial', 'km_inicial_superficie'),
+            Text::make('Km final', 'km_final_superficie'),
+            Text::make('Longitud de afectación ML', 'longitud_afectacion_superficie'),
+            Text::make('Coordenada E', 'coordenada_e_superficie'),
+            Text::make('Coordenada N', 'coordenada_n_superficie'),
+        ];
+    }
+
+    public function documentacionFields() {
+        return array_merge($this->propiedadPrivadaFields(), $this->parcelaFields(), $this->ejidoFields());
+    }
+
+    public function propiedadPrivadaFields() {
+        return [
+            $this->addHideFieldUntilOptionIsSelected(File::make('Identificación oficial', 'id_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Acta de nacimiento', 'an_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('CURP', 'curp_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('RFC', 'rfc_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Comprobante de domicilio', 'cd_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Escrituras o título de propiedad', 'es_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Plano de propiedad', 'pp_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Predial', 'pr_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Certificado libre de gravamen', 'cl_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Poder notarial para actos de dominio', 'pd_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Acta constitutiva', 'ac_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Otro', 'ot_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+        ];
+    }
+
+    public function parcelaFields() {
+        return [
+            $this->addHideFieldUntilOptionIsSelected(File::make('Identificación oficial', 'id_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Acta de nacimiento', 'an_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('CURP', 'curp_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('RFC', 'rfc_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Comprobante de domicilio', 'cd_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Certificado parcelario', 'cp_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Constancia de vigencia de derechos', 'cv_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Poder notarial para actos de dominio', 'pn_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Otro', 'ot_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+        ];
+    }
+
+    public function ejidoFields() {
+        return [
+            $this->addHideFieldUntilOptionIsSelected(File::make('Acta de elección de los órganos', 'ae_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Resolución presidencial de dotación de tierras', 'rp_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Carpeta básica del ejido', 'cb_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Plano general del ejido', 'pg_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Identificación oficial de los representantes ejidales', 'id_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Padrón vigente de ejidatarios', 'pv_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Acta de asamblea autorizando el proyecto', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Certificado parcelario con destino específico', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Reglamento del ejido', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Otro', 'ot_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+        ];
+    }
+
+    public function addHideFieldUntilOptionIsSelected($field, $option, $optionSelected) {
+        return $field->acceptedTypes('.pdf')->nullable()->hide()->dependsOn(
+            [$option],
+            function (File $field, NovaRequest $request, FormData $formData) use ($option, $optionSelected) {
+                if ($formData[$option] === $optionSelected) {
+                    $field->show()->rules('required');
+                }
+            }
+        );
+    }
+
+    public function mapaFields()
+    {
+        return [
+            Text::make('Dirección', 'direccion_inmueble'),
         ];
     }
 
