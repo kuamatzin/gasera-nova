@@ -14,38 +14,40 @@ return new class extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->id();
             // Propietario
-            $table->string('nombre_propietario_dependencia');
-            $table->string('telefono_recados');
-            $table->string('correo_electronico');
-            $table->string('calificacion_propietario');
-            $table->string('direccion_propietario_notificaciones');
-            $table->string('codigo_google_street');
-            $table->boolean('representante_legal');
+            $table->string('nombre_propietario_dependencia')->nullable();;
+            $table->string('telefono_recados')->nullable();;
+            $table->string('correo_electronico')->nullable();;
+            $table->string('calificacion_propietario')->nullable();;
+            $table->string('direccion_propietario_notificaciones')->nullable();;
+            $table->string('codigo_google_street')->nullable();;
+            $table->boolean('representante_legal')->nullable();;
             $table->string('nombre_representante_legal')->nullable();
             $table->string('telefono_recados_representante_legal')->nullable();
             $table->string('correo_electronico_representante_legal')->nullable();
             $table->string('observaciones_representante_legal')->nullable();
             // Inmueble
-            $table->string('direccion_inmueble');
-            $table->string('poblado_inmueble');
-            $table->string('municipio_inmueble');
-            $table->string('estado_inmueble');
-            $table->string('regimen_propiedad_inmueble');
-            $table->string('uso_suelo_inmueble');
+            $table->string('direccion_inmueble')->nullable();;
+            $table->string('poblado_inmueble')->nullable();;
+            $table->string('municipio_inmueble')->nullable();;
+            $table->string('estado_inmueble')->nullable();;
+            $table->string('regimen_propiedad_inmueble')->nullable();;
+            $table->string('uso_suelo_inmueble')->nullable();;
             //Superficies a contratar
-            $table->string('tipo_afectacion_superficie');
-            $table->string('superficie_contratada_m2_superficie');
-            $table->string('superficia_m2_franja_uso_temporal_superficie');
-            $table->string('superficie_m2_fute_superficie');
-            $table->string('superficie_total_contratada_m2_superficie');
-            $table->string('km_inicial_superficie');
-            $table->string('km_final_superficie');
-            $table->string('longitud_afectacion_superficie');
-            $table->string('coordenada_e_superficie');
-            $table->string('coordenada_n_superficie');
+            $table->string('tipo_afectacion_superficie')->nullable();;
+            $table->string('superficie_contratada_m2_superficie')->nullable();;
+            $table->string('superficia_m2_franja_uso_temporal_superficie')->nullable();;
+            $table->string('superficie_m2_fute_superficie')->nullable();;
+            $table->string('superficie_total_contratada_m2_superficie')->nullable();;
+            $table->string('km_inicial_superficie')->nullable();;
+            $table->string('km_final_superficie')->nullable();;
+            $table->string('longitud_afectacion_superficie')->nullable();;
+            $table->string('coordenada_e_superficie')->nullable();;
+            $table->string('coordenada_n_superficie')->nullable();;
             //Mapa afectacion
-            $table->string('mapa_afectacion_path');
-            $table->string('status');
+            $table->string('mapa_afectacion_path')->nullable();;
+            //Documentacion
+            $table->text('documentacion')->nullable();
+            $table->string('status')->default('PROGRESS');;
             $table->timestamps();
         });
     }

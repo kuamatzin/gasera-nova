@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
+use Stepanenko3\NovaJson\JSON;
 
 class Record extends Resource
 {
@@ -187,44 +188,52 @@ class Record extends Resource
         ];
     }
 
-    public function documentacionFields() {
+    public function documentacionFields()
+    {
         return array_merge($this->propiedadPrivadaFields(), $this->parcelaFields(), $this->ejidoFields());
     }
 
-    public function propiedadPrivadaFields() {
+    public function propiedadPrivadaFields()
+    {
         return [
-            $this->addHideFieldUntilOptionIsSelected(File::make('Identificación oficial', 'id_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Acta de nacimiento', 'an_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('CURP', 'curp_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('RFC', 'rfc_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Comprobante de domicilio', 'cd_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Escrituras o título de propiedad', 'es_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Plano de propiedad', 'pp_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Predial', 'pr_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Certificado libre de gravamen', 'cl_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Poder notarial para actos de dominio', 'pd_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Acta constitutiva', 'ac_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Otro', 'ot_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            JSON::make('', 'documentacion', [
+                $this->addHideFieldUntilOptionIsSelected(File::make('Identificación oficial', 'id_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Acta de nacimiento', 'an_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('CURP', 'curp_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('RFC', 'rfc_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Comprobante de domicilio', 'cd_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Escrituras o título de propiedad', 'es_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Plano de propiedad', 'pp_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Predial', 'pr_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Certificado libre de gravamen', 'cl_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Poder notarial para actos de dominio', 'pd_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Acta constitutiva', 'ac_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Otro', 'ot_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+            ])
         ];
     }
 
-    public function parcelaFields() {
+    public function parcelaFields()
+    {
         return [
-            $this->addHideFieldUntilOptionIsSelected(File::make('Identificación oficial', 'id_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Acta de nacimiento', 'an_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('CURP', 'curp_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('RFC', 'rfc_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Comprobante de domicilio', 'cd_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Certificado parcelario', 'cp_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Constancia de vigencia de derechos', 'cv_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Poder notarial para actos de dominio', 'pn_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Otro', 'ot_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+            JSON::make('', 'documentacion', [
+                $this->addHideFieldUntilOptionIsSelected(File::make('Identificación oficial', 'id_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Acta de nacimiento', 'an_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('CURP', 'curp_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('RFC', 'rfc_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Comprobante de domicilio', 'cd_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Certificado parcelario', 'cp_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Constancia de vigencia de derechos', 'cv_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Poder notarial para actos de dominio', 'pn_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+                $this->addHideFieldUntilOptionIsSelected(File::make('Otro', 'ot_pa')->disk('public'), 'regimen_propiedad_inmueble', 'pa'),
+            ])
         ];
     }
 
-    public function ejidoFields() {
+    public function ejidoFields()
+    {
         return [
-            $this->addHideFieldUntilOptionIsSelected(File::make('Acta de elección de los órganos', 'ae_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+            JSON::make('', 'documentacion', $this->addHideFieldUntilOptionIsSelected(File::make('Acta de elección de los órganos', 'ae_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
             $this->addHideFieldUntilOptionIsSelected(File::make('Resolución presidencial de dotación de tierras', 'rp_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
             $this->addHideFieldUntilOptionIsSelected(File::make('Carpeta básica del ejido', 'cb_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
             $this->addHideFieldUntilOptionIsSelected(File::make('Plano general del ejido', 'pg_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
@@ -233,11 +242,12 @@ class Record extends Resource
             $this->addHideFieldUntilOptionIsSelected(File::make('Acta de asamblea autorizando el proyecto', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
             $this->addHideFieldUntilOptionIsSelected(File::make('Certificado parcelario con destino específico', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
             $this->addHideFieldUntilOptionIsSelected(File::make('Reglamento del ejido', 'aa_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
-            $this->addHideFieldUntilOptionIsSelected(File::make('Otro', 'ot_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),
+            $this->addHideFieldUntilOptionIsSelected(File::make('Otro', 'ot_ej')->disk('public'), 'regimen_propiedad_inmueble', 'ej'),)
         ];
     }
 
-    public function addHideFieldUntilOptionIsSelected($field, $option, $optionSelected) {
+    public function addHideFieldUntilOptionIsSelected($field, $option, $optionSelected)
+    {
         return $field->acceptedTypes('.pdf')->nullable()->hide()->dependsOn(
             [$option],
             function (File $field, NovaRequest $request, FormData $formData) use ($option, $optionSelected) {

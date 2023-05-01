@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c0fdfc7c0adccf730609ea30bd40a7ed",
+    "content-hash": "86d42c50021c88b50e55b592731f8825",
     "packages": [
         {
             "name": "brick/math",
@@ -3849,6 +3849,55 @@
                 }
             ],
             "time": "2022-04-21T12:23:20+00:00"
+        },
+        {
+            "name": "stepanenko3/nova-json",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stepanenko3/nova-json.git",
+                "reference": "2add0ec3a99aacfc5b676c48b677025694937fc7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stepanenko3/nova-json/zipball/2add0ec3a99aacfc5b676c48b677025694937fc7",
+                "reference": "2add0ec3a99aacfc5b676c48b677025694937fc7",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0",
+                "php": ">=8.0"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "Stepanenko3\\NovaJson\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Artem Stepanenko",
+                    "email": "stpnnk.artem@gmail.com"
+                },
+                {
+                    "name": "Krishan Koenig",
+                    "email": "krishan.koenig@googlemail.com"
+                }
+            ],
+            "description": "Nova json field to spread a json column throughout multiple fields.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/stepanenko3/nova-json/issues",
+                "source": "https://github.com/stepanenko3/nova-json/tree/v3.1.0"
+            },
+            "time": "2022-09-21T09:33:43+00:00"
         },
         {
             "name": "symfony/console",
