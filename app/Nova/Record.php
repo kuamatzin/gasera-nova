@@ -3,6 +3,9 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Inovuz\FileEsteroids\FileEsteroids;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\FormData;
@@ -59,6 +62,7 @@ class Record extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make('Usuario', 'user', User::class),
             new Panel('Propietario', $this->propietarioFields()),
             new Panel('Datos del inmueble a contratar', $this->inmuebleFields()),
             new Panel('Superficies a contratar', $this->superficieFields()),
@@ -70,7 +74,8 @@ class Record extends Resource
     public function propietarioFields()
     {
         return [
-            Text::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
+            FileEsteroids::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
+            //Text::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
             Text::make('Celular, Teléfono local o para recados', 'telefono_recados'),
             Text::make('Nombre del propietario y/o Dependencia', 'correo_electronico'),
             Text::make('Nombre del propietario y/o Dependencia', 'calificacion_propietario')->hideFromIndex(),

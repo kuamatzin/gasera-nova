@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users');
             // Propietario
             $table->string('nombre_propietario_dependencia')->nullable();;
             $table->string('telefono_recados')->nullable();;

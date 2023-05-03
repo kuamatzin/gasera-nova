@@ -2,7 +2,9 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "build-file-esteroids": "cd nova-components/FileEsteroids && npm run dev",
+        "build-file-esteroids-prod": "cd nova-components/FileEsteroids && npm run prod"
     },
     "devDependencies": {
         "axios": "^1.1.2",
