@@ -9,6 +9,8 @@ class Record extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $casts = [
         'documentacion' => 'array',
     ];

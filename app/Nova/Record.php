@@ -49,8 +49,22 @@ class Record extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'nombre_propietario_dependencia'
     ];
+
+    /**
+     * @param NovaRequest $request
+     * @param $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        return match ($request->user()->role) {
+            'admin' => $query,
+            'abogado', 'coordinador', 'director', 'gestor' => $query->where('user_id', $request->user()->id),
+            default => $query->where('user_id', $request->user()->id),
+        };
+    }
 
     /**
      * Get the fields displayed by the resource.
@@ -74,10 +88,10 @@ class Record extends Resource
     public function propietarioFields()
     {
         return [
-            FileEsteroids::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
-            //Text::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
-            Text::make('Celular, Teléfono local o para recados', 'telefono_recados'),
-            Text::make('Nombre del propietario y/o Dependencia', 'correo_electronico'),
+            //FileEsteroids::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
+            Text::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
+            Text::make('Celular, Teléfono local o para recados', 'telefono_recados')->hideFromIndex(),
+            Text::make('Nombre del propietario y/o Dependencia', 'correo_electronico')->hideFromIndex(),
             Text::make('Nombre del propietario y/o Dependencia', 'calificacion_propietario')->hideFromIndex(),
             Text::make('Dirección del propietario para notificaciones (Debe incluir link de Google Street)', 'direccion_propietario_notificaciones')->hideFromIndex(),
             Text::make('Código de Google Street', 'codigo_google_street')->hideFromIndex(),
@@ -202,7 +216,17 @@ class Record extends Resource
     {
         return [
             JSON::make('', 'documentacion', [
-                $this->addHideFieldUntilOptionIsSelected(File::make('Identificación oficial', 'id_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                JSON::make('', 'id', [
+                    $this->addHideFieldUntilOptionIsSelected(File::make('Acta de nacimientosssss', 'an_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
+                    Select::make('Tipo de identificación oficial', 'tipo_id_pa')->options([
+                        'ine' => 'INE',
+                        'pasaporte' => 'Pasaporte',
+                        'cartilla' => 'Cartilla',
+                        'cedula' => 'Cédula profesional',
+                        'licencia' => 'Licencia de conducir',
+                        'otro' => 'Otro',
+                    ])->hideFromIndex(),
+                ]),
                 $this->addHideFieldUntilOptionIsSelected(File::make('Acta de nacimiento', 'an_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
                 $this->addHideFieldUntilOptionIsSelected(File::make('CURP', 'curp_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
                 $this->addHideFieldUntilOptionIsSelected(File::make('RFC', 'rfc_pr')->disk('public'), 'regimen_propiedad_inmueble', 'pr'),
