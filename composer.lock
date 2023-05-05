@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c869f38c9c9c76b11f0610fa27783a1",
+    "content-hash": "9ab8e3fcd141df9a749fbe0d7cce37ab",
     "packages": [
+        {
+            "name": "acme/color-picker",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/ColorPicker",
+                "reference": "937902fda0edff37f764e994f23b32e48d214215"
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Acme\\ColorPicker\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Acme\\ColorPicker\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova field.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
@@ -1031,6 +1067,99 @@
             "time": "2022-09-18T07:06:19+00:00"
         },
         {
+            "name": "formfeed-uk/nova-dependable-panel",
+            "version": "1.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Formfeed-UK/nova-dependable-panel.git",
+                "reference": "beed1de080d052747e9a2a284cf40ef64d8f5365"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Formfeed-UK/nova-dependable-panel/zipball/beed1de080d052747e9a2a284cf40ef64d8f5365",
+                "reference": "beed1de080d052747e9a2a284cf40ef64d8f5365",
+                "shasum": ""
+            },
+            "require": {
+                "formfeed-uk/nova-subfield-dependson": "^2.0.0",
+                "laravel/nova": "^4.0",
+                "nova-kit/nova-packages-tool": "^1.0",
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Formfeed\\DependablePanel\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Formfeed\\DependablePanel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova Field acting as a Panel for grouped dependsOn functionality",
+            "keywords": [
+                "dependsOn",
+                "laravel",
+                "nova",
+                "panel"
+            ],
+            "support": {
+                "issues": "https://github.com/Formfeed-UK/nova-dependable-panel/issues",
+                "source": "https://github.com/Formfeed-UK/nova-dependable-panel/tree/1.2.3"
+            },
+            "time": "2023-01-05T15:27:13+00:00"
+        },
+        {
+            "name": "formfeed-uk/nova-subfield-dependson",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Formfeed-UK/nova-subfield-dependson.git",
+                "reference": "d583c5919ab83882bf1e070b05ebb4e738b81ffb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Formfeed-UK/nova-subfield-dependson/zipball/d583c5919ab83882bf1e070b05ebb4e738b81ffb",
+                "reference": "d583c5919ab83882bf1e070b05ebb4e738b81ffb",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^8.0|^9.0|^10.0",
+                "laravel/nova": "^4.0",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Formfeed\\SubfieldDependsOn\\SubfieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Formfeed\\SubfieldDependsOn\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Functionality to allow fields which are contained within other fields to use Nova DependsOn",
+            "support": {
+                "issues": "https://github.com/Formfeed-UK/nova-subfield-dependson/issues",
+                "source": "https://github.com/Formfeed-UK/nova-subfield-dependson/tree/2.0.3"
+            },
+            "time": "2023-03-08T20:07:35+00:00"
+        },
+        {
             "name": "fruitcake/php-cors",
             "version": "v1.2.0",
             "source": {
@@ -1921,17 +2050,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.24.0",
+            "version": "4.24.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "3eb93de325760bdc232814c978521d2444097221"
+                "reference": "e7e314906c1eb78db237fe41e88501bdb493c391"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-3eb93de325760bdc232814c978521d2444097221-zip-0a31af.zip",
-                "reference": "3eb93de325760bdc232814c978521d2444097221",
-                "shasum": "f6315b4d009ad86db447934efb69637d1b18ff2a"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-e7e314906c1eb78db237fe41e88501bdb493c391-zip-8ca479.zip",
+                "reference": "e7e314906c1eb78db237fe41e88501bdb493c391",
+                "shasum": "0b5d908eb9ae6be049b625060ab459ec933342da"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0|^0.8.0",
@@ -2024,9 +2153,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.24.0"
+                "source": "https://github.com/laravel/nova/tree/v4.24.1"
             },
-            "time": "2023-05-04T17:25:48+00:00"
+            "time": "2023-05-05T14:09:37+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -3411,6 +3540,56 @@
                 "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.4"
             },
             "time": "2023-03-05T19:49:14+00:00"
+        },
+        {
+            "name": "nova-kit/nova-packages-tool",
+            "version": "v1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nova-kit/nova-packages-tool.git",
+                "reference": "ccd6f998c10b0413f27eda9b01b08ebe5b8a6111"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/ccd6f998c10b0413f27eda9b01b08ebe5b8a6111",
+                "reference": "ccd6f998c10b0413f27eda9b01b08ebe5b8a6111",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": ">=4.24.0 <4.25.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.24 || ^7.0 || ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NovaKit\\NovaPackagesTool\\LaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NovaKit\\NovaPackagesTool\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com"
+                }
+            ],
+            "description": "Tool for Laravel Nova Packages Development",
+            "support": {
+                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.9.0"
+            },
+            "time": "2023-05-04T22:15:24+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -9695,8 +9874,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "inovuz/file-esteroids": 20,
-        "inovuz/card-file": 20
+        "acme/color-picker": 20,
+        "inovuz/card-file": 20,
+        "inovuz/file-esteroids": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

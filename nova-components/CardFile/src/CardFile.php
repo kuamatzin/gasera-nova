@@ -2,14 +2,8 @@
 
 namespace Inovuz\CardFile;
 
-use Laravel\Nova\Fields\Field;
+use Stepanenko3\NovaJson\JSON;
 
-class CardFile extends Field
+class CardFile extends JSON
 {
-    /**
-     * The field's component.
-     *
-     * @var string
-     */
-    public $component = 'card-file';
 }
