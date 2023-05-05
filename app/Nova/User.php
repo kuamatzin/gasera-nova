@@ -4,9 +4,11 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -25,6 +27,17 @@ class User extends Resource
      * @var string
      */
     public static $title = 'name';
+
+
+    public static function label()
+    {
+        return 'Usuarios';
+    }
+
+    public static function singularLabel()
+    {
+        return 'Usuario';
+    }
 
     /**
      * The columns that should be searched.
@@ -46,7 +59,7 @@ class User extends Resource
         return [
             ID::make()->sortable(),
 
-            Text::make('Name')
+            Text::make('Nombre', 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
@@ -60,6 +73,28 @@ class User extends Resource
                 ->onlyOnForms()
                 ->creationRules('required', Rules\Password::defaults())
                 ->updateRules('nullable', Rules\Password::defaults()),
+
+            Select::make('Rol', 'role')
+                ->options([
+                    'gestor' => 'Gestor',
+                    'admin' => 'Administrador',
+                ])
+                ->displayUsingLabels()
+                ->rules('required'),
+
+            Select::make('Tipo', 'entity')
+                ->options([
+                    'sonora' => 'Sonora',
+                    'chihuahua' => 'Chihuahua',
+                    'todas' => 'Todas',
+                ])
+                ->displayUsingLabels()
+                ->rules('required'),
+
+
+            Boolean::make('Activo', 'active')
+                ->sortable()
+                ->rules('required'),
         ];
     }
 

@@ -54,11 +54,7 @@ class RecordPolicy
      */
     public function delete(User $user, Record $record): bool
     {
-        return match ($user->role) {
-            'admin' => true,
-            'abogado', 'coordinador', 'director', 'gestor' => false,
-            default => false,
-        };
+        return false;
     }
 
     /**
