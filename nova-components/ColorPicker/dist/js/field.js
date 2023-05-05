@@ -12,48 +12,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var laravel_nova__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-nova */ "../../vendor/laravel/nova/resources/js/mixins/packages.js");
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mixins: [laravel_nova__WEBPACK_IMPORTED_MODULE_0__.FieldValue],
-  props: ['index', 'resource', 'resourceName', 'resourceId', 'field'],
-  data: function data() {
-    return {
-      showModal: false
-    };
-  },
-  methods: {
-    /**
-     * Download the linked file
-     */
-    download: function download() {
-      this.showModal = true;
-      return;
-      var link = document.createElement('a');
-      link.target = '_blank';
-      link.href = "/storage/".concat(this.fieldValue);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  },
-  computed: {
-    hasValue: function hasValue() {
-      return Boolean(this.field.value || this.imageUrl);
-    },
-    shouldShowLoader: function shouldShowLoader() {
-      return this.imageUrl;
-    },
-    shouldShowToolbar: function shouldShowToolbar() {
-      return Boolean(this.field.downloadable && this.hasValue);
-    },
-    imageUrl: function imageUrl() {
-      return this.field.previewUrl || this.field.thumbnailUrl;
-    },
-    isVaporField: function isVaporField() {
-      return this.field.component === 'vapor-file-field';
-    }
-  }
+  props: ['index', 'resource', 'resourceName', 'resourceId', 'field']
 });
 
 /***/ }),
@@ -70,252 +30,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var laravel_nova__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-nova */ "../../vendor/laravel/nova/resources/js/mixins/packages.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function createFile(file) {
-  return {
-    name: file.name,
-    extension: file.name.split('.').pop(),
-    type: file.type,
-    originalFile: file,
-    vapor: false,
-    processing: false,
-    progress: 0
-  };
-}
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  emits: ['file-upload-started', 'file-upload-finished', 'file-deleted'],
-  props: ['resourceId', 'relatedResourceName', 'relatedResourceId', 'viaRelationship'],
-  mixins: [laravel_nova__WEBPACK_IMPORTED_MODULE_0__.HandlesValidationErrors, laravel_nova__WEBPACK_IMPORTED_MODULE_0__.DependentFormField],
-  data: function data() {
-    return {
-      previewFile: null,
-      file: null,
-      removeModalOpen: false,
-      missing: false,
-      deleted: false,
-      uploadErrors: new laravel_nova__WEBPACK_IMPORTED_MODULE_0__.Errors(),
-      vaporFile: {
-        key: '',
-        uuid: '',
-        filename: '',
-        extension: ''
-      },
-      uploadProgress: 0,
-      startedDrag: false,
-      uploadModalShown: false
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      return _regeneratorRuntime().wrap(function _callee$(_context) {
-        while (1) switch (_context.prev = _context.next) {
-          case 0:
-            _this.preparePreviewImage();
-            _this.field.fill = function (formData) {
-              var attribute = _this.field.attribute;
-              if (_this.file && !_this.isVaporField) {
-                formData.append(attribute, _this.file.originalFile, _this.file.name);
-              }
-              if (_this.file && _this.isVaporField) {
-                formData.append(attribute, _this.file.name);
-                formData.append('vaporFile[' + attribute + '][key]', _this.vaporFile.key);
-                formData.append('vaporFile[' + attribute + '][uuid]', _this.vaporFile.uuid);
-                formData.append('vaporFile[' + attribute + '][filename]', _this.vaporFile.filename);
-                formData.append('vaporFile[' + attribute + '][extension]', _this.vaporFile.extension);
-              }
-            };
-          case 2:
-          case "end":
-            return _context.stop();
-        }
-      }, _callee);
-    }))();
-  },
+  mixins: [laravel_nova__WEBPACK_IMPORTED_MODULE_0__.FormField, laravel_nova__WEBPACK_IMPORTED_MODULE_0__.HandlesValidationErrors],
+  props: ['resourceName', 'resourceId', 'field'],
   methods: {
-    preparePreviewImage: function preparePreviewImage() {
-      if (this.hasValue && this.imageUrl) {
-        this.fetchPreviewImage();
-      }
-      if (this.hasValue && !this.imageUrl) {
-        this.previewFile = createFile({
-          name: this.currentField.value,
-          type: this.currentField.value.split('.').pop()
-        });
-      }
-    },
-    fetchPreviewImage: function fetchPreviewImage() {
-      var _this2 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var response, data;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return fetch(_this2.imageUrl);
-            case 2:
-              response = _context2.sent;
-              _context2.next = 5;
-              return response.blob();
-            case 5:
-              data = _context2.sent;
-              _this2.previewFile = createFile(new File([data], _this2.currentField.value, {
-                type: data.type
-              }));
-            case 7:
-            case "end":
-              return _context2.stop();
-          }
-        }, _callee2);
-      }))();
-    },
-    handleFileChange: function handleFileChange(newFiles) {
-      this.file = createFile(newFiles[0]);
-      if (this.isVaporField) {
-        this.file.vapor = true;
-        this.uploadVaporFiles();
-      }
-    },
-    removeFile: function removeFile() {
-      this.file = null;
-    },
-    uploadVaporFiles: function uploadVaporFiles() {
-      var _this3 = this;
-      this.file.processing = true;
-      this.$emit('file-upload-started');
-      Vapor.store(this.file.originalFile, {
-        progress: function progress(_progress) {
-          _this3.file.progress = Math.round(_progress * 100);
-        }
-      }).then(function (response) {
-        _this3.vaporFile.key = response.key;
-        _this3.vaporFile.uuid = response.uuid;
-        _this3.vaporFile.filename = _this3.file.name;
-        _this3.vaporFile.extension = _this3.file.extension;
-        _this3.file.processing = false;
-        _this3.file.progress = 100;
-        _this3.$emit('file-upload-finished');
-      })["catch"](function (error) {
-        if (error.response.status === 403) {
-          Nova.error(_this3.__('Sorry! You are not authorized to perform this action.'));
-        }
-      });
-    },
-    confirmRemoval: function confirmRemoval() {
-      this.removeModalOpen = true;
-    },
-    closeRemoveModal: function closeRemoveModal() {
-      this.removeModalOpen = false;
-    },
-    removeUploadedFile: function removeUploadedFile() {
-      var _this4 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var resourceName, resourceId, relatedResourceName, relatedResourceId, viaRelationship, attribute, uri, _error$response;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
-            case 0:
-              _this4.uploadErrors = new laravel_nova__WEBPACK_IMPORTED_MODULE_0__.Errors();
-              resourceName = _this4.resourceName, resourceId = _this4.resourceId, relatedResourceName = _this4.relatedResourceName, relatedResourceId = _this4.relatedResourceId, viaRelationship = _this4.viaRelationship;
-              attribute = _this4.field.attribute;
-              uri = _this4.viaRelationship && _this4.relatedResourceName && _this4.relatedResourceId ? "/nova-api/".concat(resourceName, "/").concat(resourceId, "/").concat(relatedResourceName, "/").concat(relatedResourceId, "/field/").concat(attribute, "?viaRelationship=").concat(viaRelationship) : "/nova-api/".concat(resourceName, "/").concat(resourceId, "/field/").concat(attribute);
-              _context3.prev = 4;
-              _context3.next = 7;
-              return Nova.request()["delete"](uri);
-            case 7:
-              _this4.closeRemoveModal();
-              _this4.deleted = true;
-              _this4.$emit('file-deleted');
-              Nova.success(_this4.__('The file was deleted!'));
-              _context3.next = 17;
-              break;
-            case 13:
-              _context3.prev = 13;
-              _context3.t0 = _context3["catch"](4);
-              _this4.closeRemoveModal();
-              if (((_error$response = _context3.t0.response) === null || _error$response === void 0 ? void 0 : _error$response.status) === 422) {
-                _this4.uploadErrors = new laravel_nova__WEBPACK_IMPORTED_MODULE_0__.Errors(_context3.t0.response.data.errors);
-              }
-            case 17:
-            case "end":
-              return _context3.stop();
-          }
-        }, _callee3, null, [[4, 13]]);
-      }))();
-    }
-  },
-  computed: {
-    files: function files() {
-      return this.file ? [this.file] : [];
+    /*
+     * Set the initial, internal value for the field.
+     */
+    setInitialValue: function setInitialValue() {
+      this.value = this.field.value || '';
     },
     /**
-     * Determine if the field has an upload error.
+     * Fill the given FormData object with the field's internal value.
      */
-    hasError: function hasError() {
-      return this.uploadErrors.has(this.fieldAttribute);
-    },
-    /**
-     * Return the first error for the field.
-     */
-    firstError: function firstError() {
-      if (this.hasError) {
-        return this.uploadErrors.first(this.fieldAttribute);
-      }
-    },
-    /**
-     * The ID attribute to use for the file field.
-     */
-    idAttr: function idAttr() {
-      return this.labelFor;
-    },
-    /**
-     * The label attribute to use for the file field.
-     */
-    labelFor: function labelFor() {
-      var name = this.resourceName;
-      if (this.relatedResourceName) {
-        name += '-' + this.relatedResourceName;
-      }
-      return "file-".concat(name, "-").concat(this.field.attribute);
-    },
-    /**
-     * Determine whether the field has a value.
-     */
-    hasValue: function hasValue() {
-      return Boolean(this.field.value || this.imageUrl) && !Boolean(this.deleted) && !Boolean(this.missing);
-    },
-    /**
-     * Determine whether the field should show the loader component.
-     */
-    shouldShowLoader: function shouldShowLoader() {
-      return !Boolean(this.deleted) && Boolean(this.imageUrl);
-    },
-    /**
-     * Determine whether the file field input should be shown.
-     */
-    shouldShowField: function shouldShowField() {
-      return Boolean(!this.currentlyIsReadonly);
-    },
-    /**
-     * Determine whether the field should show the remove button.
-     */
-    shouldShowRemoveButton: function shouldShowRemoveButton() {
-      return Boolean(this.currentField.deletable && !this.currentlyIsReadonly);
-    },
-    /**
-     * Return the preview or thumbnail URL for the field.
-     */
-    imageUrl: function imageUrl() {
-      return this.currentField.previewUrl || this.currentField.thumbnailUrl;
-    },
-    /**
-     * Determining if the field is a Vapor field.
-     */
-    isVaporField: function isVaporField() {
-      return this.currentField.component == 'vapor-file-field';
+    fill: function fill(formData) {
+      formData.append(this.field.attribute, this.value || '');
     }
   }
 });
@@ -358,107 +88,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
-var _hoisted_1 = {
-  key: 1,
-  "class": "break-words"
-};
-var _hoisted_2 = {
-  key: 2
-};
-var _hoisted_3 = {
-  key: 3,
-  "class": "flex items-center text-sm"
-};
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "class mt-1"
-}, "Previsualizar", -1 /* HOISTED */);
-var _hoisted_5 = {
-  style: {
-    "background": "white"
-  }
-};
-var _hoisted_6 = {
-  "class": "flex justify-between items-center mb-2"
-};
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-  "class": "text-xl font-bold"
-}, "Previsualizar archivo", -1 /* HOISTED */);
-var _hoisted_8 = {
-  "class": "flex flex-wrap h-screen"
-};
-var _hoisted_9 = {
-  "class": "w-full h-screen"
-};
-var _hoisted_10 = ["src"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _this = this;
-  var _component_ImageLoader = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ImageLoader");
-  var _component_Icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Icon");
   var _component_PanelItem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PanelItem");
-  var _component_ModalHeader = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModalHeader");
-  var _component_ModalContent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModalContent");
-  var _component_Modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Modal");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PanelItem, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_PanelItem, {
     index: $props.index,
     field: $props.field
-  }, {
-    value: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [$options.shouldShowLoader ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ImageLoader, {
-        key: 0,
-        src: $options.imageUrl,
-        maxWidth: $props.field.maxWidth || $props.field.detailWidth,
-        rounded: $props.field.rounded,
-        aspect: $props.field.aspect
-      }, null, 8 /* PROPS */, ["src", "maxWidth", "rounded", "aspect"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.fieldValue && !$options.imageUrl ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_1)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !_ctx.fieldValue && !$options.imageUrl ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_2, "—")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $options.shouldShowToolbar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_3, [$props.field.downloadable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
-        key: 0,
-        onKeydown: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)((0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-          return $options.download && $options.download.apply($options, arguments);
-        }, ["prevent"]), ["enter"])),
-        onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-          return $options.download && $options.download.apply($options, arguments);
-        }, ["prevent"])),
-        tabindex: "0",
-        "class": "cursor-pointer text-gray-500 inline-flex items-center"
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Icon, {
-        "class": "mr-2",
-        type: "eye",
-        "view-box": "0 0 24 24",
-        width: "16",
-        height: "16"
-      }), _hoisted_4], 32 /* HYDRATE_EVENTS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
-    }),
-    _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["index", "field"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
-    show: $data.showModal,
-    size: '7xl',
-    modalStyle: 'fullscreen'
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalHeader, null, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-            onClick: _cache[2] || (_cache[2] = function ($event) {
-              return $data.showModal = false;
-            }),
-            "class": "cursor-pointer text-3xl leading-none"
-          }, " × ")])];
-        }),
-        _: 1 /* STABLE */
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalContent, null, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("iframe", {
-            src: "/storage/".concat(_this.fieldValue),
-            frameborder: "0",
-            width: "100%",
-            height: "85%"
-          }, null, 8 /* PROPS */, _hoisted_10)])])];
-        }),
-        _: 1 /* STABLE */
-      })])];
-    }),
-
-    _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["show"])], 64 /* STABLE_FRAGMENT */);
+  }, null, 8 /* PROPS */, ["index", "field"]);
 }
 
 /***/ }),
@@ -478,51 +113,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 var _hoisted_1 = {
-  "class": "space-y-4"
-};
-var _hoisted_2 = {
-  key: 0,
-  "class": "grid grid-cols-4 gap-x-6 gap-y-2"
+  "class": "font-semibold",
+  style: {
+    "margin-left": "30px",
+    "margin-top": "5px",
+    "margin-bottom": "5px"
+  }
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_FilePreviewBlock = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FilePreviewBlock");
-  var _component_ConfirmUploadRemovalModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ConfirmUploadRemovalModal");
-  var _component_DropZone = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DropZone");
-  var _component_DefaultField = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DefaultField");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DefaultField, {
-    field: _ctx.currentField,
-    "label-for": $options.labelFor,
-    errors: _ctx.errors,
-    "show-help-text": !_ctx.isReadonly && _ctx.showHelpText,
-    "full-width-content": _ctx.fullWidthContent
-  }, {
-    field: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      var _ctx$file;
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Existing Image "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [$options.hasValue && _ctx.previewFile && $options.files.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [_ctx.previewFile ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FilePreviewBlock, {
-        key: 0,
-        file: _ctx.previewFile,
-        removable: $options.shouldShowRemoveButton,
-        onRemoved: $options.confirmRemoval,
-        rounded: _ctx.field.rounded,
-        dusk: "".concat(_ctx.field.attribute, "-delete-link")
-      }, null, 8 /* PROPS */, ["file", "removable", "onRemoved", "rounded", "dusk"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Upload Removal Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ConfirmUploadRemovalModal, {
-        show: _ctx.removeModalOpen,
-        onConfirm: $options.removeUploadedFile,
-        onClose: $options.closeRemoveModal
-      }, null, 8 /* PROPS */, ["show", "onConfirm", "onClose"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" DropZone "), $options.shouldShowField ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DropZone, {
-        key: 1,
-        files: $options.files,
-        onFileChanged: $options.handleFileChange,
-        onFileRemoved: $options.removeFile,
-        rounded: _ctx.field.rounded,
-        "accepted-types": _ctx.field.acceptedTypes,
-        disabled: (_ctx$file = _ctx.file) === null || _ctx$file === void 0 ? void 0 : _ctx$file.processing,
-        dusk: "".concat(_ctx.field.attribute, "-delete-link"),
-        "input-dusk": _ctx.field.attribute
-      }, null, 8 /* PROPS */, ["files", "onFileChanged", "onFileRemoved", "rounded", "accepted-types", "disabled", "dusk", "input-dusk"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
-    }),
-    _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["field", "label-for", "errors", "show-help-text", "full-width-content"])]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.field.visible), 1 /* TEXT */)]);
 }
 
 /***/ }),
@@ -562,9 +161,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 Nova.booting(function (app, store) {
-  app.component('index-file-esteroids', _components_IndexField__WEBPACK_IMPORTED_MODULE_0__["default"]);
-  app.component('detail-file-esteroids', _components_DetailField__WEBPACK_IMPORTED_MODULE_1__["default"]);
-  app.component('form-file-esteroids', _components_FormField__WEBPACK_IMPORTED_MODULE_2__["default"]);
+  app.component('index-color-picker', _components_IndexField__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  app.component('detail-color-picker', _components_DetailField__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  app.component('form-color-picker', _components_FormField__WEBPACK_IMPORTED_MODULE_2__["default"]);
 });
 
 /***/ }),
@@ -2012,13 +1611,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _DetailField_vue_vue_type_template_id_0224618e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DetailField.vue?vue&type=template&id=0224618e */ "./resources/js/components/DetailField.vue?vue&type=template&id=0224618e");
 /* harmony import */ var _DetailField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DetailField.vue?vue&type=script&lang=js */ "./resources/js/components/DetailField.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_ColorPicker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_DetailField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_DetailField_vue_vue_type_template_id_0224618e__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/DetailField.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_ColorPicker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_DetailField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_DetailField_vue_vue_type_template_id_0224618e__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/DetailField.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2040,13 +1639,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormField.vue?vue&type=template&id=c023248a */ "./resources/js/components/FormField.vue?vue&type=template&id=c023248a");
 /* harmony import */ var _FormField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormField.vue?vue&type=script&lang=js */ "./resources/js/components/FormField.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_ColorPicker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_FormField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/FormField.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_ColorPicker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_FormField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/FormField.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2068,13 +1667,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexField.vue?vue&type=template&id=9e63f81a */ "./resources/js/components/IndexField.vue?vue&type=template&id=9e63f81a");
 /* harmony import */ var _IndexField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./IndexField.vue?vue&type=script&lang=js */ "./resources/js/components/IndexField.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_ColorPicker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_IndexField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/IndexField.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_ColorPicker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_IndexField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/IndexField.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -15438,7 +15037,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","/Users/carloscuamatzin/P
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkinovuz_file_npm_run_nova_installesteroids"] = self["webpackChunkinovuz_file_npm_run_nova_installesteroids"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunkacme_color_picker"] = self["webpackChunkacme_color_picker"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();

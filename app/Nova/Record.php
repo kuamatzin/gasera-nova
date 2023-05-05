@@ -2,17 +2,9 @@
 
 namespace App\Nova;
 
-use Acme\ColorPicker\ColorPicker;
-use Faker\Core\Color;
-use Formfeed\DependablePanel\DependablePanel;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Inovuz\CardFile\CardFile;
 use Inovuz\FileEsteroids\FileEsteroids;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\Field;
-use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
@@ -284,18 +276,18 @@ class Record extends Resource
             }
         )->showOnDetail(function (NovaRequest $request, $resource) use ($option, $optionSelected) {
             return $this[$option] === $optionSelected;
-        });
+        })->hideFromIndex();
 
-        $file_field = File::make('', $value)->disk('public')->acceptedTypes('.pdf')->nullable()->hide()->dependsOn(
+        $file_field = FileEsteroids::make('', $value)->disk('public')->acceptedTypes('.pdf')->nullable()->hide()->dependsOn(
             [$option],
-            function (File $field, NovaRequest $request, FormData $formData) use ($option, $optionSelected) {
+            function (FileEsteroids $field, NovaRequest $request, FormData $formData) use ($option, $optionSelected) {
                 if ($formData[$option] === $optionSelected) {
                     $field->show();
                 }
             }
         )->showOnDetail(function (NovaRequest $request, $resource) use ($option, $optionSelected) {
             return $this[$option] === $optionSelected;
-        });
+        })->hideFromIndex();
 
         $select_field = Select::make('', $value . '_status')->options([
             'revision' => 'Revisión',
@@ -310,7 +302,7 @@ class Record extends Resource
             }
         )->showOnDetail(function (NovaRequest $request, $resource) use ($option, $optionSelected) {
             return $this[$option] === $optionSelected;
-        });
+        })->hideFromIndex();
 
         return [$titleSection, $file_field, $select_field];
     }
