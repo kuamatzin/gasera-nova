@@ -79,7 +79,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             //new NovaGridSystem
-            new LaravelNovaCsvImport,
+            //new LaravelNovaCsvImport,
         ];
     }
 

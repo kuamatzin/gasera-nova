@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.8",
         "maatwebsite/excel": "^3.1",
         "simonhamp/laravel-nova-csv-import": "^0.4.0",
-        "stepanenko3/nova-json": "^3.1"
+        "stepanenko3/nova-json": "^3.1",
+        "inovuz/card-file": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -80,6 +81,14 @@
         "0": {
             "type": "path",
             "url": "./nova-components/FileEsteroids"
+        },
+        "1": {
+            "type": "path",
+            "url": "./nova-components/CardFile"
+        },
+        "2": {
+            "type": "path",
+            "url": "./nova-components/CardFile"
         }
     }
 }

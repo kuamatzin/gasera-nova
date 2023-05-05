@@ -569,6 +569,29 @@ Nova.booting(function (app, store) {
 
 /***/ }),
 
+/***/ "../../vendor/laravel/nova/resources/js/composables/useLocalization.js":
+/*!*****************************************************************************!*\
+  !*** ../../vendor/laravel/nova/resources/js/composables/useLocalization.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "useLocalization": () => (/* binding */ useLocalization)
+/* harmony export */ });
+Object(function webpackMissingModule() { var e = new Error("Cannot find module '@/mixins/Localization'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+
+function useLocalization() {
+  return {
+    __: function __(key, replace) {
+      return Object(function webpackMissingModule() { var e = new Error("Cannot find module '@/mixins/Localization'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(key, replace);
+    }
+  };
+}
+
+/***/ }),
+
 /***/ "../../vendor/laravel/nova/resources/js/mixins/CopiesToClipboard.js":
 /*!**************************************************************************!*\
   !*** ../../vendor/laravel/nova/resources/js/mixins/CopiesToClipboard.js ***!
@@ -1493,13 +1516,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "useLocalization": () => (/* binding */ useLocalization)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var lodash_forEach__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/forEach */ "../../vendor/laravel/nova/node_modules/lodash/forEach.js");
 /* harmony import */ var lodash_forEach__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_forEach__WEBPACK_IMPORTED_MODULE_0__);
 
-var mixin = {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   methods: {
     /**
      * Translate the given key.
@@ -1522,15 +1544,7 @@ var mixin = {
       return translation;
     }
   }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mixin);
-function useLocalization() {
-  return {
-    __: function __(key, replace) {
-      return mixin.methods.__(key, replace);
-    }
-  };
-}
+});
 
 /***/ }),
 
@@ -1763,7 +1777,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PreventsModalAbandonment": () => (/* reexport safe */ _PreventsModalAbandonment__WEBPACK_IMPORTED_MODULE_3__["default"]),
 /* harmony export */   "mapProps": () => (/* reexport safe */ _propTypes__WEBPACK_IMPORTED_MODULE_0__.mapProps),
 /* harmony export */   "useCopyValueToClipboard": () => (/* reexport safe */ _CopiesToClipboard__WEBPACK_IMPORTED_MODULE_1__.useCopyValueToClipboard),
-/* harmony export */   "useLocalization": () => (/* reexport safe */ _Localization__WEBPACK_IMPORTED_MODULE_7__.useLocalization)
+/* harmony export */   "useLocalization": () => (/* reexport safe */ _composables_useLocalization__WEBPACK_IMPORTED_MODULE_17__.useLocalization)
 /* harmony export */ });
 /* harmony import */ var _propTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./propTypes */ "../../vendor/laravel/nova/resources/js/mixins/propTypes.js");
 /* harmony import */ var _CopiesToClipboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CopiesToClipboard */ "../../vendor/laravel/nova/resources/js/mixins/CopiesToClipboard.js");
@@ -1782,6 +1796,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HasCards__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./HasCards */ "../../vendor/laravel/nova/resources/js/mixins/HasCards.js");
 /* harmony import */ var _HandlesPanelVisibility__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./HandlesPanelVisibility */ "../../vendor/laravel/nova/resources/js/mixins/HandlesPanelVisibility.js");
 /* harmony import */ var form_backend_validation__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! form-backend-validation */ "../../vendor/laravel/nova/node_modules/form-backend-validation/dist/index.js");
+/* harmony import */ var _composables_useLocalization__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../composables/useLocalization */ "../../vendor/laravel/nova/resources/js/composables/useLocalization.js");
+
 
 
 
@@ -1977,13 +1993,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _DetailField_vue_vue_type_template_id_0224618e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DetailField.vue?vue&type=template&id=0224618e */ "./resources/js/components/DetailField.vue?vue&type=template&id=0224618e");
 /* harmony import */ var _DetailField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DetailField.vue?vue&type=script&lang=js */ "./resources/js/components/DetailField.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_DetailField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_DetailField_vue_vue_type_template_id_0224618e__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/DetailField.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_DetailField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_DetailField_vue_vue_type_template_id_0224618e__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/DetailField.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2005,13 +2021,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormField.vue?vue&type=template&id=c023248a */ "./resources/js/components/FormField.vue?vue&type=template&id=c023248a");
 /* harmony import */ var _FormField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormField.vue?vue&type=script&lang=js */ "./resources/js/components/FormField.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_FormField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/FormField.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_FormField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/FormField.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2033,13 +2049,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexField.vue?vue&type=template&id=9e63f81a */ "./resources/js/components/IndexField.vue?vue&type=template&id=9e63f81a");
 /* harmony import */ var _IndexField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./IndexField.vue?vue&type=script&lang=js */ "./resources/js/components/IndexField.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_IndexField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/IndexField.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileEsteroids_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_IndexField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/IndexField.vue"]])
 /* hot reload */
 if (false) {}
 

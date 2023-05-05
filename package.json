@@ -4,7 +4,9 @@
         "dev": "vite",
         "build": "vite build",
         "build-file-esteroids": "cd nova-components/FileEsteroids && npm run dev",
-        "build-file-esteroids-prod": "cd nova-components/FileEsteroids && npm run prod"
+        "build-file-esteroids-prod": "cd nova-components/FileEsteroids && npm run prod",
+        "build-card-file": "cd nova-components/CardFile && npm run dev",
+        "build-card-file-prod": "cd nova-components/CardFile && npm run prod"
     },
     "devDependencies": {
         "axios": "^1.1.2",
