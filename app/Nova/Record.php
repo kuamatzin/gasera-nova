@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Illuminate\Support\Facades\Auth;
 use Inovuz\FileEsteroids\FileEsteroids;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -75,11 +76,20 @@ class Record extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make('Usuario', 'user', User::class),
-            Select::make('Estatus', 'status')->options([
-                'progress' => 'En progreso',
-                'revision' => 'Revisión',
-                'completed' => 'Completado',
-            ])->displayUsingLabels()->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Select::make('Estatus', 'status')->options(function () {
+                if (Auth::user()->role === 'admin') {
+                    return [
+                        'progress' => 'En progreso',
+                        'revision' => 'Revisión',
+                        'completed' => 'Completado',
+                    ];
+                }
+
+                return [
+                    'progress' => 'En progreso',
+                    'revision' => 'Revisión',
+                ];
+            })->displayUsingLabels()->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             new Panel('Propietario', $this->propietarioFields()),
             new Panel('Datos del inmueble a contratar', $this->inmuebleFields()),
             new Panel('Superficies a contratar', $this->superficieFields()),
@@ -97,10 +107,22 @@ class Record extends Resource
         return $this->status !== 'progress';
     }
 
+    public function representateLegalConfig($field)
+    {
+        return $field->hide()
+            ->dependsOn(
+                ['representante_legal'],
+                function (Text $field, NovaRequest $request, FormData $formData) {
+                    if ($formData->representante_legal) {
+                        $field->show()->rules('required');
+                    }
+                }
+            )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r));
+    }
+
     public function propietarioFields()
     {
         return [
-            //FileEsteroids::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
             Text::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Celular, Teléfono local o para recados', 'telefono_recados')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Nombre del propietario y/o Dependencia', 'correo_electronico')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
@@ -108,43 +130,10 @@ class Record extends Resource
             Text::make('Dirección del propietario para notificaciones (Debe incluir link de Google Street)', 'direccion_propietario_notificaciones')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Código de Google Street', 'codigo_google_street')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Boolean::make('Representante Legal', 'representante_legal')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
-            Text::make('Representante Legal', 'nombre_representante_legal')
-                ->hide()
-                ->dependsOn(
-                    ['representante_legal'],
-                    function (Text $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->representante_legal) {
-                            $field->show()->rules('required');
-                        }
-                    }
-                )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
-            Text::make('Celular, Teléfono local para recados', 'telefono_recados_representante_legal')->nullable()->hide()
-                ->dependsOn(
-                    ['representante_legal'],
-                    function (Text $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->representante_legal) {
-                            $field->show()->rules('required');
-                        }
-                    }
-                )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
-            Text::make('Correo electrónico', 'correo_electronico_representante_legal')->nullable()->hide()
-                ->dependsOn(
-                    ['representante_legal'],
-                    function (Text $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->representante_legal) {
-                            $field->show()->rules('required');
-                        }
-                    }
-                )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
-            Text::make('Observaciones o comentarios', 'observaciones_representante_legal')->nullable()->hide()
-                ->dependsOn(
-                    ['representante_legal'],
-                    function (Text $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->representante_legal) {
-                            $field->show()->rules('required');
-                        }
-                    }
-                )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            $this->representateLegalConfig(Text::make('Representante Legal', 'nombre_representante_legal')),
+            $this->representateLegalConfig(Text::make('Celular, Teléfono local para recados', 'telefono_recados_representante_legal')),
+            $this->representateLegalConfig(Text::make('Correo electrónico', 'correo_electronico_representante_legal')),
+            $this->representateLegalConfig(Text::make('Observaciones o comentarios', 'observaciones_representante_legal')),
         ];
     }
 
@@ -303,15 +292,25 @@ class Record extends Resource
             return $this[$option] === $optionSelected;
         })->hideFromIndex();
 
-        $select_field = Select::make('', $value . '_status')->options([
-            'revision' => 'Revisión',
-            'aceptado' => 'Aceptado',
-            'rechazado' => 'Rechazado',
-        ])->hide()->dependsOn(
+        $select_field = Select::make('', $value . '_status')->options(function () {
+            if (Auth::user()->role === 'admin') {
+                return [
+                    'revision' => 'Revisión',
+                    'aceptado' => 'Aceptado',
+                    'rechazado' => 'Rechazado',
+                ];
+            }
+
+            return [
+                'revision' => 'Revisión',
+            ];
+        })->hide()->dependsOn(
             [$option],
             function (Select $field, NovaRequest $request, FormData $formData) use ($option, $optionSelected) {
                 if ($formData[$option] === $optionSelected) {
-                    $field->show();
+                    if (Auth::user()->role === 'admin') {
+                        $field->show();
+                    }
                 }
             }
         )->showOnDetail(function (NovaRequest $request, $resource) use ($option, $optionSelected) {

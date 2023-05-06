@@ -23,6 +23,7 @@ class RecordsImport implements ToModel
             'km_inicial_superficie' => $row[32],
             'km_final_superficie' => $row[33],
             'longitud_afectacion_superficie' => $row[34],
+            'status' => 'progress',
         ]);
     }
 }
