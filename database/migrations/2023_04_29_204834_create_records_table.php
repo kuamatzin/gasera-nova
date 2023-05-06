@@ -48,7 +48,7 @@ return new class extends Migration
             $table->string('mapa_afectacion_path')->nullable();;
             //Documentacion
             $table->text('documentacion')->nullable();
-            $table->string('status')->default('PROGRESS');;
+            $table->string('status')->default('progress');;
             $table->timestamps();
         });
     }

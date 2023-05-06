@@ -26,15 +26,8 @@ __webpack_require__.r(__webpack_exports__);
     /**
      * Download the linked file
      */
-    download: function download() {
+    preview: function preview() {
       this.showModal = true;
-      return;
-      var link = document.createElement('a');
-      link.target = '_blank';
-      link.href = "/storage/".concat(this.fieldValue);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
     }
   },
   computed: {
@@ -412,10 +405,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 8 /* PROPS */, ["src", "maxWidth", "rounded", "aspect"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.fieldValue && !$options.imageUrl ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_1)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !_ctx.fieldValue && !$options.imageUrl ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_2, "—")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $options.shouldShowToolbar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_3, [$props.field.downloadable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
         key: 0,
         onKeydown: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)((0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-          return $options.download && $options.download.apply($options, arguments);
+          return $options.preview && $options.preview.apply($options, arguments);
         }, ["prevent"]), ["enter"])),
         onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-          return $options.download && $options.download.apply($options, arguments);
+          return $options.preview && $options.preview.apply($options, arguments);
         }, ["prevent"])),
         tabindex: "0",
         "class": "cursor-pointer text-gray-500 inline-flex items-center"

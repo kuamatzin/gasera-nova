@@ -75,6 +75,11 @@ class Record extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make('Usuario', 'user', User::class),
+            Select::make('Estatus', 'status')->options([
+                'progress' => 'En progreso',
+                'revision' => 'Revisión',
+                'completed' => 'Completado',
+            ])->displayUsingLabels()->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             new Panel('Propietario', $this->propietarioFields()),
             new Panel('Datos del inmueble a contratar', $this->inmuebleFields()),
             new Panel('Superficies a contratar', $this->superficieFields()),
@@ -83,17 +88,26 @@ class Record extends Resource
         ];
     }
 
+    public function validateEditionField(NovaRequest $request)
+    {
+        $allowed = ['admin'];
+        if (in_array($request->user()->role, $allowed)) {
+            return false;
+        }
+        return $this->status !== 'progress';
+    }
+
     public function propietarioFields()
     {
         return [
             //FileEsteroids::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
-            Text::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia'),
-            Text::make('Celular, Teléfono local o para recados', 'telefono_recados')->hideFromIndex(),
-            Text::make('Nombre del propietario y/o Dependencia', 'correo_electronico')->hideFromIndex(),
-            Text::make('Nombre del propietario y/o Dependencia', 'calificacion_propietario')->hideFromIndex(),
-            Text::make('Dirección del propietario para notificaciones (Debe incluir link de Google Street)', 'direccion_propietario_notificaciones')->hideFromIndex(),
-            Text::make('Código de Google Street', 'codigo_google_street')->hideFromIndex(),
-            Boolean::make('Representante Legal', 'representante_legal')->hideFromIndex(),
+            Text::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Celular, Teléfono local o para recados', 'telefono_recados')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Nombre del propietario y/o Dependencia', 'correo_electronico')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Nombre del propietario y/o Dependencia', 'calificacion_propietario')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Dirección del propietario para notificaciones (Debe incluir link de Google Street)', 'direccion_propietario_notificaciones')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Código de Google Street', 'codigo_google_street')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Boolean::make('Representante Legal', 'representante_legal')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Representante Legal', 'nombre_representante_legal')
                 ->hide()
                 ->dependsOn(
@@ -103,7 +117,7 @@ class Record extends Resource
                             $field->show()->rules('required');
                         }
                     }
-                )->hideFromIndex(),
+                )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Celular, Teléfono local para recados', 'telefono_recados_representante_legal')->nullable()->hide()
                 ->dependsOn(
                     ['representante_legal'],
@@ -112,7 +126,7 @@ class Record extends Resource
                             $field->show()->rules('required');
                         }
                     }
-                )->hideFromIndex(),
+                )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Correo electrónico', 'correo_electronico_representante_legal')->nullable()->hide()
                 ->dependsOn(
                     ['representante_legal'],
@@ -121,7 +135,7 @@ class Record extends Resource
                             $field->show()->rules('required');
                         }
                     }
-                )->hideFromIndex(),
+                )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Observaciones o comentarios', 'observaciones_representante_legal')->nullable()->hide()
                 ->dependsOn(
                     ['representante_legal'],
@@ -130,18 +144,18 @@ class Record extends Resource
                             $field->show()->rules('required');
                         }
                     }
-                )->hideFromIndex(),
+                )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
         ];
     }
 
     public function inmuebleFields()
     {
         return [
-            Text::make('Dirección', 'direccion_inmueble')->hideFromIndex(),
+            Text::make('Dirección', 'direccion_inmueble')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Select::make('Estado', 'estado_inmueble')->options([
                 'chihuahua' => 'Chihuahua',
                 'sonora' => 'Sonora',
-            ])->hideFromIndex(),
+            ])->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Select::make('Municipio', 'municipio_inmueble')->options([])->hide()->dependsOn(
                 ['estado_inmueble'],
                 function (Select $field, NovaRequest $request, FormData $formData) {
@@ -172,16 +186,16 @@ class Record extends Resource
                         $field->hide();
                     }
                 }
-            )->hideFromIndex(),
-            Text::make('Poblado', 'poblado_inmueble')->hideFromIndex(),
+            )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Poblado', 'poblado_inmueble')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Select::make('Régimen de propiedad', 'regimen_propiedad_inmueble')->options([
                 'pr' => 'Propiedad privada',
                 'ej' => 'Propiedad ejidal',
                 'pa' => 'Parcela',
                 'po' => 'Posesión',
                 'ca' => 'Comunidad Agraria',
-            ])->hideFromIndex(),
-            Text::make('Uso de suelo', 'uso_suelo_inmueble')->hideFromIndex(),
+            ])->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Uso de suelo', 'uso_suelo_inmueble')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
         ];
     }
 
@@ -192,16 +206,16 @@ class Record extends Resource
                 'servidumbre_voluntaria' => 'Servidumbre voluntaria',
                 'estacion_medicion' => 'Estación de medición',
                 'valvula_seccionamiento' => 'Válvula de seccionamiento',
-            ])->hideFromIndex(),
-            Text::make('Superficie contratada m2', 'superficie_contratada_m2_superficie')->hideFromIndex(),
-            Text::make('Superficie m2 franja de uso temporal', 'superficia_m2_franja_uso_temporal_superficie')->hideFromIndex(),
-            Text::make('Superficie m2 FUTE', 'superficie_m2_fute_superficie')->hideFromIndex(),
-            Text::make('Superficie total contratada m2', 'superficie_total_contratada_m2_superficie')->hideFromIndex(),
-            Text::make('Km inicial', 'km_inicial_superficie')->hideFromIndex(),
-            Text::make('Km final', 'km_final_superficie')->hideFromIndex(),
-            Text::make('Longitud de afectación ML', 'longitud_afectacion_superficie')->hideFromIndex(),
-            Text::make('Coordenada E', 'coordenada_e_superficie')->hideFromIndex(),
-            Text::make('Coordenada N', 'coordenada_n_superficie')->hideFromIndex(),
+            ])->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Superficie contratada m2', 'superficie_contratada_m2_superficie')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Superficie m2 franja de uso temporal', 'superficia_m2_franja_uso_temporal_superficie')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Superficie m2 FUTE', 'superficie_m2_fute_superficie')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Superficie total contratada m2', 'superficie_total_contratada_m2_superficie')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Km inicial', 'km_inicial_superficie')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Km final', 'km_final_superficie')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Longitud de afectación ML', 'longitud_afectacion_superficie')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Coordenada E', 'coordenada_e_superficie')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Coordenada N', 'coordenada_n_superficie')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
         ];
     }
 
@@ -310,7 +324,7 @@ class Record extends Resource
     public function mapaFields()
     {
         return [
-            Text::make('Dirección', 'direccion_inmueble')->hideFromIndex(),
+            Text::make('Dirección', 'direccion_inmueble')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
         ];
     }
 

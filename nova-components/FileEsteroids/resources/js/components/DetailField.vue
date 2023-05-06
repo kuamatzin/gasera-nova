@@ -17,8 +17,8 @@
             <p v-if="shouldShowToolbar" class="flex items-center text-sm">
                 <a
                     v-if="field.downloadable"
-                    @keydown.enter.prevent="download"
-                    @click.prevent="download"
+                    @keydown.enter.prevent="preview"
+                    @click.prevent="preview"
                     tabindex="0"
                     class="cursor-pointer text-gray-500 inline-flex items-center"
                 >
@@ -82,15 +82,8 @@ export default {
         /**
          * Download the linked file
          */
-        download() {
+        preview() {
             this.showModal = true;
-            return;
-            let link = document.createElement('a')
-            link.target = '_blank'
-            link.href = `/storage/${this.fieldValue}`
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)
         },
     },
 
