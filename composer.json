@@ -12,6 +12,7 @@
         "acme/color-picker": "@dev",
         "codenco-dev/nova-grid-system": "^2.0",
         "formfeed-uk/nova-dependable-panel": "^1.2",
+        "formfeed-uk/nova-logo-url": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "inovuz/card-file": "@dev",
         "inovuz/file-esteroids": "@dev",

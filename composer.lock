@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ab8e3fcd141df9a749fbe0d7cce37ab",
+    "content-hash": "4757fbbf8271fc14455d9a2ffc9e0411",
     "packages": [
         {
             "name": "acme/color-picker",
@@ -1115,6 +1115,54 @@
                 "source": "https://github.com/Formfeed-UK/nova-dependable-panel/tree/1.2.3"
             },
             "time": "2023-01-05T15:27:13+00:00"
+        },
+        {
+            "name": "formfeed-uk/nova-logo-url",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Formfeed-UK/nova-logo-url.git",
+                "reference": "9e7ad9f648d458a233c40278e6fb09675540604a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Formfeed-UK/nova-logo-url/zipball/9e7ad9f648d458a233c40278e6fb09675540604a",
+                "reference": "9e7ad9f648d458a233c40278e6fb09675540604a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0",
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Formfeed\\NovaLogoUrl\\AssetServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Formfeed\\NovaLogoUrl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova Package for custom App Logo Urls and Links",
+            "homepage": "https://github.com/formfeed-uk/nova-logo-url",
+            "keywords": [
+                "laravel",
+                "logo",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/Formfeed-UK/nova-logo-url/issues",
+                "source": "https://github.com/Formfeed-UK/nova-logo-url/tree/2.0.2"
+            },
+            "time": "2023-01-26T12:55:18+00:00"
         },
         {
             "name": "formfeed-uk/nova-subfield-dependson",

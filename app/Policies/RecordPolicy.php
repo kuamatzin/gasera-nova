@@ -42,9 +42,8 @@ class RecordPolicy
     public function update(User $user, Record $record): bool
     {
         return match ($user->role) {
-            'admin' => true,
-            'gestor' => true,
-            'abogado', 'coordinador', 'director' => false,
+            'admin', 'gestor', 'abogado' => true,
+            'coordinador', 'director' => false,
             default => false,
         };
     }

@@ -164,12 +164,14 @@ return [
 
     'brand' => [
         'logo' => resource_path('/img/logo.svg'),
-
-    //     'colors' => [
-    //         "400" => "24, 182, 155, 0.5",
-    //         "500" => "24, 182, 155",
-    //         "600" => "24, 182, 155, 0.75",
-    //     ]
+        'logo_src' => 'https://files.inovuz.com/files/logo_advisers.png',
+        'logo_src_dark' => 'https://files.inovuz.com/files/logo_advisers.png',
+        'logo_class' => '',
+        //     'colors' => [
+        //         "400" => "24, 182, 155, 0.5",
+        //         "500" => "24, 182, 155",
+        //         "600" => "24, 182, 155, 0.75",
+        //     ]
     ],
 
     /*
