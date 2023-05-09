@@ -98,6 +98,9 @@ class Record extends Resource
             new Panel('Mapa de afectación', $this->mapaFields()),
             new Panel('Documentación', $this->documentacionFields()),
             new Panel('Dictamen Legal', $this->dictamenLegalFields()),
+            new Panel('Fase 1', $this->faseUnoFields()),
+            new Panel('Fase 2', $this->faseDosFields()),
+            //new Panel('Dictamen Legal', $this->dictamenLegalFields()),
         ];
     }
 
@@ -242,6 +245,42 @@ class Record extends Resource
         return array_merge($this->propiedadPrivadaFields(), $this->parcelaFields(), $this->ejidoFields());
     }
 
+    public function faseUnoFields()
+    {
+        return [
+            JSON::make('', 'dictamen_legal_fase_uno', [
+                Boolean::make('Propietario localizado', 'propietario_localizado'),
+                ...$this->fieldFileFasesDictamenLegal('Anuencia de trabajos preliminares', 'anuencia_trabajos_preliminares'),
+                ...$this->fieldFileFasesDictamenLegal('Anuencia cambio de uso de suelo', 'anuencia_cambio_uso_suelo'),
+                Boolean::make('Obtención de Documentación Legal', 'obtenicion_documentacion_legal'),
+                ...$this->fieldFileFasesDictamenLegal('Certificado de Libertad de Gravamen/Constancia Vigencia de Derechos ', 'certificado_libertad_gravamen'),
+                ...$this->fieldFileFasesDictamenLegal('Dictamen Legal', 'dictamen_legal'),
+                ...$this->fieldFileFasesDictamenLegal('Plano de afectación', 'plano_afectacion'),
+                ...$this->fieldFileFasesDictamenLegal('Cuantificación de BDTS', 'cuantificacion_bdts'),
+                ...$this->fieldFileFasesDictamenLegal('Reporte Fotográfico BDTS', 'reporte_fotografico_bdts'),
+                ...$this->fieldFileFasesDictamenLegal('Contrato de Promesa Firmado', 'contrato_promesa_firmado'),
+            ])
+        ];
+    }
+
+    public function faseDosFields()
+    {
+        return [
+            JSON::make('', 'dictamen_legal_fase_dos', [
+                ...$this->fieldFileFasesDictamenLegal('Aviso de interés', 'aviso_interes'),
+                ...$this->fieldFileFasesDictamenLegal('Notificación SENER', 'notificacion_sener'),
+                ...$this->fieldFileFasesDictamenLegal('Notificación SEDATU', 'notificacion_sedatu'),
+                ...$this->fieldFileFasesDictamenLegal('Anuencia de conformidad', 'anuencia_conformidad'),
+                ...$this->fieldFileFasesDictamenLegal('Contrato firmado', 'contrato_firmaddo'),
+                ...$this->fieldFileFasesDictamenLegal('Notificación de acuerdo cerrado a CRE', 'notificacion_acuerdo_cerrado_cre'),
+                ...$this->fieldFileFasesDictamenLegal('Notificación de acuerdo cerrado a SEDATU', 'notificacion_acuerdo_cerrado_sedatu'),
+                ...$this->fieldFileFasesDictamenLegal('Contrato de proceso de validación', 'contrato_proceso_validacion'),
+                ...$this->fieldFileFasesDictamenLegal('Contrato validado', 'contrato_validado'),
+                ...$this->fieldFileFasesDictamenLegal('Inscripción de contrato RAN/RPP', 'inscripcion_contrato_ran_rpp'),
+            ])
+        ];
+    }
+
     public function propiedadPrivadaFields()
     {
         return [
@@ -325,6 +364,30 @@ class Record extends Resource
             Text::make('Abogado emitió dictamen', 'abogado_emitio_dictamen')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
             Date::make('Fecha', 'fecha_dictamen')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
         ];
+    }
+
+
+    public function fieldFileFasesDictamenLegal($title, $value): array
+    {
+        $titleSection = Heading::make($title, $value)->hideFromIndex();
+
+        $file_field = FileEsteroids::make('', $value)->disk('public')->acceptedTypes('.pdf')->nullable()->hideFromIndex();
+
+        $select_field = Select::make('', $value . '_status')->options(function () {
+            if (Auth::user()->role === 'admin') {
+                return [
+                    'revision' => 'Revisión',
+                    'aceptado' => 'Aceptado',
+                    'rechazado' => 'Rechazado',
+                ];
+            }
+
+            return [
+                'revision' => 'Revisión',
+            ];
+        })->hideFromIndex();
+
+        return [$titleSection, $file_field, $select_field];
     }
 
     public function addHideFieldUntilOptionIsSelected($title, $value, $option, $optionSelected): array
