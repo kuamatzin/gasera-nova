@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use CodencoDev\NovaGridSystem\NovaGridSystem;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
@@ -52,9 +53,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function gate()
     {
         Gate::define('viewNova', function ($user) {
-            return in_array($user->email, [
-                //
-            ]);
+            return in_array($user->email, User::all()->pluck('email')->toArray());
         });
     }
 
