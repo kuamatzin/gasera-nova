@@ -56,7 +56,7 @@ return new class extends Migration
             $table->string('convenio_promesa')->nullable();
             $table->boolean('contrato_definitivo')->nullable();
             $table->boolean('convenio_sujeto_condicion')->nullable();
-            $table->boolean('identificacion_inconsistencia_importante');
+            $table->boolean('identificacion_inconsistencia_importante')->nullable();
             $table->string('identificacion_inconsistencia_importante_contenido')->nullable();
             $table->boolean('accion_legal_regularizar_tierra')->nullable();
             $table->string('accion_legal_regularizar_tierra_contenido')->nullable();
