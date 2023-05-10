@@ -415,7 +415,6 @@ class Record extends Resource
         ];
     }
 
-
     public function fieldFileFasesDictamenLegal($title, $value): array
     {
         $titleSection = Heading::make($title, $value)->hideFromIndex();
