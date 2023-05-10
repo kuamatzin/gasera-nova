@@ -13,6 +13,8 @@ class Record extends Model
 
     protected $casts = [
         'documentacion' => 'array',
+        'dictamen_legal_fase_uno' => 'array',
+        'dictamen_legal_fase_dos' => 'array',
     ];
 
     /**

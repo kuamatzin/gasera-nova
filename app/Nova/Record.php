@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
 use Inovuz\FileEsteroids\FileEsteroids;
 use Laravel\Nova\Fields\BelongsTo;
@@ -91,7 +92,7 @@ class Record extends Resource
         ];
 
         $regimen_propiedad = [
-          'propiedad' => 'P',
+            'propiedad' => 'P',
         ];
 
         $record = \App\Models\Record::find($request->resourceId);
@@ -419,7 +420,9 @@ class Record extends Resource
     {
         $titleSection = Heading::make($title, $value)->hideFromIndex();
 
-        $file_field = FileEsteroids::make('', $value)->disk('public')->acceptedTypes('.pdf')->nullable()->hideFromIndex();
+        $file_field = FileEsteroids::make('', $value)->storeAs(function ($request) use ($value) {
+            return $request->numero_expediente . '.pdf';
+        })->disk('public')->acceptedTypes('.pdf')->nullable()->hideFromIndex();
 
         $select_field = Select::make('', $value . '_status')->options(function () {
             if (Auth::user()->role === 'admin') {
