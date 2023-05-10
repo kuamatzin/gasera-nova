@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Imports\RecordsImport;
+use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
@@ -18,6 +19,12 @@ use App\Http\Controllers\Controller;
 
 Route::get('/records-import', function () {
    Excel::import(new RecordsImport, 'bd.csv');
+
+   return 'great';
+});
+
+Route::get('/users-import', function () {
+   Excel::import(new UsersImport, 'users.csv');
 
    return 'great';
 });

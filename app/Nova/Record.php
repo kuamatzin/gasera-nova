@@ -67,6 +67,53 @@ class Record extends Resource
         };
     }
 
+    public function generateNumeroExpediente($request)
+    {
+        $municipios_chihuahua = [
+            'villa ahumada' => '001',
+            'buenaventura' => '010',
+            'casas grandes' => '013',
+            'galeana' => '023',
+            'guadalupe' => '028',
+            'nuevo casas grandes' => '050',
+        ];
+
+        $municipios_sonora = [
+            'bacerac' => '010',
+            'cumpas' => '023',
+            'hachinerea' => '031',
+            'pitiquito' => '047',
+            'trincheras' => '064',
+            'cucurpe' => '022',
+            'santa ana' => '058',
+            'arizpe' => '006',
+            'villa hidalgo' => '067',
+        ];
+
+        $regimen_propiedad = [
+          'propiedad' => 'P',
+        ];
+
+        $record = \App\Models\Record::find($request->resourceId);
+        if (!$record) {
+            return '';
+        }
+        $estado = $record->estado_inmueble;
+        $estado = strtolower($estado) === 'sonora' ? 'SN' : 'CH';
+
+        $municipio = strtolower($record->municipio_inmueble);
+        if ($estado === 'SN') {
+            $municipio = $municipios_sonora[$municipio];
+        } else {
+            $municipio = $municipios_chihuahua[$municipio];
+        }
+
+        $propiedad = strtolower($record->regimen_propiedad_inmueble);
+
+
+        return 'SM-' . $estado . '-' . $municipio;
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -76,6 +123,7 @@ class Record extends Resource
     public function fields(NovaRequest $request)
     {
         return [
+            Text::make('Número de expediente', 'numero_expediente')->readonly(true)->hideFromIndex(),
             ID::make()->sortable(),
             BelongsTo::make('Usuario', 'user', User::class),
             Select::make('Estatus', 'status')->options(function () {
@@ -240,19 +288,19 @@ class Record extends Resource
         ];
     }
 
-    public function documentacionFields()
+    public function documentacionFields(): array
     {
         return array_merge($this->propiedadPrivadaFields(), $this->parcelaFields(), $this->ejidoFields());
     }
 
-    public function faseUnoFields()
+    public function faseUnoFields(): array
     {
         return [
             JSON::make('', 'dictamen_legal_fase_uno', [
-                Boolean::make('Propietario localizado', 'propietario_localizado'),
+                Boolean::make('Propietario localizado', 'propietario_localizado')->hideFromIndex(),
                 ...$this->fieldFileFasesDictamenLegal('Anuencia de trabajos preliminares', 'anuencia_trabajos_preliminares'),
                 ...$this->fieldFileFasesDictamenLegal('Anuencia cambio de uso de suelo', 'anuencia_cambio_uso_suelo'),
-                Boolean::make('Obtención de Documentación Legal', 'obtenicion_documentacion_legal'),
+                Boolean::make('Obtención de Documentación Legal', 'obtenicion_documentacion_legal')->hideFromIndex(),
                 ...$this->fieldFileFasesDictamenLegal('Certificado de Libertad de Gravamen/Constancia Vigencia de Derechos ', 'certificado_libertad_gravamen'),
                 ...$this->fieldFileFasesDictamenLegal('Dictamen Legal', 'dictamen_legal'),
                 ...$this->fieldFileFasesDictamenLegal('Plano de afectación', 'plano_afectacion'),
@@ -263,7 +311,7 @@ class Record extends Resource
         ];
     }
 
-    public function faseDosFields()
+    public function faseDosFields(): array
     {
         return [
             JSON::make('', 'dictamen_legal_fase_dos', [

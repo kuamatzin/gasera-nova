@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             // Propietario
+            $table->string('numero_expediente')->unique();
             $table->string('nombre_propietario_dependencia')->nullable();
             $table->string('telefono_recados')->nullable();
             $table->string('correo_electronico')->nullable();
