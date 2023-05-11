@@ -79,4 +79,9 @@ class RecordPolicy
             default => false,
         };
     }
+
+    public function replicate(User $user, Record $record): bool
+    {
+        return false;
+    }
 }
