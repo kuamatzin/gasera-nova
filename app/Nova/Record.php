@@ -187,7 +187,7 @@ class Record extends Resource
                 ['representante_legal'],
                 function (Text $field, NovaRequest $request, FormData $formData) {
                     if ($formData->representante_legal) {
-                        $field->show()->rules('required');
+                        $field->show();
                     }
                 }
             )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r));
