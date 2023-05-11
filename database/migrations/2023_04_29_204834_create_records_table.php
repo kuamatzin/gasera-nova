@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('observaciones_representante_legal')->nullable();
             // Inmueble
             $table->string('direccion_inmueble')->nullable();
+            $table->string('ejido_inmueble')->nullable();
             $table->string('poblado_inmueble')->nullable();
             $table->string('municipio_inmueble')->nullable();
             $table->string('estado_inmueble')->nullable();

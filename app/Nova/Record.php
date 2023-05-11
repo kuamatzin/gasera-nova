@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Inovuz\FileEsteroids\FileEsteroids;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\BooleanGroup;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\Heading;
@@ -208,7 +209,11 @@ class Record extends Resource
             }),
             Text::make('Celular, Teléfono local o para recados', 'telefono_recados')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Correo electrónico', 'correo_electronico')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
-            Text::make('Calificación del propietario', 'calificacion_propietario')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Select::make('Calificación del propietario', 'calificacion_propietario')->options([
+                'a' => 'a',
+                'b' => 'b',
+                'c' => 'c',
+            ])->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Dirección del propietario para notificaciones (Debe incluir link de Google Street)', 'direccion_propietario_notificaciones')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Código de Google Street', 'codigo_google_street')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Boolean::make('Representante Legal', 'representante_legal')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
@@ -216,14 +221,14 @@ class Record extends Resource
             $this->representateLegalConfig(Text::make('Celular, Teléfono local para recados', 'telefono_recados_representante_legal')),
             $this->representateLegalConfig(Text::make('Correo electrónico', 'correo_electronico_representante_legal')),
             Textarea::make('Observaciones o comentarios', 'observaciones_representante_legal')->hide()
-            ->dependsOn(
-                ['representante_legal'],
-                function (Textarea $field, NovaRequest $request, FormData $formData) {
-                    if ($formData->representante_legal) {
-                        $field->show()->rules('required');
+                ->dependsOn(
+                    ['representante_legal'],
+                    function (Textarea $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->representante_legal) {
+                            $field->show()->rules('required');
+                        }
                     }
-                }
-            )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+                )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             //$this->representateLegalConfig(Text::make('Observaciones o comentarios', 'observaciones_representante_legal')),
         ];
     }
@@ -232,6 +237,7 @@ class Record extends Resource
     {
         return [
             Text::make('Dirección', 'direccion_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            Text::make('Ejido', 'ejido_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Select::make('Estado', 'estado_inmueble')->options([
                 'chihuahua' => 'Chihuahua',
                 'sonora' => 'Sonora',
@@ -400,7 +406,7 @@ class Record extends Resource
         return [
             Boolean::make('Documentación completa para firmar contrato', 'documentación_completa_firmar_contrato')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
             Boolean::make('Cuenta con CLG/CVD', 'clg_cvd')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
-            Text::make('Dictamen Legal', 'dictamen_legal')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
+            Textarea::make('Dictamen Legal', 'dictamen_legal')->rows(35)->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
             Select::make('Convenio de promesa', 'convenio_promesa')->options([
                 'Si' => 'Si',
                 'No' => 'No',
