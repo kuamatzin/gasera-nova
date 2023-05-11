@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use Stepanenko3\NovaJson\JSON;
@@ -214,7 +215,16 @@ class Record extends Resource
             $this->representateLegalConfig(Text::make('Representante Legal', 'nombre_representante_legal')),
             $this->representateLegalConfig(Text::make('Celular, Teléfono local para recados', 'telefono_recados_representante_legal')),
             $this->representateLegalConfig(Text::make('Correo electrónico', 'correo_electronico_representante_legal')),
-            $this->representateLegalConfig(Text::make('Observaciones o comentarios', 'observaciones_representante_legal')),
+            Textarea::make('Observaciones o comentarios', 'observaciones_representante_legal')->hide()
+            ->dependsOn(
+                ['representante_legal'],
+                function (Textarea $field, NovaRequest $request, FormData $formData) {
+                    if ($formData->representante_legal) {
+                        $field->show()->rules('required');
+                    }
+                }
+            )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            //$this->representateLegalConfig(Text::make('Observaciones o comentarios', 'observaciones_representante_legal')),
         ];
     }
 
