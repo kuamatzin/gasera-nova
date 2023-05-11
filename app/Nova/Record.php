@@ -124,7 +124,7 @@ class Record extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            Text::make('Número de expediente', 'numero_expediente')->readonly(true)->hideFromIndex(),
+            Text::make('Número de expediente', 'numero_expediente')->readonly(true),
             ID::make()->sortable(),
             BelongsTo::make('Usuario', 'user', User::class),
             Select::make('Estatus', 'status')->options(function () {
