@@ -18,13 +18,24 @@ use App\Http\Controllers\Controller;
 */
 
 Route::get('/records-import', function () {
-   Excel::import(new RecordsImport, 'bd.csv');
+    Excel::import(new RecordsImport, 'bd.csv');
 
-   return 'great';
+    return 'great';
 });
 
 Route::get('/users-import', function () {
-   Excel::import(new UsersImport, 'users.csv');
+    Excel::import(new UsersImport, 'users.csv');
 
-   return 'great';
+    return 'great';
+});
+
+Route::get('files', function () {
+    array_filter(\Illuminate\Support\Facades\Storage::disk('public')->files(), function ($item) {
+        if (str_contains($item, '.pdf') || str_contains($item, '.PDF')) {
+            $numero_expediente = strpos($item, '_');
+            $numero_expediente = substr($item, 0, $numero_expediente);
+            $expediente = \App\Models\Record::where('numero_expediente', $numero_expediente)->first();
+            dd($expediente->documentacion);
+        }
+    });
 });
