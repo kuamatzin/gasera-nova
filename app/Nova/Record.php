@@ -562,7 +562,7 @@ class Record extends Resource
     public function actions(NovaRequest $request)
     {
         return [
-            (new DownloadExcel)->withFilename('expedientes-' . time() . '.xlsx'),
+            (new \App\Nova\Actions\DownloadExcel)->allFields()->withFilename('expedientes-' . time() . '.xlsx'),
         ];
     }
 }
