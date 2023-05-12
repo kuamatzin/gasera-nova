@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\RecordState;
 use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
 use Inovuz\BooleanSwitcher\BooleanSwitcher;
@@ -554,7 +555,9 @@ class Record extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+            new RecordState,
+        ];
     }
 
     /**
