@@ -516,7 +516,7 @@ class Record extends Resource
     {
         return [
             //Text::make('Dirección', 'direccion_inmueble')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
-            File::make('Dirección', 'direccion_inmueble'),
+            FileEsteroids::make('Dirección', 'direccion_inmueble'),
         ];
     }
 
