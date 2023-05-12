@@ -73,18 +73,26 @@ class Record extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
+        if ($request->user()->entity === 'chihuahua') {
+            return $query->where('estado_inmueble', 'CHIHUAHUA');
+        }
+
+        if ($request->user()->entity === 'sonora') {
+            return $query->where('estado_inmueble', 'SONORA');
+        }
+
         if (empty($request->get('orderBy'))) {
             $query->getQuery()->orders = [];
 
             return match ($request->user()->role) {
-                'admin' => $query->orderBy(key(static::$indexDefaultOrder), reset(static::$indexDefaultOrder)),
+                'admin', 'cliente' => $query->orderBy(key(static::$indexDefaultOrder), reset(static::$indexDefaultOrder)),
                 'abogado', 'coordinador', 'director', 'gestor' => $query->where('user_id', $request->user()->id)->orderBy(key(static::$indexDefaultOrder), reset(static::$indexDefaultOrder)),
                 default => $query->where('user_id', $request->user()->id)->orderBy(key(static::$indexDefaultOrder), reset(static::$indexDefaultOrder)),
             };
         }
 
         return match ($request->user()->role) {
-            'admin' => $query,
+            'admin', 'cliente' => $query,
             'abogado', 'coordinador', 'director', 'gestor' => $query->where('user_id', $request->user()->id),
             default => $query->where('user_id', $request->user()->id),
         };
