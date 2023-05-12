@@ -76,6 +76,8 @@ class User extends Resource
                 ->options([
                     'admin' => 'Administrador',
                     'gestor' => 'Gestor',
+                    'abogado' => 'Abogado',
+                    'cliente' => 'Cliente',
                 ])
                 ->displayUsingLabels()
                 ->rules('required'),

@@ -31,7 +31,7 @@ class RecordPolicy
     {
         return match ($user->role) {
             'admin' => true,
-            'abogado', 'coordinador', 'director', 'gestor' => false,
+            'abogado', 'coordinador', 'director', 'gestor', 'cliente' => false,
             default => false,
         };
     }
@@ -43,7 +43,7 @@ class RecordPolicy
     {
         return match ($user->role) {
             'admin', 'gestor', 'abogado' => true,
-            'coordinador', 'director' => false,
+            'coordinador', 'director', 'cliente' => false,
             default => false,
         };
     }
@@ -63,7 +63,7 @@ class RecordPolicy
     {
         return match ($user->role) {
             'admin' => true,
-            'abogado', 'coordinador', 'director', 'gestor' => false,
+            'abogado', 'coordinador', 'director', 'gestor', 'cliente' => false,
             default => false,
         };
     }
@@ -75,7 +75,7 @@ class RecordPolicy
     {
         return match ($user->role) {
             'admin' => true,
-            'abogado', 'coordinador', 'director', 'gestor' => false,
+            'abogado', 'coordinador', 'director', 'gestor', 'cliente' => false,
             default => false,
         };
     }
