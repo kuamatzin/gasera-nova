@@ -154,9 +154,14 @@ class Record extends Resource
     public function fields(NovaRequest $request)
     {
         return [
+            ID::make('Número de cadenamiento', 'id')->sortable(),
             Text::make('Número de expediente', 'numero_expediente')->readonly(true),
-            ID::make()->sortable(),
-            BelongsTo::make('Usuario', 'user', User::class),
+            BelongsTo::make('Gestor', 'user', User::class)->hideFromIndex(function () {
+                if (Auth::user()->role === 'cliente') {
+                    return true;
+                }
+                return false;
+            }),
             Select::make('Estatus', 'status')->options(function () {
                 if (Auth::user()->role === 'admin') {
                     return [
@@ -225,7 +230,7 @@ class Record extends Resource
     public function propietarioFields()
     {
         return [
-            Text::make('Nombre del propietario y/o Dependencia', 'nombre_propietario_dependencia')->readonly(function (NovaRequest $request) {
+            Text::make('Planilla de identificación', 'nombre_propietario_dependencia')->readonly(function (NovaRequest $request) {
                 $allowed = ['admin'];
                 if (in_array($request->user()->role, $allowed)) {
                     return false;
