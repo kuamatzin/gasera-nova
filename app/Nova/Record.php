@@ -171,7 +171,7 @@ class Record extends Resource
                     'revision' => 'Revisión',
                 ];
             })->displayUsingLabels()->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            new Panel('Propietario', $this->propietarioFields()),
+            new Panel('Planilla de identificación', $this->propietarioFields()),
             new Panel('Datos del inmueble a contratar', $this->inmuebleFields()),
             new Panel('Superficies a contratar', $this->superficieFields()),
             new Panel('Mapa de afectación', $this->mapaFields()),
@@ -225,7 +225,7 @@ class Record extends Resource
     public function propietarioFields()
     {
         return [
-            Text::make('Planilla de identificación', 'nombre_propietario_dependencia')->readonly(function (NovaRequest $request) {
+            Text::make('Nombre de propietario o dependencia', 'nombre_propietario_dependencia')->readonly(function (NovaRequest $request) {
                 $allowed = ['admin'];
                 if (in_array($request->user()->role, $allowed)) {
                     return false;
