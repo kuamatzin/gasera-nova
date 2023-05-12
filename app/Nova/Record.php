@@ -267,25 +267,25 @@ class Record extends Resource
                     if ($formData->estado_inmueble === 'sonora') {
                         $field->show()->rules('required');
                         $field->options([
-                            '10' => 'Bacerac',
-                            '23' => 'Cumpas',
-                            '31' => 'Hachinera',
-                            '47' => 'Pitiquito',
-                            '64' => 'Trincheras',
-                            '22' => 'Cucurpe',
-                            '58' => 'Santa Ana',
-                            '06' => 'Arizpe',
-                            '67' => 'Villa Hidalgo',
+                            '010' => '010 - Bacerac',
+                            '023' => '023 - Cumpas',
+                            '031' => '031 - Hachinera',
+                            '047' => '047 - Pitiquito',
+                            '064' => '064 - Trincheras',
+                            '022' => '022 - Cucurpe',
+                            '058' => '058 - Santa Ana',
+                            '006' => '006 - Arizpe',
+                            '067' => '067 - Villa Hidalgo',
                         ]);
                     } else if ($formData->estado_inmueble === 'chihuahua') {
                         $field->show()->rules('required');
                         $field->options([
-                            '01' => 'Villa Ahumada',
-                            '10' => 'Buenaventura',
-                            '13' => 'Casas Grandes',
-                            '23' => 'Galeana',
-                            '28' => 'Guadalupe',
-                            '50' => 'Nuevo Casas Grandes',
+                            '001' => '001 - Villa Ahumada',
+                            '010' => '010 - Buenaventura',
+                            '013' => '013 - Casas Grandes',
+                            '023' => '023 - Galeana',
+                            '028' => '028 - Guadalupe',
+                            '050' => '050 - Nuevo Casas Grandes',
                         ]);
                     } else {
                         $field->hide();
