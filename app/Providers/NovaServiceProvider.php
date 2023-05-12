@@ -6,6 +6,7 @@ use App\Models\User;
 use CodencoDev\NovaGridSystem\NovaGridSystem;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
+use Inovuz\CustomGridSystem\CustomGridSystem;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Oneduo\NovaFileManager\NovaFileManager;
@@ -80,6 +81,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             //new NovaGridSystem
             //new LaravelNovaCsvImport,
+            new CustomGridSystem,
             NovaFileManager::make()->canSee(function($request) {
                 if ($request->user()->role == 'admin') {
                     return true;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d0ac528d92d0e2d2f1181acfbad5d7b",
+    "content-hash": "0a7d49316e7e245447be4b6c1b752965",
     "packages": [
         {
             "name": "acme/color-picker",
@@ -1888,6 +1888,42 @@
                 "MIT"
             ],
             "description": "A Laravel Nova field.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "inovuz/custom-grid-system",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/CustomGridSystem",
+                "reference": "7954012c2eec63fc4a95bdd435aad077973b18c4"
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Inovuz\\CustomGridSystem\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Inovuz\\CustomGridSystem\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova tool.",
             "keywords": [
                 "laravel",
                 "nova"
@@ -10569,7 +10605,8 @@
         "inovuz/boolean-switcher": 20,
         "inovuz/card-file": 20,
         "inovuz/file-esteroids": 20,
-        "inovuz/file-kmz": 20
+        "inovuz/file-kmz": 20,
+        "inovuz/custom-grid-system": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
