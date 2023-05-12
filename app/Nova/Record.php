@@ -4,7 +4,9 @@ namespace App\Nova;
 
 use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
+use Inovuz\BooleanSwitcher\BooleanSwitcher;
 use Inovuz\FileEsteroids\FileEsteroids;
+use Inovuz\FileKmz\FileKmz;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\BooleanGroup;
@@ -18,6 +20,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
+use NormanHuth\NovaRadioField\Radio;
 use Stepanenko3\NovaJson\JSON;
 
 class Record extends Resource
@@ -216,7 +219,7 @@ class Record extends Resource
             ])->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Dirección del propietario para notificaciones (Debe incluir link de Google Street)', 'direccion_propietario_notificaciones')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             Text::make('Código de Google Street', 'codigo_google_street')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
-            Boolean::make('Representante Legal', 'representante_legal')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            BooleanSwitcher::make('Representante Legal', 'representante_legal')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             $this->representateLegalConfig(Text::make('Representante Legal', 'nombre_representante_legal')),
             $this->representateLegalConfig(Text::make('Celular, Teléfono local para recados', 'telefono_recados_representante_legal')),
             $this->representateLegalConfig(Text::make('Correo electrónico', 'correo_electronico_representante_legal')),
@@ -314,10 +317,10 @@ class Record extends Resource
     {
         return [
             JSON::make('', 'dictamen_legal_fase_uno', [
-                Boolean::make('Propietario localizado', 'propietario_localizado')->hideFromIndex(),
+                BooleanSwitcher::make('Propietario localizado', 'propietario_localizado')->hideFromIndex(),
                 ...$this->fieldFileFasesDictamenLegal('Anuencia de trabajos preliminares', 'anuencia_trabajos_preliminares'),
                 ...$this->fieldFileFasesDictamenLegal('Anuencia cambio de uso de suelo', 'anuencia_cambio_uso_suelo'),
-                Boolean::make('Obtención de Documentación Legal', 'obtenicion_documentacion_legal')->hideFromIndex(),
+                BooleanSwitcher::make('Obtención de Documentación Legal', 'obtenicion_documentacion_legal')->hideFromIndex(),
                 ...$this->fieldFileFasesDictamenLegal('Certificado de Libertad de Gravamen/Constancia Vigencia de Derechos ', 'certificado_libertad_gravamen'),
                 ...$this->fieldFileFasesDictamenLegal('Dictamen Legal', 'dictamen_legal'),
                 ...$this->fieldFileFasesDictamenLegal('Plano de afectación', 'plano_afectacion'),
@@ -404,19 +407,19 @@ class Record extends Resource
     public function dictamenLegalFields()
     {
         return [
-            Boolean::make('Documentación completa para firmar contrato', 'documentación_completa_firmar_contrato')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
-            Boolean::make('Cuenta con CLG/CVD', 'clg_cvd')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
+            BooleanSwitcher::make('Documentación completa para firmar contrato', 'documentación_completa_firmar_contrato')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
+            BooleanSwitcher::make('Cuenta con CLG/CVD', 'clg_cvd')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
             Textarea::make('Dictamen Legal', 'dictamen_legal')->rows(35)->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
             Select::make('Convenio de promesa', 'convenio_promesa')->options([
                 'Si' => 'Si',
                 'No' => 'No',
                 'n/a' => 'N/A'
             ])->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
-            Boolean::make('Contrato definitivo', 'contrato_definitivo')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
-            Boolean::make('Convenio sujeto a condición', 'convenio_sujeto_condicion')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
-            Boolean::make('Indique si se identificó alguna inconsistencia importante', 'identificacion_inconsistencia_importante')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
+            BooleanSwitcher::make('Contrato definitivo', 'contrato_definitivo')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
+            BooleanSwitcher::make('Convenio sujeto a condición', 'convenio_sujeto_condicion')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
+            BooleanSwitcher::make('Indique si se identificó alguna inconsistencia importante', 'identificacion_inconsistencia_importante')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
             Text::make('Descripción', 'identificacion_inconsistencia_importante_contenido')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
-            Boolean::make('Acción legal que se tendría que realizar para regularizar la Legal Tenencia de la Tierra', 'accion_legal_regularizar_tierra')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
+            BooleanSwitcher::make('Acción legal que se tendría que realizar para regularizar la Legal Tenencia de la Tierra', 'accion_legal_regularizar_tierra')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
             Text::make('Descripción', 'accion_legal_regularizar_tierra_contenido')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r)),
             Select::make('Clasificación de la contingencia de acuerdo a la inconsistencia detectada', 'clasificacion_contingencia_detectada')->options([
                 'simple' => 'Simple de resolver',
@@ -480,7 +483,7 @@ class Record extends Resource
             return $this[$option] === $optionSelected;
         })->hideFromIndex();
 
-        $select_field = Select::make('', $value . '_status')->options(function () {
+        $select_field = Radio::make('', $value . '_status')->options(function () {
             if (Auth::user()->role === 'admin') {
                 return [
                     'revision' => 'Revisión',
@@ -511,7 +514,8 @@ class Record extends Resource
     public function mapaFields()
     {
         return [
-            Text::make('Dirección', 'direccion_inmueble')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            //Text::make('Dirección', 'direccion_inmueble')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
+            FileKmz::make('Dirección', 'direccion_inmueble'),
         ];
     }
 

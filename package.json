@@ -8,7 +8,11 @@
         "build-card-file": "cd nova-components/CardFile && npm run dev",
         "build-card-file-prod": "cd nova-components/CardFile && npm run prod",
         "build-color-picker": "cd nova-components/ColorPicker && npm run dev",
-        "build-color-picker-prod": "cd nova-components/ColorPicker && npm run prod"
+        "build-color-picker-prod": "cd nova-components/ColorPicker && npm run prod",
+        "build-file-kmz": "cd nova-components/FileKmz && npm run dev",
+        "build-file-kmz-prod": "cd nova-components/FileKmz && npm run prod",
+        "build-boolean-switcher": "cd nova-components/BooleanSwitcher && npm run dev",
+        "build-boolean-switcher-prod": "cd nova-components/BooleanSwitcher && npm run prod"
     },
     "devDependencies": {
         "axios": "^1.1.2",
