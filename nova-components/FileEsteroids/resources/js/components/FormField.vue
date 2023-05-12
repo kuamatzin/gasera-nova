@@ -1,52 +1,50 @@
 <template>
-    <div>
-        <DefaultField
-            :field="currentField"
-            :label-for="labelFor"
-            :errors="errors"
-            :show-help-text="!isReadonly && showHelpText"
-            :full-width-content="fullWidthContent"
-        >
-            <template #field>
-                <!-- Existing Image -->
-                <div class="space-y-4">
-                    <div
-                        v-if="hasValue && previewFile && files.length == 0"
-                        class="grid grid-cols-4 gap-x-6 gap-y-2"
-                    >
-                        <FilePreviewBlock
-                            v-if="previewFile"
-                            :file="previewFile"
-                            :removable="shouldShowRemoveButton"
-                            @removed="confirmRemoval"
-                            :rounded="field.rounded"
-                            :dusk="`${field.attribute}-delete-link`"
-                        />
-                    </div>
-
-                    <!-- Upload Removal Modal -->
-                    <ConfirmUploadRemovalModal
-                        :show="removeModalOpen"
-                        @confirm="removeUploadedFile"
-                        @close="closeRemoveModal"
-                    />
-
-                    <!-- DropZone -->
-                    <DropZone
-                        v-if="shouldShowField"
-                        :files="files"
-                        @file-changed="handleFileChange"
-                        @file-removed="removeFile"
+    <DefaultField
+        :field="currentField"
+        :label-for="labelFor"
+        :errors="errors"
+        :show-help-text="!isReadonly && showHelpText"
+        :full-width-content="fullWidthContent"
+    >
+        <template #field>
+            <!-- Existing Image -->
+            <div class="space-y-4">
+                <div
+                    v-if="hasValue && previewFile && files.length == 0"
+                    class="grid grid-cols-4 gap-x-6 gap-y-2"
+                >
+                    <FilePreviewBlock
+                        v-if="previewFile"
+                        :file="previewFile"
+                        :removable="shouldShowRemoveButton"
+                        @removed="confirmRemoval"
                         :rounded="field.rounded"
-                        :accepted-types="field.acceptedTypes"
-                        :disabled="file?.processing"
                         :dusk="`${field.attribute}-delete-link`"
-                        :input-dusk="field.attribute"
                     />
                 </div>
-            </template>
-        </DefaultField>
-    </div>
+
+                <!-- Upload Removal Modal -->
+                <ConfirmUploadRemovalModal
+                    :show="removeModalOpen"
+                    @confirm="removeUploadedFile"
+                    @close="closeRemoveModal"
+                />
+
+                <!-- DropZone -->
+                <DropZone
+                    v-if="shouldShowField"
+                    :files="files"
+                    @file-changed="handleFileChange"
+                    @file-removed="removeFile"
+                    :rounded="field.rounded"
+                    :accepted-types="field.acceptedTypes"
+                    :disabled="file?.processing"
+                    :dusk="`${field.attribute}-delete-link`"
+                    :input-dusk="field.attribute"
+                />
+            </div>
+        </template>
+    </DefaultField>
 </template>
 
 <script>

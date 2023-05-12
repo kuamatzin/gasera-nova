@@ -342,7 +342,7 @@ class Record extends Resource
     {
         return [
             JSON::make('', 'dictamen_legal_fase_uno', [
-                BooleanSwitcher::make('Propietario localizado', 'propietario_localizado')->hideFromIndex(),
+                BooleanSwitcher::make('Propietario localizado', 'propietario_localizado')->hideFromIndex()->size('w-full'),
                 ...$this->fieldFileFasesDictamenLegal('Anuencia de trabajos preliminares', 'anuencia_trabajos_preliminares'),
                 ...$this->fieldFileFasesDictamenLegal('Anuencia cambio de uso de suelo', 'anuencia_cambio_uso_suelo'),
                 BooleanSwitcher::make('Obtención de Documentación Legal', 'obtenicion_documentacion_legal')->hideFromIndex(),
@@ -461,11 +461,9 @@ class Record extends Resource
 
     public function fieldFileFasesDictamenLegal($title, $value): array
     {
-        $titleSection = Heading::make($title, $value)->hideFromIndex();
-
         $file_field = FileEsteroids::make('', $value)->storeAs(function ($request) use ($value) {
             return $request->numero_expediente . '.pdf';
-        })->disk('public')->acceptedTypes('.pdf')->nullable()->hideFromIndex();
+        })->disk('public')->acceptedTypes('.pdf')->nullable()->hideFromIndex()->size('w-1/4');
 
         $select_field = Select::make('', $value . '_status')->options(function () {
             if (Auth::user()->role === 'admin') {
@@ -479,15 +477,15 @@ class Record extends Resource
             return [
                 'revision' => 'Revisión',
             ];
-        })->hideFromIndex();
+        })->hideFromIndex()->size('w-1/4');;
 
-        return [$titleSection, $file_field, $select_field];
+        return [$file_field, $select_field];
     }
 
     public function addHideFieldUntilOptionIsSelected($title, $value, $option, $optionSelected): array
     {
 
-        $file_field = FileEsteroids::make('', $value)->disk('public')->acceptedTypes('.pdf')->nullable()->hide()->dependsOn(
+        $file_field = FileEsteroids::make($title, $value)->disk('public')->acceptedTypes('.pdf')->nullable()->hide()->dependsOn(
             [$option],
             function (FileEsteroids $field, NovaRequest $request, FormData $formData) use ($option, $optionSelected) {
                 if ($formData[$option] === $optionSelected) {
@@ -496,7 +494,7 @@ class Record extends Resource
             }
         )->showOnDetail(function (NovaRequest $request, $resource) use ($option, $optionSelected) {
             return $this[$option] === $optionSelected;
-        })->hideFromIndex();
+        })->hideFromIndex()->size('w-1/4');
 
         $select_field = Radio::make('', $value . '_status')->options(function () {
             if (Auth::user()->role === 'admin') {
@@ -521,7 +519,7 @@ class Record extends Resource
             }
         )->showOnDetail(function (NovaRequest $request, $resource) use ($option, $optionSelected) {
             return $this[$option] === $optionSelected;
-        })->hideFromIndex();
+        })->hideFromIndex()->size('w-1/4');
 
         return [$file_field, $select_field];
     }
