@@ -60,6 +60,11 @@ class Record extends Resource
         'id', 'nombre_propietario_dependencia'
     ];
 
+    public static $indexDefaultOrder = [
+        'id' => 'asc'
+    ];
+
+
     /**
      * @param NovaRequest $request
      * @param $query
@@ -67,10 +72,20 @@ class Record extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
+        if (empty($request->get('orderBy'))) {
+            $query->getQuery()->orders = [];
+
+            return match ($request->user()->role) {
+                'admin' => $query->orderBy(key(static::$indexDefaultOrder), reset(static::$indexDefaultOrder)),
+                'abogado', 'coordinador', 'director', 'gestor' => $query->where('user_id', $request->user()->id)->orderBy(key(static::$indexDefaultOrder), reset(static::$indexDefaultOrder)),
+                default => $query->where('user_id', $request->user()->id)->orderBy(key(static::$indexDefaultOrder), reset(static::$indexDefaultOrder)),
+            };
+        }
+
         return match ($request->user()->role) {
-            'admin' => $query->orderByDesc('created_at'),
-            'abogado', 'coordinador', 'director', 'gestor' => $query->where('user_id', $request->user()->id)->orderByDesc('created_at'),
-            default => $query->where('user_id', $request->user()->id)->orderByDesc('created_at'),
+            'admin' => $query,
+            'abogado', 'coordinador', 'director', 'gestor' => $query->where('user_id', $request->user()->id),
+            default => $query->where('user_id', $request->user()->id),
         };
     }
 
