@@ -78,7 +78,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-            new NovaGridSystem,
+            //new NovaGridSystem
             //new LaravelNovaCsvImport,
             NovaFileManager::make()->canSee(function($request) {
                 if ($request->user()->role == 'admin') {

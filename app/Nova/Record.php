@@ -20,6 +20,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
+use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use NormanHuth\NovaRadioField\Radio;
 use Stepanenko3\NovaJson\JSON;
 
@@ -560,6 +561,8 @@ class Record extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new DownloadExcel)->name('Descargar excel')->withFilename('expedientes-' . time() . '.xlsx'),
+        ];
     }
 }
