@@ -56,8 +56,8 @@
         </template>
     </DefaultField>
 
-    <Modal :show="showModal" :size="'7xl'" :modalStyle="'fullscreen'">
-        <div style="background: white">
+    <Modal :show="showModal" :size="'7xl'" :modalStyle="'fullscreen'" @keydown.esc="showModal = false">
+        <div style="background: white" id="box">
             <ModalHeader>
                 <div class="flex justify-between items-center mb-2">
                     <h1 class="text-xl font-bold">Previsualizar archivo</h1>
@@ -173,6 +173,12 @@ export default {
                 }
             }
             this.showModal = true;
+
+            setTimeout(() => {
+                const box = document.getElementById('box');
+                box.tabIndex = '-1';
+                box.focus();
+            }, 100);
         },
 
         preparePreviewImage() {

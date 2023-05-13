@@ -143,6 +143,11 @@ function createFile(file) {
       }
 
       this.showModal = true;
+      setTimeout(function () {
+        var box = document.getElementById('box');
+        box.tabIndex = '-1';
+        box.focus();
+      }, 100);
     },
     preparePreviewImage: function preparePreviewImage() {
       if (this.hasValue && this.imageUrl) {
@@ -494,7 +499,8 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   style: {
     "background": "white"
-  }
+  },
+  id: "box"
 };
 var _hoisted_4 = {
   "class": "flex justify-between items-center mb-2"
@@ -570,7 +576,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8 /* PROPS */, ["field", "label-for", "errors", "show-help-text", "full-width-content"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
     show: _ctx.showModal,
     size: '7xl',
-    modalStyle: 'fullscreen'
+    modalStyle: 'fullscreen',
+    onKeydown: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+      return _ctx.showModal = false;
+    }, ["esc"]))
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalHeader, null, {
