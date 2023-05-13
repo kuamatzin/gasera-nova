@@ -11,16 +11,26 @@
             <div class="space-y-4">
                 <div
                     v-if="hasValue && previewFile && files.length == 0"
-                    class="grid grid-cols-4 gap-x-6 gap-y-2"
+                    class="flex items-center justify-center"
                 >
-                    <FilePreviewBlock
-                        v-if="previewFile"
-                        :file="previewFile"
-                        :removable="shouldShowRemoveButton"
-                        @removed="confirmRemoval"
-                        :rounded="field.rounded"
-                        :dusk="`${field.attribute}-delete-link`"
-                    />
+                    <div>
+                        <div @click="preview" class="cursor-pointer"
+                             style="position: relative; left: -5%; top: 12px; z-index: 10000;">
+                            <Icon
+                                type="eye"
+                                :solid="true"
+                                class="text-gray-800 dark:text-gray-200"
+                            />
+                        </div>
+                        <FilePreviewBlock
+                            v-if="previewFile"
+                            :file="previewFile"
+                            :removable="shouldShowRemoveButton"
+                            @removed="confirmRemoval"
+                            :rounded="field.rounded"
+                            :dusk="`${field.attribute}-delete-link`"
+                        />
+                    </div>
                 </div>
 
                 <!-- Upload Removal Modal -->
@@ -45,6 +55,34 @@
             </div>
         </template>
     </DefaultField>
+
+    <Modal :show="showModal" :size="'7xl'" :modalStyle="'fullscreen'">
+        <div style="background: white">
+            <ModalHeader>
+                <div class="flex justify-between items-center mb-2">
+                    <h1 class="text-xl font-bold">Previsualizar archivo</h1>
+                    <button
+                        @click="showModal = false"
+                        class="cursor-pointer text-3xl leading-none"
+                    >
+                        &times;
+                    </button>
+                </div>
+            </ModalHeader>
+            <ModalContent>
+                <div class="flex flex-wrap h-screen">
+                    <div class="w-full h-screen">
+                        <iframe
+                            :src="`/storage/${this.fileModal}`"
+                            frameborder="0"
+                            width="100%"
+                            height="85%"
+                        ></iframe>
+                    </div>
+                </div>
+            </ModalContent>
+        </div>
+    </Modal>
 </template>
 
 <script>
@@ -75,6 +113,8 @@ export default {
     mixins: [HandlesValidationErrors, DependentFormField],
 
     data: () => ({
+        showModal: false,
+        fileModal: '',
         previewFile: null,
         file: null,
         removeModalOpen: false,
@@ -123,6 +163,18 @@ export default {
     },
 
     methods: {
+        preview() {
+            for (let propName in this.currentFieldValues) {
+                if (this.currentFieldValues.hasOwnProperty(propName)) {
+                    this.fileModal = this.currentFieldValues[propName];
+                    this.showModal = true;
+                    break;
+                    // do something with each element here
+                }
+            }
+            this.showModal = true;
+        },
+
         preparePreviewImage() {
             if (this.hasValue && this.imageUrl) {
                 this.fetchPreviewImage()

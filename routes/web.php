@@ -23,6 +23,12 @@ Route::get('/records-import', function () {
     return 'great';
 });
 
+Route::get('/records-sonora-import', function () {
+    Excel::import(new \App\Imports\RecordsSonoraImport, 'sonora.csv');
+
+    return 'great';
+});
+
 Route::get('/users-import', function () {
     Excel::import(new UsersImport, 'users.csv');
 
