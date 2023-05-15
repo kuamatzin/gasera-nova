@@ -31,18 +31,20 @@ class RecordsImport implements ToModel
 
             $numero_expediente = str_replace(' ', '', $row[1]) . '-' . str_replace(' ', '', $row[2]) . '-' . $codeMunicipio . '-' . str_replace(' ', '', $row[4]) . '-' . $codeNumero;
 
-            return new Record([
-                'user_id' => $row[36],
-                'numero_expediente' => $numero_expediente,
-                'nombre_propietario_dependencia' => $row[7],
-                'municipio_inmueble' => $row[22],
-                'estado_inmueble' => $row[23],
-                'regimen_propiedad_inmueble' => $row[24],
-                'km_inicial_superficie' => $row[32],
-                'km_final_superficie' => $row[33],
-                'longitud_afectacion_superficie' => $row[34],
-                'status' => 'progress',
-            ]);
+            if (!Record::where('numero_expediente', $numero_expediente)->first()) {
+                return new Record([
+                    'user_id' => $row[36] + 4,
+                    'numero_expediente' => $numero_expediente,
+                    'nombre_propietario_dependencia' => $row[7],
+                    'municipio_inmueble' => $row[22],
+                    'estado_inmueble' => $row[23],
+                    'regimen_propiedad_inmueble' => $row[24],
+                    'km_inicial_superficie' => $row[32],
+                    'km_final_superficie' => $row[33],
+                    'longitud_afectacion_superficie' => $row[34],
+                    'status' => 'progress',
+                ]);
+            }
         }
     }
 }

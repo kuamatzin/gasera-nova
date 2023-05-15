@@ -58,11 +58,11 @@ class Record extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'nombre_propietario_dependencia'
+        'numero_cadenamiento'
     ];
 
     public static $indexDefaultOrder = [
-        'id' => 'asc'
+        'numero_cadenamiento' => 'asc'
     ];
 
 
@@ -154,7 +154,8 @@ class Record extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make('Número de cadenamiento', 'id')->sortable(),
+            //ID::make('ID')->sortable(),
+            Text::make('Número de cadenamiento', 'numero_cadenamiento')->sortable(),
             Text::make('Número de expediente', 'numero_expediente')->readonly(false)->size('w-1/3'),
             BelongsTo::make('Gestor', 'user', User::class)->hideFromIndex(fn() => Auth::user()->role === 'cliente')->size('w-1/3'),
             Select::make('Estatus', 'status')->options(function () {
@@ -343,15 +344,15 @@ class Record extends Resource
         return [
             JSON::make('', 'dictamen_legal_fase_uno', [
                 BooleanSwitcher::make('Propietario localizado', 'propietario_localizado')->hideFromIndex()->size('w-full'),
-                ...$this->fieldFileFasesDictamenLegal('Anuencia de trabajos preliminares', 'anuencia_trabajos_preliminares'),
-                ...$this->fieldFileFasesDictamenLegal('Anuencia cambio de uso de suelo', 'anuencia_cambio_uso_suelo'),
+                ...$this->fieldFileFasesDictamenLegal('Anuencia de trabajos preliminares', 'atp'),
+                ...$this->fieldFileFasesDictamenLegal('Anuencia cambio de uso de suelo', 'aus'),
                 BooleanSwitcher::make('Obtención de Documentación Legal', 'obtenicion_documentacion_legal')->hideFromIndex(),
-                ...$this->fieldFileFasesDictamenLegal('Certificado de Libertad de Gravamen/Constancia Vigencia de Derechos ', 'certificado_libertad_gravamen'),
+                ...$this->fieldFileFasesDictamenLegal('Certificado de Libertad de Gravamen/Constancia Vigencia de Derechos ', 'clg'),
                 ...$this->fieldFileFasesDictamenLegal('Dictamen Legal', 'dictamen_legal'),
-                ...$this->fieldFileFasesDictamenLegal('Plano de afectación', 'plano_afectacion'),
-                ...$this->fieldFileFasesDictamenLegal('Cuantificación de BDTS', 'cuantificacion_bdts'),
-                ...$this->fieldFileFasesDictamenLegal('Reporte Fotográfico BDTS', 'reporte_fotografico_bdts'),
-                ...$this->fieldFileFasesDictamenLegal('Contrato de Promesa Firmado', 'contrato_promesa_firmado'),
+                ...$this->fieldFileFasesDictamenLegal('Plano de afectación', 'paf'),
+                ...$this->fieldFileFasesDictamenLegal('Cuantificación de BDTS', 'cbdts'),
+                ...$this->fieldFileFasesDictamenLegal('Reporte Fotográfico BDTS', 'fbdts'),
+                ...$this->fieldFileFasesDictamenLegal('Contrato de Promesa Firmado', 'cpf'),
             ])
         ];
     }
@@ -360,16 +361,16 @@ class Record extends Resource
     {
         return [
             JSON::make('', 'dictamen_legal_fase_dos', [
-                ...$this->fieldFileFasesDictamenLegal('Aviso de interés', 'aviso_interes'),
-                ...$this->fieldFileFasesDictamenLegal('Notificación SENER', 'notificacion_sener'),
-                ...$this->fieldFileFasesDictamenLegal('Notificación SEDATU', 'notificacion_sedatu'),
-                ...$this->fieldFileFasesDictamenLegal('Anuencia de conformidad', 'anuencia_conformidad'),
-                ...$this->fieldFileFasesDictamenLegal('Contrato firmado', 'contrato_firmaddo'),
-                ...$this->fieldFileFasesDictamenLegal('Notificación de acuerdo cerrado a CRE', 'notificacion_acuerdo_cerrado_cre'),
-                ...$this->fieldFileFasesDictamenLegal('Notificación de acuerdo cerrado a SEDATU', 'notificacion_acuerdo_cerrado_sedatu'),
+                ...$this->fieldFileFasesDictamenLegal('Aviso de interés', 'ain'),
+                ...$this->fieldFileFasesDictamenLegal('Notificación SENER', 'sener'),
+                ...$this->fieldFileFasesDictamenLegal('Notificación SEDATU', 'sedatu'),
+                ...$this->fieldFileFasesDictamenLegal('Anuencia de conformidad', 'adc'),
+                ...$this->fieldFileFasesDictamenLegal('Contrato firmado', 'cto'),
+                ...$this->fieldFileFasesDictamenLegal('Notificación de acuerdo cerrado a CRE', 'cre'),
+                ...$this->fieldFileFasesDictamenLegal('Notificación de acuerdo cerrado a SEDATU', 'csedatu'),
                 ...$this->fieldFileFasesDictamenLegal('Contrato de proceso de validación', 'contrato_proceso_validacion'),
                 ...$this->fieldFileFasesDictamenLegal('Contrato validado', 'contrato_validado'),
-                ...$this->fieldFileFasesDictamenLegal('Inscripción de contrato RAN/RPP', 'inscripcion_contrato_ran_rpp'),
+                ...$this->fieldFileFasesDictamenLegal('Inscripción de contrato RAN/RPP', 'icr'),
             ])
         ];
     }
@@ -378,18 +379,18 @@ class Record extends Resource
     {
         return [
             JSON::make('', 'documentacion', [
-                ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial', 'id_pr', 'regimen_propiedad_inmueble', 'pr'),
-                ...$this->addHideFieldUntilOptionIsSelected('Acta de nacimiento', 'an_pr', 'regimen_propiedad_inmueble', 'pr'),
+                ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial', 'ido_pr', 'regimen_propiedad_inmueble', 'pr'),
+                ...$this->addHideFieldUntilOptionIsSelected('Acta de nacimiento', 'ana_pr', 'regimen_propiedad_inmueble', 'pr'),
                 ...$this->addHideFieldUntilOptionIsSelected('CURP', 'curp_pr', 'regimen_propiedad_inmueble', 'pr'),
                 ...$this->addHideFieldUntilOptionIsSelected('RFC', 'rfc_pr', 'regimen_propiedad_inmueble', 'pr'),
-                ...$this->addHideFieldUntilOptionIsSelected('Comprobante de domicilio', 'cd_pr', 'regimen_propiedad_inmueble', 'pr'),
-                ...$this->addHideFieldUntilOptionIsSelected('Escrituras o título de propiedad', 'es_pr', 'regimen_propiedad_inmueble', 'pr'),
-                ...$this->addHideFieldUntilOptionIsSelected('Plano de propiedad', 'pp_pr', 'regimen_propiedad_inmueble', 'pr'),
-                ...$this->addHideFieldUntilOptionIsSelected('Predial', 'pr_pr', 'regimen_propiedad_inmueble', 'pr'),
-                ...$this->addHideFieldUntilOptionIsSelected('Certificado libre de gravamen', 'cl_pr', 'regimen_propiedad_inmueble', 'pr'),
-                ...$this->addHideFieldUntilOptionIsSelected('Poder notarial para actos de dominio', 'pd_pr', 'regimen_propiedad_inmueble', 'pr'),
-                ...$this->addHideFieldUntilOptionIsSelected('Acta constitutiva', 'ac_pr', 'regimen_propiedad_inmueble', 'pr'),
-                ...$this->addHideFieldUntilOptionIsSelected('Otro', 'ot_pr', 'regimen_propiedad_inmueble', 'pr'),
+                ...$this->addHideFieldUntilOptionIsSelected('Comprobante de domicilio', 'cdo_pr', 'regimen_propiedad_inmueble', 'pr'),
+                ...$this->addHideFieldUntilOptionIsSelected('Escrituras o título de propiedad', 'esc_pr', 'regimen_propiedad_inmueble', 'pr'),
+                ...$this->addHideFieldUntilOptionIsSelected('Plano de propiedad', 'pla_pr', 'regimen_propiedad_inmueble', 'pr'),
+                ...$this->addHideFieldUntilOptionIsSelected('Predial', 'pre_pr', 'regimen_propiedad_inmueble', 'pr'),
+                ...$this->addHideFieldUntilOptionIsSelected('Certificado libre de gravamen', 'clg_pr', 'regimen_propiedad_inmueble', 'pr'),
+                ...$this->addHideFieldUntilOptionIsSelected('Poder notarial para actos de dominio', 'pno_pr', 'regimen_propiedad_inmueble', 'pr'),
+                ...$this->addHideFieldUntilOptionIsSelected('Acta constitutiva', 'aco_pr', 'regimen_propiedad_inmueble', 'pr'),
+                ...$this->addHideFieldUntilOptionIsSelected('Otro', 'otr_pr', 'regimen_propiedad_inmueble', 'pr'),
             ])
         ];
     }
@@ -398,15 +399,15 @@ class Record extends Resource
     {
         return [
             JSON::make('', 'documentacion', [
-                ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial', 'id_pa', 'regimen_propiedad_inmueble', 'pa'),
-                ...$this->addHideFieldUntilOptionIsSelected('Acta de nacimiento', 'an_pa', 'regimen_propiedad_inmueble', 'pa'),
+                ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial', 'ido_pa', 'regimen_propiedad_inmueble', 'pa'),
+                ...$this->addHideFieldUntilOptionIsSelected('Acta de nacimiento', 'ana_pa', 'regimen_propiedad_inmueble', 'pa'),
                 ...$this->addHideFieldUntilOptionIsSelected('CURP', 'curp_pa', 'regimen_propiedad_inmueble', 'pa'),
                 ...$this->addHideFieldUntilOptionIsSelected('RFC', 'rfc_pa', 'regimen_propiedad_inmueble', 'pa'),
-                ...$this->addHideFieldUntilOptionIsSelected('Comprobante de domicilio', 'cd_pa', 'regimen_propiedad_inmueble', 'pa'),
-                ...$this->addHideFieldUntilOptionIsSelected('Certificado parcelario', 'cp_pa', 'regimen_propiedad_inmueble', 'pa'),
-                ...$this->addHideFieldUntilOptionIsSelected('Constancia de vigencia de derechos', 'cv_pa', 'regimen_propiedad_inmueble', 'pa'),
-                ...$this->addHideFieldUntilOptionIsSelected('Poder notarial para actos de dominio', 'pn_pa', 'regimen_propiedad_inmueble', 'pa'),
-                ...$this->addHideFieldUntilOptionIsSelected('Otro', 'ot_pa', 'regimen_propiedad_inmueble', 'pa'),
+                ...$this->addHideFieldUntilOptionIsSelected('Comprobante de domicilio', 'cdo_pa', 'regimen_propiedad_inmueble', 'pa'),
+                ...$this->addHideFieldUntilOptionIsSelected('Certificado parcelario', 'cpa_pa', 'regimen_propiedad_inmueble', 'pa'),
+                ...$this->addHideFieldUntilOptionIsSelected('Constancia de vigencia de derechos', 'cvd_pa', 'regimen_propiedad_inmueble', 'pa'),
+                ...$this->addHideFieldUntilOptionIsSelected('Poder notarial para actos de dominio', 'pad_pa', 'regimen_propiedad_inmueble', 'pa'),
+                ...$this->addHideFieldUntilOptionIsSelected('Otro', 'otr_pa', 'regimen_propiedad_inmueble', 'pa'),
             ])
         ];
     }
@@ -415,16 +416,16 @@ class Record extends Resource
     {
         return [
             JSON::make('', 'documentacion', [
-                ...$this->addHideFieldUntilOptionIsSelected('Acta de elección de los órganos', 'ae_ej', 'regimen_propiedad_inmueble', 'ej'),
-                ...$this->addHideFieldUntilOptionIsSelected('Resolución presidencial de dotación de tierras', 'rp_ej', 'regimen_propiedad_inmueble', 'ej'),
-                ...$this->addHideFieldUntilOptionIsSelected('Carpeta básica del ejido', 'cb_ej', 'regimen_propiedad_inmueble', 'ej'),
-                ...$this->addHideFieldUntilOptionIsSelected('Plano general del ejido', 'pg_ej', 'regimen_propiedad_inmueble', 'ej'),
-                ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial de los representantes ejidales', 'id_ej', 'regimen_propiedad_inmueble', 'ej'),
-                ...$this->addHideFieldUntilOptionIsSelected('Padrón vigente de ejidatarios', 'pv_ej', 'regimen_propiedad_inmueble', 'ej'),
-                ...$this->addHideFieldUntilOptionIsSelected('Acta de asamblea autorizando el proyecto', 'aa_ej', 'regimen_propiedad_inmueble', 'ej'),
-                ...$this->addHideFieldUntilOptionIsSelected('Certificado parcelario con destino específico', 'aa_ej', 'regimen_propiedad_inmueble', 'ej'),
-                ...$this->addHideFieldUntilOptionIsSelected('Reglamento del ejido', 'aa_ej', 'regimen_propiedad_inmueble', 'ej'),
-                ...$this->addHideFieldUntilOptionIsSelected('Otro', 'ot_ej', 'regimen_propiedad_inmueble', 'ej')
+                ...$this->addHideFieldUntilOptionIsSelected('Acta de elección de los órganos', 'aeo_ej', 'regimen_propiedad_inmueble', 'ej'),
+                ...$this->addHideFieldUntilOptionIsSelected('Resolución presidencial de dotación de tierras', 'rdt_ej', 'regimen_propiedad_inmueble', 'ej'),
+                ...$this->addHideFieldUntilOptionIsSelected('Carpeta básica del ejido', 'cbe_ej', 'regimen_propiedad_inmueble', 'ej'),
+                ...$this->addHideFieldUntilOptionIsSelected('Plano general del ejido', 'pge_ej', 'regimen_propiedad_inmueble', 'ej'),
+                ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial de los representantes ejidales', 'ide_ej', 'regimen_propiedad_inmueble', 'ej'),
+                ...$this->addHideFieldUntilOptionIsSelected('Padrón vigente de ejidatarios', 'pve_ej', 'regimen_propiedad_inmueble', 'ej'),
+                ...$this->addHideFieldUntilOptionIsSelected('Acta de asamblea autorizando el proyecto', 'aap_ej', 'regimen_propiedad_inmueble', 'ej'),
+                ...$this->addHideFieldUntilOptionIsSelected('Certificado parcelario con destino específico', 'cpd_ej', 'regimen_propiedad_inmueble', 'ej'),
+                ...$this->addHideFieldUntilOptionIsSelected('Reglamento del ejido', 'ree_ej', 'regimen_propiedad_inmueble', 'ej'),
+                ...$this->addHideFieldUntilOptionIsSelected('Otro', 'otr_ej', 'regimen_propiedad_inmueble', 'ej')
             ])
         ];
     }
@@ -461,6 +462,12 @@ class Record extends Resource
 
     public function fieldFileFasesDictamenLegal($title, $value): array
     {
+        $file_names = [
+          'IDO' => [
+
+          ]
+        ];
+
         $file_field = FileEsteroids::make('', $value)->storeAs(function ($request) use ($value) {
             return $request->numero_expediente . '.pdf';
         })->disk('public')->acceptedTypes('.pdf')->nullable()->hideFromIndex()->size('w-1/4');
