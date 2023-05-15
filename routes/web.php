@@ -122,7 +122,7 @@ Route::get('/test', function () {
 
 Route::get('files', function () {
     $docsFaseUno = ['atp', 'aus', 'clg', 'paf', 'cbdts', 'fbdts', 'cpf'];
-    $docsFaseDos = ['ain', 'sener', 'sedatu', 'adc', 'cto', 'cre', 'csedatu', 'icr'];
+    $docsFaseDos = ['ain', 'sener', 'sedatu', 'adc', 'cto', 'cre', 'csedatu', 'icr', 'cpv', 'cva'];
 
     array_filter(\Illuminate\Support\Facades\Storage::disk('public')->files(), function ($item) use ($docsFaseUno, $docsFaseDos) {
         if (str_contains($item, '.pdf') || str_contains($item, '.PDF')) {

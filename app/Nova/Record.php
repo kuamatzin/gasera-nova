@@ -368,8 +368,8 @@ class Record extends Resource
                 ...$this->fieldFileFasesDictamenLegal('Contrato firmado', 'cto'),
                 ...$this->fieldFileFasesDictamenLegal('Notificación de acuerdo cerrado a CRE', 'cre'),
                 ...$this->fieldFileFasesDictamenLegal('Notificación de acuerdo cerrado a SEDATU', 'csedatu'),
-                ...$this->fieldFileFasesDictamenLegal('Contrato de proceso de validación', 'contrato_proceso_validacion'),
-                ...$this->fieldFileFasesDictamenLegal('Contrato validado', 'contrato_validado'),
+                ...$this->fieldFileFasesDictamenLegal('Contrato de proceso de validación', 'cpv'),
+                ...$this->fieldFileFasesDictamenLegal('Contrato validado', 'cva'),
                 ...$this->fieldFileFasesDictamenLegal('Inscripción de contrato RAN/RPP', 'icr'),
             ])
         ];
