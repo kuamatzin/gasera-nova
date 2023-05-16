@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\RunNumeroCadenamientoOrdering;
 use App\Nova\Filters\RecordState;
 use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
@@ -588,6 +589,7 @@ class Record extends Resource
     {
         return [
             (new \App\Nova\Actions\DownloadExcel)->allFields()->withFilename('expedientes-' . time() . '.xlsx'),
+            (new RunNumeroCadenamientoOrdering)->canSee(fn() => Auth::user()->role === 'admin')->canRun(fn() => Auth::user()->role === 'admin'),
         ];
     }
 }

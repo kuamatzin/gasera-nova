@@ -30,7 +30,8 @@ Route::get('/records-sonora-import', function () {
 });
 
 Route::get('/ordering', function () {
-    Excel::import(new \App\Imports\RecodsNumberFormat, 'consecutivos.csv');
+    $file = public_path('storage/consecutivos.csv');
+    Excel::import(new \App\Imports\RecodsNumberFormat, $file);
 
     return 'great';
 });
