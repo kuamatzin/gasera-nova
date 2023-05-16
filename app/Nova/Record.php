@@ -58,7 +58,8 @@ class Record extends Resource
      * @var array
      */
     public static $search = [
-        'numero_cadenamiento'
+        'numero_cadenamiento',
+        'numero_expediente'
     ];
 
     public static $indexDefaultOrder = [

@@ -29,6 +29,12 @@ Route::get('/records-sonora-import', function () {
     return 'great';
 });
 
+Route::get('/ordering', function () {
+    Excel::import(new \App\Imports\RecodsNumberFormat, 'consecutivos.csv');
+
+    return 'great';
+});
+
 Route::get('/users-import', function () {
     Excel::import(new UsersImport, 'users.csv');
 
@@ -157,4 +163,22 @@ Route::get('files', function () {
             }
         }
     });
+});
+
+Route::get('ordening', function () {
+    $records = \App\Models\Record::all();
+
+    foreach ($records as $record) {
+        $get_numero_expediente = $record->numero_expediente;
+        $get_numero_expediente = explode('-', $get_numero_expediente);
+        $get_numero_expediente = $get_numero_expediente[sizeof($get_numero_expediente) - 1];
+        $get_numero_expediente = explode('.', $get_numero_expediente);
+        $get_numero_expediente = $get_numero_expediente[0];
+        $get_numero_expediente = ltrim($get_numero_expediente, '0');
+        $get_numero_expediente = (int)$get_numero_expediente;
+
+        $record->update([
+            'numero_cadenamiento' => substr($get_numero_expediente, -3)
+        ]);
+    }
 });
