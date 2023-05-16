@@ -27,7 +27,7 @@ class RecordState extends Filter
     public function apply(NovaRequest $request, $query, $value)
     {
         if ($value == 'all') return $query;
-        return $query->where('estado_inmueble', $value);
+        return $query->where('estado_inmueble', strtolower($value));
     }
 
     /**
