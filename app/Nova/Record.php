@@ -76,11 +76,11 @@ class Record extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         if ($request->user()->entity === 'chihuahua') {
-            return $query->where('estado_inmueble', 'CHIHUAHUA');
+            return $query->where('estado_inmueble', 'chihuahua');
         }
 
         if ($request->user()->entity === 'sonora') {
-            return $query->where('estado_inmueble', 'SONORA');
+            return $query->where('estado_inmueble', 'sonora');
         }
 
         if (empty($request->get('orderBy'))) {

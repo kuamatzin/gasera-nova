@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
@@ -9,6 +10,8 @@ use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Illuminate\Support\Facades\Gate;
+
 
 class User extends Resource
 {
@@ -138,5 +141,21 @@ class User extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    /**
+     * @return bool
+     */
+    public function canImpersonate()
+    {
+        return Auth::user()->role == 'admin';
+    }
+
+    /**
+     * @return true
+     */
+    public function canBeImpersonated()
+    {
+        return !Auth::user()->role == 'admin';
     }
 }
