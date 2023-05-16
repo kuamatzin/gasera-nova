@@ -470,7 +470,7 @@ class Record extends Resource
         ];
 
         $file_field = FileEsteroids::make('', $value)->storeAs(function ($request) use ($value) {
-            return $request->numero_expediente . '.pdf';
+            return $request->numero_expediente . '_' . strtoupper($value) . '.pdf';
         })->disk('public')->acceptedTypes('.pdf')->nullable()->hideFromIndex()->size('w-1/4');
 
         $select_field = Select::make('', $value . '_status')->options(function () {
