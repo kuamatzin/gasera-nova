@@ -268,7 +268,14 @@ class Record extends Resource
     {
         return [
             Text::make('Dirección', 'direccion_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Ejido', 'ejido_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Ejido', 'ejido_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3')->hide()->dependsOn(
+                ['regimen_propiedad_inmueble'],
+                function (Text $field, NovaRequest $request, FormData $formData) {
+                    if ($formData->regimen_propiedad_inmueble === 'ej') {
+                        $field->show();
+                    }
+                }
+            ),
             Select::make('Estado', 'estado_inmueble')->options([
                 'chihuahua' => 'Chihuahua',
                 'sonora' => 'Sonora',
