@@ -140,6 +140,11 @@ Route::get('files', function () {
             $archivo = strtolower(str_replace('.pdf', '', $archivo));
             $expediente = \App\Models\Record::where('numero_expediente', $numero_expediente)->first();
             if ($expediente) {
+                if ($item === 'SM-CH-001-PR-022_ATP.pdf') {
+                    if (in_array($archivo, $docsFaseUno)) {
+                        dd($expediente->dictamen_legal_fase_uno);
+                    }
+                }
                 if (in_array($archivo, $docsFaseUno)) {
                     $dictamen_legal_fase_uno = $expediente->dictamen_legal_fase_uno;
                     $key_file = $archivo;

@@ -33,7 +33,6 @@ class AnuenciaTrabajosPreliminares extends Partition
             'No' => $no_aceptado,
             'Si' => $aceptado,
         ]);
-        return $this->count($request, Record::class, 'representante_legal');
     }
 
     /**

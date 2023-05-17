@@ -169,7 +169,7 @@ class Record extends Resource
                     'progress' => 'En progreso',
                     'revision' => 'Revisión',
                 ];
-            })->displayUsingLabels()->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            })->displayUsingLabels()->hide()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
             new Panel('Planilla de identificación', $this->propietarioFields()),
             new Panel('Datos del inmueble a contratar', $this->inmuebleFields()),
             new Panel('Superficies a contratar', $this->superficieFields()),
