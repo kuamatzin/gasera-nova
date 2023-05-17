@@ -3,6 +3,12 @@
 namespace App\Nova\Dashboards;
 
 use App\Nova\Metrics\AnuenciaTrabajosPreliminares;
+use App\Nova\Metrics\CertificadoLibertadGravamen;
+use App\Nova\Metrics\ContratoPromesaFirmado;
+use App\Nova\Metrics\CuantificacionDBTS;
+use App\Nova\Metrics\DcitamenLegal;
+use App\Nova\Metrics\PlanoAfectacion;
+use App\Nova\Metrics\ReporteFotograficoBDTS;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Dashboards\Main as Dashboard;
 
@@ -24,7 +30,13 @@ class Main extends Dashboard
     public function cards(): array
     {
         return [
-            new AnuenciaTrabajosPreliminares
+            new AnuenciaTrabajosPreliminares,
+            new CertificadoLibertadGravamen,
+            new ContratoPromesaFirmado,
+            new CuantificacionDBTS,
+            new DcitamenLegal,
+            new PlanoAfectacion,
+            new ReporteFotograficoBDTS
         ];
     }
 }
