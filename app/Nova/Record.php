@@ -179,6 +179,7 @@ class Record extends Resource
             new Panel('Superficies a contratar', $this->superficieFields()),
             new Panel('Mapa de afectación', $this->mapaFields()),
             new Panel('Documentación', $this->documentacionFields()),
+            new Panel('Cónyuge/Bienes mancomunados', $this->documentacionBienesMancomunados()),
             new Panel('Dictamen Legal', $this->dictamenLegalFields()),
             new Panel('Fase 1', $this->faseUnoFields()),
             new Panel('Fase 2', $this->faseDosFields()),
@@ -348,6 +349,18 @@ class Record extends Resource
         return array_merge($this->propiedadPrivadaFields(), $this->parcelaFields(), $this->ejidoFields());
     }
 
+    public function documentacionBienesMancomunados()
+    {
+        return [
+            Boolean::make('Cónyuge/Bienes mancomunados', 'conyuge_bienes_mancomunados')->hideFromIndex()->size('w-full'),
+            JSON::make('', 'conyuge_bienes_mancomunados_documentacion', [
+                ...$this->addHideFieldUntilOptionIsSelected('Acta de matrimonio', 'ama', 'conyuge_bienes_mancomunados', true),
+                ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial cónyuge', 'idc', 'conyuge_bienes_mancomunados', true),
+                ...$this->addHideFieldUntilOptionIsSelected('Acta de nacimiento cónyuge', 'anc', 'conyuge_bienes_mancomunados', true),
+            ])
+        ];
+    }
+
     public function faseUnoFields(): array
     {
         return [
@@ -494,6 +507,7 @@ class Record extends Resource
 
     public function addHideFieldUntilOptionIsSelected($title, $value, $option, $optionSelected): array
     {
+        $conyuges = [];
 
         $file_field = FileEsteroids::make($title, $value)->disk('public')->acceptedTypes('.pdf')->nullable()->hide()->dependsOn(
             [$option],

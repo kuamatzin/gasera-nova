@@ -13,6 +13,7 @@ class Record extends Model
 
     protected $casts = [
         'documentacion' => 'array',
+        'conyuge_bienes_mancomunados_documentacion' => 'array',
         'dictamen_legal_fase_uno' => 'array',
         'dictamen_legal_fase_dos' => 'array',
     ];
