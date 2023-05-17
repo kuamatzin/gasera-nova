@@ -238,9 +238,9 @@ class Record extends Resource
             Text::make('Celular, Teléfono local o para recados', 'telefono_recados')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
             Text::make('Correo electrónico', 'correo_electronico')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
             Select::make('Calificación del propietario', 'calificacion_propietario')->options([
-                'a' => 'a',
-                'b' => 'b',
-                'c' => 'c',
+                'A' => 'A',
+                'B' => 'B',
+                'C' => 'C',
             ])->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
             Text::make('Dirección del propietario para notificaciones (Debe incluir link de Google Street)', 'direccion_propietario_notificaciones')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
             Text::make('Código de Google Street', 'codigo_google_street')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
@@ -253,7 +253,7 @@ class Record extends Resource
                     ['representante_legal'],
                     function (Textarea $field, NovaRequest $request, FormData $formData) {
                         if ($formData->representante_legal) {
-                            $field->show()->rules('required');
+                            $field->show();
                         }
                     }
                 )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-full'),
