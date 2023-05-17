@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Nova\Dashboards\Main;
 use CodencoDev\NovaGridSystem\NovaGridSystem;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
@@ -67,7 +68,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function dashboards()
     {
         return [
-            new \App\Nova\Dashboards\Main,
+            Main::make()->showRefreshButton()->canSee(function($request) {
+                if ($request->user()->role == 'admin') {
+                    return true;
+                }
+            }),
         ];
     }
 

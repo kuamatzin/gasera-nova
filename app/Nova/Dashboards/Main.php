@@ -30,13 +30,13 @@ class Main extends Dashboard
     public function cards(): array
     {
         return [
-            new AnuenciaTrabajosPreliminares,
-            new CertificadoLibertadGravamen,
-            new ContratoPromesaFirmado,
-            new CuantificacionDBTS,
-            new DcitamenLegal,
-            new PlanoAfectacion,
-            new ReporteFotograficoBDTS
+            AnuenciaTrabajosPreliminares::make(),
+            CertificadoLibertadGravamen::make(),
+            ContratoPromesaFirmado::make(),
+            CuantificacionDBTS::make(),
+            DcitamenLegal::make(),
+            PlanoAfectacion::make(),
+            ReporteFotograficoBDTS::make(),
         ];
     }
 }
