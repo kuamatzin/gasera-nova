@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Record;
 use Illuminate\Support\Facades\Route;
 use App\Imports\RecordsImport;
 use App\Imports\UsersImport;
@@ -181,5 +182,21 @@ Route::get('ordening', function () {
         $record->update([
             'numero_cadenamiento' => substr($get_numero_expediente, -3)
         ]);
+    }
+});
+
+
+Route::get('test2', function () {
+    $records = Record::all();
+
+    $aceptado = 0;
+    $no_aceptado = 0;
+    foreach ($records as $record) {
+        $dictamen_legal_fase_uno = $record->dictamen_legal_fase_uno;
+        if ($dictamen_legal_fase_uno && isset($dictamen_legal_fase_uno['anuencia_trabajos_preliminares_status']) && $dictamen_legal_fase_uno['anuencia_trabajos_preliminares_status'] === 'aceptado') {
+            $aceptado++;
+        } else {
+            $no_aceptado++;
+        }
     }
 });

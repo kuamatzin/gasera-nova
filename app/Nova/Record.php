@@ -4,25 +4,21 @@ namespace App\Nova;
 
 use App\Nova\Actions\RunNumeroCadenamientoOrdering;
 use App\Nova\Filters\RecordState;
-use http\Env\Request;
+use App\Nova\Metrics\AnuenciaTrabajosPreliminares;
 use Illuminate\Support\Facades\Auth;
 use Inovuz\BooleanSwitcher\BooleanSwitcher;
 use Inovuz\FileEsteroids\FileEsteroids;
-use Inovuz\FileKmz\FileKmz;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\BooleanGroup;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\FormData;
-use Laravel\Nova\Fields\Heading;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
-use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use NormanHuth\NovaRadioField\Radio;
 use Stepanenko3\NovaJson\JSON;
 
@@ -567,7 +563,8 @@ class Record extends Resource
      */
     public function cards(NovaRequest $request)
     {
-        return [];
+        return [
+        ];
     }
 
     /**
