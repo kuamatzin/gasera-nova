@@ -16,6 +16,11 @@ class RecordState extends Filter
 
     public $name = 'Estado';
 
+    public function default()
+    {
+        return 'all';
+    }
+
     /**
      * Apply the filter to the given query.
      *
