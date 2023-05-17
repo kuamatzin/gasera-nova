@@ -464,13 +464,7 @@ class Record extends Resource
 
     public function fieldFileFasesDictamenLegal($title, $value): array
     {
-        $file_names = [
-          'IDO' => [
-
-          ]
-        ];
-
-        $file_field = FileEsteroids::make('', $value)->storeAs(function ($request) use ($value) {
+        $file_field = FileEsteroids::make($title, $value)->storeAs(function ($request) use ($value) {
             return $request->numero_expediente . '_' . strtoupper($value) . '.pdf';
         })->disk('public')->acceptedTypes('.pdf')->nullable()->hideFromIndex()->size('w-1/4');
 
