@@ -284,7 +284,7 @@ class Record extends Resource
                         $field->options([
                             '010' => '010 - Bacerac',
                             '023' => '023 - Cumpas',
-                            '031' => '031 - Hachinera',
+                            '031' => '031 - Huachinera',
                             '047' => '047 - Pitiquito',
                             '064' => '064 - Trincheras',
                             '022' => '022 - Cucurpe',
