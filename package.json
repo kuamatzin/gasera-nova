@@ -14,7 +14,9 @@
         "build-boolean-switcher": "cd nova-components/BooleanSwitcher && npm run dev",
         "build-boolean-switcher-prod": "cd nova-components/BooleanSwitcher && npm run prod",
         "build-custom-grid-system": "cd nova-components/CustomGridSystem && npm run dev",
-        "build-custom-grid-system-prod": "cd nova-components/CustomGridSystem && npm run prod"
+        "build-custom-grid-system-prod": "cd nova-components/CustomGridSystem && npm run prod",
+        "build-panel-esteroids": "cd nova-components/PanelEsteroids && npm run dev",
+        "build-panel-esteroids-prod": "cd nova-components/PanelEsteroids && npm run prod"
     },
     "devDependencies": {
         "axios": "^1.1.2",

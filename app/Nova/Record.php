@@ -7,6 +7,7 @@ use App\Nova\Filters\RecordState;
 use Illuminate\Support\Facades\Auth;
 use Inovuz\BooleanSwitcher\BooleanSwitcher;
 use Inovuz\FileEsteroids\FileEsteroids;
+use Inovuz\PanelEsteroids\PanelEsteroids;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
@@ -168,15 +169,15 @@ class Record extends Resource
                     'revision' => 'Revisión',
                 ];
             })->displayUsingLabels()->hide()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            new Panel('Planilla de identificación', $this->propietarioFields()),
-            new Panel('Datos del inmueble a contratar', $this->inmuebleFields()),
-            new Panel('Superficies a contratar', $this->superficieFields()),
-            new Panel('Mapa de afectación', $this->mapaFields()),
-            new Panel('Documentación', $this->documentacionFields()),
-            new Panel('Cónyuge/Bienes mancomunados', $this->documentacionBienesMancomunados()),
-            new Panel('Dictamen Legal', $this->dictamenLegalFields()),
-            new Panel('Fase 1', $this->faseUnoFields()),
-            new Panel('Fase 2', $this->faseDosFields()),
+            new PanelEsteroids('Planilla de identificación', $this->propietarioFields()),
+            new PanelEsteroids('Datos del inmueble a contratar', $this->inmuebleFields()),
+            new PanelEsteroids('Superficies a contratar', $this->superficieFields()),
+            new PanelEsteroids('Mapa de afectación', $this->mapaFields()),
+            new PanelEsteroids('Documentación', $this->documentacionFields()),
+            new PanelEsteroids('Cónyuge/Bienes mancomunados', $this->documentacionBienesMancomunados()),
+            new PanelEsteroids('Dictamen Legal', $this->dictamenLegalFields()),
+            new PanelEsteroids('Fase 1', $this->faseUnoFields()),
+            new PanelEsteroids('Fase 2', $this->faseDosFields()),
             //new Panel('Dictamen Legal', $this->dictamenLegalFields()),
         ];
     }

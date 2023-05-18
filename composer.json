@@ -29,7 +29,8 @@
         "simonhamp/laravel-nova-csv-import": "^0.4.0",
         "stepanenko3/nova-json": "^3.1",
         "trin4ik/nova-switcher": "^0.3.0",
-        "inovuz/custom-grid-system": "@dev"
+        "inovuz/custom-grid-system": "@dev",
+        "inovuz/panel-esteroids": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -115,6 +116,10 @@
         "6": {
             "type": "path",
             "url": "./nova-components/CustomGridSystem"
+        },
+        "7": {
+            "type": "path",
+            "url": "./nova-components/PanelEsteroids"
         }
     }
 }
