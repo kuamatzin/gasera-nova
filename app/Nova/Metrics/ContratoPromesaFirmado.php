@@ -6,22 +6,34 @@ use App\Models\Record;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
 
-class ContratoPromesaFirmado extends Partition
+class DocumentMetric extends Partition
 {
+
+    public function name()
+    {
+        $meta = $this->meta;
+        return $meta['titulo'];
+    }
     /**
      * Calculate the value of the metric.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return mixed
      */
     public function calculate(NovaRequest $request)
     {
+        $this->name('amskdmaskldmakslmdkl');
+        $meta = $this->meta;
+        $fase = $meta['fase'];
+        $type = $meta['type'];
+
         $records = Record::all();
         $aceptado = 0;
         $no_aceptado = 0;
         foreach ($records as $record) {
-            $dictamen_legal_fase_uno = $record->dictamen_legal_fase_uno;
-            if ($dictamen_legal_fase_uno && isset($dictamen_legal_fase_uno['cpf_status']) && $dictamen_legal_fase_uno['cpf_status'] === 'aceptado') {
+            $dictamen_legal = $fase === '1' ? $record->dictamen_legal_fase_uno : $record->dictamen_legal_fase_dos;
+
+            if ($dictamen_legal && isset($dictamen_legal[$type]) && $dictamen_legal[$type] === 'aceptado') {
                 $aceptado++;
             } else {
                 $no_aceptado++;
@@ -42,7 +54,7 @@ class ContratoPromesaFirmado extends Partition
      */
     public function cacheFor()
     {
-        return now()->addMinutes(30);
+        //return now()->addMinutes(30);
     }
 
     /**

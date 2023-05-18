@@ -365,7 +365,7 @@ class Record extends Resource
                 ...$this->fieldFileFasesDictamenLegal('Anuencia de trabajos preliminares', 'atp'),
                 ...$this->fieldFileFasesDictamenLegal('Anuencia cambio de uso de suelo', 'aus'),
                 BooleanSwitcher::make('Obtención de Documentación Legal', 'obtenicion_documentacion_legal')->hideFromIndex(),
-                ...$this->fieldFileFasesDictamenLegal('Certificado de Libertad de Gravamen/Constancia Vigencia de Derechos ', 'clg'),
+                ...$this->fieldFileFasesDictamenLegal('Certificado de Libertad de Gravamen/Constancia Vigencia de Derechos', 'clg'),
                 ...$this->fieldFileFasesDictamenLegal('Dictamen Legal', 'dictamen_legal'),
                 ...$this->fieldFileFasesDictamenLegal('Plano de afectación', 'paf'),
                 ...$this->fieldFileFasesDictamenLegal('Cuantificación de BDTS', 'cbdts'),
@@ -551,7 +551,7 @@ class Record extends Resource
     {
         return [
             //Text::make('Dirección', 'direccion_inmueble')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
-            FileEsteroids::make('Dirección', 'direccion_inmueble')->size('w-full'),
+            FileEsteroids::make('Mapa de afectación', 'mapa_afectacion_path')->size('w-full'),
         ];
     }
 

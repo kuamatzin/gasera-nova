@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Nova\Dashboards\Main;
+use App\Nova\Dashboards\Sonora;
 use CodencoDev\NovaGridSystem\NovaGridSystem;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
@@ -73,6 +74,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     return true;
                 }
             }),
+            Sonora::make()->showRefreshButton()->canSee(function($request) {
+                if ($request->user()->role == 'admin') {
+                    return true;
+                }
+            })
         ];
     }
 
