@@ -12,8 +12,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _mixins_Collapsable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/Collapsable */ "./resources/js/mixins/Collapsable.js");
+/* harmony import */ var _mixins_BehavesAsPanel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../mixins/BehavesAsPanel */ "./resources/js/mixins/BehavesAsPanel.js");
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['index', 'resource', 'resourceName', 'resourceId', 'field']
+  mixins: [_mixins_Collapsable__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_BehavesAsPanel__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  methods: {
+    /**
+     * Resolve the component name.
+     */
+    resolveComponentName: function resolveComponentName(field) {
+      return field.prefixComponent ? 'detail-' + field.component : field.component;
+    },
+    /**
+     * Show all of the Panel's fields.
+     */
+    showAllFields: function showAllFields() {
+      return this.panel.limit = 0;
+    }
+  },
+  data: function data() {
+    return {
+      collapse: true
+    };
+  },
+  computed: {
+    localStorageKey: function localStorageKey() {
+      return "nova.panels.".concat(this.panel.name, ".collapsed");
+    },
+    collapsedByDefault: function collapsedByDefault() {
+      var _this$panel$collapsed, _this$panel;
+      return (_this$panel$collapsed = (_this$panel = this.panel) === null || _this$panel === void 0 ? void 0 : _this$panel.collapsedByDefault) !== null && _this$panel$collapsed !== void 0 ? _this$panel$collapsed : false;
+    },
+    /**
+     * Limits the visible fields.
+     */
+    fields: function fields() {
+      if (this.panel.limit > 0) {
+        return this.panel.fields.slice(0, this.panel.limit);
+      }
+      return this.panel.fields;
+    },
+    /**
+     * Determines if should display the 'Show all fields' button.
+     */
+    shouldShowShowAllFieldsButton: function shouldShowShowAllFieldsButton() {
+      return this.panel.limit > 0;
+    }
+  }
 });
 
 /***/ }),
@@ -137,12 +184,84 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
+var _hoisted_1 = {
+  "class": "flex items-center"
+};
+var _hoisted_2 = ["aria-label", "aria-expanded"];
+var _hoisted_3 = ["innerHTML"];
+var _hoisted_4 = {
+  key: 0,
+  "class": "-mx-6 border-t border-gray-100 dark:border-gray-700 text-center rounded-b"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_PanelItem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PanelItem");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_PanelItem, {
-    index: $props.index,
-    field: $props.field
-  }, null, 8 /* PROPS */, ["index", "field"]);
+  var _component_Icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Icon");
+  var _component_Heading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Heading");
+  var _component_CollapseButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CollapseButton");
+  var _component_Card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Card");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, function () {
+    return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Heading, {
+      level: 1,
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([_ctx.panel.helpText ? 'mb-0' : 'mb-0', "w-full"])
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+          "class": "border-0 border-gray-700 rounded-lg px-4 py-2 flex justify-between items-center bg-white dark:bg-gray-800 rounded-lg shadow",
+          onClick: _cache[0] || (_cache[0] = function ($event) {
+            return $data.collapse = !$data.collapse;
+          })
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.panel.name), 1 /* TEXT */), $data.collapse ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Icon, {
+          key: 0,
+          type: "arrow-down",
+          solid: true,
+          "class": "text-gray-800 dark:text-gray-200 cursor-pointer"
+        })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$data.collapse ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Icon, {
+          key: 1,
+          type: "arrow-up",
+          solid: true,
+          "class": "text-gray-800 dark:text-gray-200 cursor-pointer"
+        })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
+      }),
+      _: 1 /* STABLE */
+    }, 8 /* PROPS */, ["class"]), _ctx.panel.collapsable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      key: 0,
+      onClick: _cache[1] || (_cache[1] = function () {
+        return _ctx.toggleCollapse && _ctx.toggleCollapse.apply(_ctx, arguments);
+      }),
+      "class": "rounded border border-transparent h-6 w-6 ml-1 inline-flex items-center justify-center focus:outline-none focus:ring focus:ring-primary-200",
+      "aria-label": _ctx.__('Toggle Collapsed'),
+      "aria-expanded": _ctx.collapsed === false ? 'true' : 'false'
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CollapseButton, {
+      collapsed: _ctx.collapsed
+    }, null, 8 /* PROPS */, ["collapsed"])], 8 /* PROPS */, _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _ctx.panel.helpText && !_ctx.collapsed ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
+      key: 0,
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-gray-500 text-sm font-semibold italic", _ctx.panel.helpText ? 'mt-2' : 'mt-3']),
+      innerHTML: _ctx.panel.helpText
+    }, null, 10 /* CLASS, PROPS */, _hoisted_3)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+  }), !_ctx.collapsed && $options.fields.length > 0 ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Card, {
+    key: 0,
+    "class": "mt-0 py-2 px-6 divide-y divide-gray-100 dark:divide-gray-700"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.fields, function (field, index) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($options.resolveComponentName(field)), {
+          key: index,
+          index: index,
+          "resource-name": _ctx.resourceName,
+          "resource-id": _ctx.resourceId,
+          resource: _ctx.resource,
+          field: field,
+          onActionExecuted: _ctx.actionExecuted
+        }, null, 40 /* PROPS, HYDRATE_EVENTS */, ["index", "resource-name", "resource-id", "resource", "field", "onActionExecuted"]);
+      }), 128 /* KEYED_FRAGMENT */)), $options.shouldShowShowAllFieldsButton ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        type: "button",
+        "class": "block w-full text-sm link-default font-bold py-2 -mb-2",
+        onClick: _cache[2] || (_cache[2] = function () {
+          return $options.showAllFields && $options.showAllFields.apply($options, arguments);
+        })
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Show All Fields')), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+    }),
+    _: 1 /* STABLE */
+  }, 512 /* NEED_PATCH */)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.collapse]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -279,6 +398,83 @@ Nova.booting(function (app, store) {
   app.component('index-panel-esteroids', _components_IndexField__WEBPACK_IMPORTED_MODULE_0__["default"]);
   app.component('detail-panel-esteroids', _components_DetailField__WEBPACK_IMPORTED_MODULE_1__["default"]);
   app.component('form-panel-esteroids', _components_FormField__WEBPACK_IMPORTED_MODULE_2__["default"]);
+});
+
+/***/ }),
+
+/***/ "./resources/js/mixins/BehavesAsPanel.js":
+/*!***********************************************!*\
+  !*** ./resources/js/mixins/BehavesAsPanel.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  emits: ['actionExecuted'],
+  props: ['resourceName', 'resourceId', 'resource', 'panel'],
+  methods: {
+    /**
+     * Handle the actionExecuted event and pass it up the chain.
+     */
+    actionExecuted: function actionExecuted() {
+      this.$emit('actionExecuted');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/mixins/Collapsable.js":
+/*!********************************************!*\
+  !*** ./resources/js/mixins/Collapsable.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      collapsed: false
+    };
+  },
+  created: function created() {
+    var value = localStorage.getItem(this.localStorageKey);
+    if (value !== 'undefined') {
+      var _JSON$parse;
+      this.collapsed = (_JSON$parse = JSON.parse(value)) !== null && _JSON$parse !== void 0 ? _JSON$parse : this.collapsedByDefault;
+    }
+  },
+  unmounted: function unmounted() {
+    localStorage.setItem(this.localStorageKey, this.collapsed);
+  },
+  methods: {
+    toggleCollapse: function toggleCollapse() {
+      this.collapsed = !this.collapsed;
+      localStorage.setItem(this.localStorageKey, this.collapsed);
+    }
+  },
+  computed: {
+    ariaExpanded: function ariaExpanded() {
+      return this.collapsed === false ? 'true' : 'false';
+    },
+    shouldBeCollapsed: function shouldBeCollapsed() {
+      return this.collapsed;
+    },
+    localStorageKey: function localStorageKey() {
+      return "nova.navigation.".concat(this.item.key, ".collapsed");
+    },
+    collapsedByDefault: function collapsedByDefault() {
+      return false;
+    }
+  }
 });
 
 /***/ }),
