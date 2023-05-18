@@ -602,4 +602,14 @@ class Record extends Resource
             (new RunNumeroCadenamientoOrdering)->canSee(fn() => Auth::user()->role === 'admin')->canRun(fn() => Auth::user()->role === 'admin'),
         ];
     }
+
+    /**
+     * @param NovaRequest $request
+     * @param $resource
+     * @return string
+     */
+    public static function redirectAfterUpdate(NovaRequest $request, $resource)
+    {
+        return '/resources/'.static::uriKey().'/'.$resource->getKey().'/edit';
+    }
 }
