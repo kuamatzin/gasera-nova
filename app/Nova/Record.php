@@ -293,7 +293,7 @@ class Record extends Resource
 
     public function documentacionFields(): array
     {
-        return array_merge($this->propiedadPrivadaFields(), $this->parcelaFields(), $this->ejidoFields());
+        return array_merge($this->propiedadPrivadaFields(), $this->parcelaFields(), $this->posesionFields(), $this->ejidoFields(), $this->comunidadAgrariaFields());
     }
 
     public function documentacionBienesMancomunados()
@@ -381,6 +381,31 @@ class Record extends Resource
         ];
     }
 
+    public function posesionFields()
+    {
+        return [
+            JSON::make('', 'documentacion', [
+                ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial', 'ido_po', 'regimen_propiedad_inmueble', 'po'),
+                ...$this->addHideFieldUntilOptionIsSelected('Acta de nacimiento', 'ana_po', 'regimen_propiedad_inmueble', 'po'),
+                ...$this->addHideFieldUntilOptionIsSelected('CURP', 'curp_po', 'regimen_propiedad_inmueble', 'po'),
+                ...$this->addHideFieldUntilOptionIsSelected('RFC', 'rfc_po', 'regimen_propiedad_inmueble', 'po'),
+                ...$this->addHideFieldUntilOptionIsSelected('Comprobante de domicilio', 'cdo_po', 'regimen_propiedad_inmueble', 'po'),
+                ...$this->addHideFieldUntilOptionIsSelected('Documento de posesión', 'dpo_po', 'regimen_propiedad_inmueble', 'po'),
+                ...$this->addHideFieldUntilOptionIsSelected('Plano de propiedad', 'pla_po', 'regimen_propiedad_inmueble', 'po'),
+                ...$this->addHideFieldUntilOptionIsSelected('Predial', 'pre_po', 'regimen_propiedad_inmueble', 'po'),
+                ...$this->addHideFieldUntilOptionIsSelected('Otro', 'otr_po', 'regimen_propiedad_inmueble', 'po'),
+                Boolean::make('Expediente completo', 'expediente_completo')->hide()->dependsOn(
+                    ['regimen_propiedad_inmueble'],
+                    function (Boolean $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->regimen_propiedad_inmueble === 'po') {
+                            $field->show();
+                        }
+                    }
+                )
+            ])
+        ];
+    }
+
     public function ejidoFields()
     {
         return [
@@ -395,6 +420,24 @@ class Record extends Resource
                 ...$this->addHideFieldUntilOptionIsSelected('Certificado parcelario con destino específico', 'cpd_ej', 'regimen_propiedad_inmueble', 'ej'),
                 ...$this->addHideFieldUntilOptionIsSelected('Reglamento del ejido', 'ree_ej', 'regimen_propiedad_inmueble', 'ej'),
                 ...$this->addHideFieldUntilOptionIsSelected('Otro', 'otr_ej', 'regimen_propiedad_inmueble', 'ej')
+            ])
+        ];
+    }
+
+    public function comunidadAgrariaFields()
+    {
+        return [
+            JSON::make('', 'documentacion', [
+                ...$this->addHideFieldUntilOptionIsSelected('Acta de elección de los órganos', 'aeo_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Resolución presidencial de dotación de tierras', 'rdt_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Carpeta básica del ejido', 'cbe_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Plano general del ejido', 'pge_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial de los representantes ejidales', 'ide_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Padrón vigente de ejidatarios', 'pve_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Acta de asamblea autorizando el proyecto', 'aap_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Certificado parcelario con destino específico', 'cpd_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Reglamento del ejido', 'ree_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Otro', 'otr_ca', 'regimen_propiedad_inmueble', 'ca')
             ])
         ];
     }
