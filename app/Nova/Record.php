@@ -263,7 +263,12 @@ class Record extends Resource
                         $field->show();
                     }
                 }
-            ),
+            )->hideFromDetail(function (NovaRequest $request) {
+                if ($this->regimen_propiedad_inmueble === 'ej') {
+                    return false;
+                }
+                return true;
+            }),
             Select::make('Estado', 'estado_inmueble')->options([
                 'chihuahua' => 'Chihuahua',
                 'sonora' => 'Sonora',
