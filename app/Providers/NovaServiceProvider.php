@@ -108,6 +108,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function register()
     {
-        //
+        \Laravel\Nova\Nova::$initialPath = '/resources/records';
     }
 }
