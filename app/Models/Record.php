@@ -32,12 +32,24 @@ class Record extends Model
      */
     protected function setDocumentacionAttribute($documentation): bool|string
     {
-        $status_values = array_filter($documentation, fn ($value, $key) => strpos($key, '_status', 0), ARRAY_FILTER_USE_BOTH);
-        $status_values = array_map(fn ($value) => $value === null ? 'revision' : $value, $status_values);
+        $status_values = array_filter($documentation, fn($value, $key) => strpos($key, '_status', 0), ARRAY_FILTER_USE_BOTH);
+        $status_values = array_map(fn($value) => $value === null ? 'revision' : $value, $status_values);
         foreach ($status_values as $key => $value) {
             $documentation[$key] = $value;
         }
 
         return $this->attributes['documentacion'] = json_encode($documentation);
+    }
+
+    public function getRegimenPropiedadInmuebleAttribute($value)
+    {
+        return match ($value) {
+            'pr' => 'Propiedad privada',
+            'ej' => 'Propiedad ejidal',
+            'pa' => 'Parcela',
+            'po' => 'Posesión',
+            'ca' => 'Comunidad Agraria',
+            default => '',
+        };
     }
 }

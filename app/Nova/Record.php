@@ -265,9 +265,9 @@ class Record extends Resource
                 }
             )->hideFromDetail(function (NovaRequest $request) {
                 if ($this->regimen_propiedad_inmueble === 'ej') {
-                    return false;
+                    return true;
                 }
-                return true;
+                return false;
             }),
             Select::make('Estado', 'estado_inmueble')->options([
                 'chihuahua' => 'Chihuahua',
