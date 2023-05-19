@@ -95,53 +95,6 @@ class Record extends Resource
         };
     }
 
-    public function generateNumeroExpediente($request)
-    {
-        $municipios_chihuahua = [
-            'villa ahumada' => '001',
-            'buenaventura' => '010',
-            'casas grandes' => '013',
-            'galeana' => '023',
-            'guadalupe' => '028',
-            'nuevo casas grandes' => '050',
-        ];
-
-        $municipios_sonora = [
-            'bacerac' => '010',
-            'cumpas' => '023',
-            'hachinerea' => '031',
-            'pitiquito' => '047',
-            'trincheras' => '064',
-            'cucurpe' => '022',
-            'santa ana' => '058',
-            'arizpe' => '006',
-            'villa hidalgo' => '067',
-        ];
-
-        $regimen_propiedad = [
-            'propiedad' => 'P',
-        ];
-
-        $record = \App\Models\Record::find($request->resourceId);
-        if (!$record) {
-            return '';
-        }
-        $estado = $record->estado_inmueble;
-        $estado = strtolower($estado) === 'sonora' ? 'SN' : 'CH';
-
-        $municipio = strtolower($record->municipio_inmueble);
-        if ($estado === 'SN') {
-            $municipio = $municipios_sonora[$municipio];
-        } else {
-            $municipio = $municipios_chihuahua[$municipio];
-        }
-
-        $propiedad = strtolower($record->regimen_propiedad_inmueble);
-
-
-        return 'SM-' . $estado . '-' . $municipio;
-    }
-
     /**
      * Get the fields displayed by the resource.
      *
@@ -305,7 +258,9 @@ class Record extends Resource
                 }
             )->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
             Text::make('Poblado', 'poblado_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Select::make('Régimen de propiedad', 'regimen_propiedad_inmueble')->options([
+            Select::make('Régimen de propiedad', 'regimen_propiedad_inmueble')->resolveUsing(function () {
+                return $this->getRawOriginal('regimen_propiedad_inmueble');
+            })->options([
                 'pr' => 'Propiedad privada',
                 'ej' => 'Propiedad ejidal',
                 'pa' => 'Parcela',
@@ -608,6 +563,6 @@ class Record extends Resource
      */
     public static function redirectAfterUpdate(NovaRequest $request, $resource)
     {
-        return '/resources/'.static::uriKey().'/'.$resource->getKey().'/edit';
+        return '/resources/' . static::uriKey() . '/' . $resource->getKey() . '/edit';
     }
 }
