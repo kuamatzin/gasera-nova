@@ -247,15 +247,7 @@ class Record extends Resource
             $this->representateLegalConfig(Text::make('Representante Legal', 'nombre_representante_legal')),
             $this->representateLegalConfig(Text::make('Celular, Teléfono local para recados', 'telefono_recados_representante_legal')),
             $this->representateLegalConfig(Text::make('Correo electrónico', 'correo_electronico_representante_legal')),
-            Textarea::make('Observaciones o comentarios', 'observaciones_representante_legal')->hide()
-                ->dependsOn(
-                    ['representante_legal'],
-                    function (Textarea $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->representante_legal) {
-                            $field->show();
-                        }
-                    }
-                )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-full'),
+            Textarea::make('Observaciones o comentarios', 'observaciones_representante_legal')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-full'),
             //$this->representateLegalConfig(Text::make('Observaciones o comentarios', 'observaciones_representante_legal')),
         ];
     }
