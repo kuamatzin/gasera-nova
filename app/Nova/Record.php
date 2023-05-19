@@ -258,15 +258,20 @@ class Record extends Resource
                 }
             )->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
             Text::make('Poblado', 'poblado_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Select::make('Régimen de propiedad', 'regimen_propiedad_inmueble')->resolveUsing(function () {
-                return $this->getRawOriginal('regimen_propiedad_inmueble');
-            })->options([
+            Select::make('Régimen de propiedad', 'regimen_propiedad_inmueble')->resolveUsing(fn() => $this->getRawOriginal('regimen_propiedad_inmueble'))->options([
                 'pr' => 'Propiedad privada',
                 'ej' => 'Propiedad ejidal',
                 'pa' => 'Parcela',
                 'po' => 'Posesión',
                 'ca' => 'Comunidad Agraria',
-            ])->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            ])->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3')->hideFromDetail(),
+            Select::make('Régimen de propiedad', 'regimen_propiedad_inmueble')->options([
+                'pr' => 'Propiedad privada',
+                'ej' => 'Propiedad ejidal',
+                'pa' => 'Parcela',
+                'po' => 'Posesión',
+                'ca' => 'Comunidad Agraria',
+            ])->size('w-1/3')->onlyOnDetail(),
             Text::make('Uso de suelo', 'uso_suelo_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
         ];
     }
@@ -401,7 +406,7 @@ class Record extends Resource
                             $field->show();
                         }
                     }
-                )
+                )->showOnDetail(fn() => $this->regimen_propiedad_inmueble === 'po')
             ])
         ];
     }
