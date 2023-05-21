@@ -105,7 +105,7 @@ class Record extends Resource
     {
         return [
             //ID::make('ID')->sortable(),
-            Text::make('Número de cadenamiento', 'numero_cadenamiento')->sortable(),
+            Text::make('# Cad.', 'numero_cadenamiento')->sortable(),
             Text::make('Número de expediente', 'numero_expediente')->readonly(false)->size('w-1/3'),
             BelongsTo::make('Gestor', 'user', User::class)->hideFromIndex(fn() => Auth::user()->role === 'cliente')->size('w-1/3'),
             Select::make('Estatus', 'status')->options(function () {
@@ -121,7 +121,7 @@ class Record extends Resource
                     'progress' => 'En progreso',
                     'revision' => 'Revisión',
                 ];
-            })->displayUsingLabels()->hide()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            })->hideFromIndex()->displayUsingLabels()->hide()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
             new PanelEsteroids('Planilla de identificación', $this->propietarioFields()),
             new PanelEsteroids('Datos del inmueble a contratar', $this->inmuebleFields()),
             new PanelEsteroids('Superficies a contratar', $this->superficieFields()),
@@ -406,7 +406,7 @@ class Record extends Resource
                             $field->show();
                         }
                     }
-                )->showOnDetail(fn() => $this->regimen_propiedad_inmueble === 'po')
+                )->hideFromIndex()->showOnDetail(fn() => $this->regimen_propiedad_inmueble === 'po')
             ])
         ];
     }
