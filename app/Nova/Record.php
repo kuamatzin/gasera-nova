@@ -483,7 +483,7 @@ class Record extends Resource
             return $request->numero_expediente . '_' . strtoupper($value) . '.pdf';
         })->disk('public')->acceptedTypes('.pdf')->nullable()->hideFromIndex()->size('w-1/4');
 
-        $select_field = Select::make('', $value . '_status')->options(function () {
+        $select_field = Radio::make('', $value . '_status')->options(function () {
             if (Auth::user()->role === 'admin') {
                 return [
                     'revision' => 'Revisión',
