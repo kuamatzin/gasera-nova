@@ -497,13 +497,11 @@ class Record extends Resource
             ];
         })->hideFromIndex()->size('w-1/4');;
 
-        return [$file_field, $select_field];
+        return [$file_field];
     }
 
     public function addHideFieldUntilOptionIsSelected($title, $value, $option, $optionSelected): array
     {
-        $conyuges = [];
-
         $file_field = FileEsteroids::make($title, $value)->disk('public')->acceptedTypes('.pdf')->nullable()->hide()->dependsOn(
             [$option],
             function (FileEsteroids $field, NovaRequest $request, FormData $formData) use ($option, $optionSelected) {
@@ -543,7 +541,7 @@ class Record extends Resource
             return $this[$option] === $optionSelected;
         })->hideFromIndex()->size('w-1/4');
 
-        return [$file_field, $select_field];
+        return [$file_field];
     }
 
     public function mapaFields()
