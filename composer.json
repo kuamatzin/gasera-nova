@@ -10,14 +10,17 @@
     "require": {
         "php": "^8.1",
         "acme/color-picker": "@dev",
+        "barryvdh/laravel-dompdf": "^2.0",
         "codenco-dev/nova-grid-system": "^2.0",
         "formfeed-uk/nova-dependable-panel": "^1.2",
         "formfeed-uk/nova-logo-url": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "inovuz/boolean-switcher": "@dev",
         "inovuz/card-file": "@dev",
+        "inovuz/custom-grid-system": "@dev",
         "inovuz/file-esteroids": "@dev",
         "inovuz/file-kmz": "@dev",
+        "inovuz/panel-esteroids": "@dev",
         "laravel/framework": "^10.8",
         "laravel/nova": "~4.0",
         "laravel/sanctum": "^3.2",
@@ -28,9 +31,7 @@
         "oneduo/nova-file-manager": "^0.9.2",
         "simonhamp/laravel-nova-csv-import": "^0.4.0",
         "stepanenko3/nova-json": "^3.1",
-        "trin4ik/nova-switcher": "^0.3.0",
-        "inovuz/custom-grid-system": "@dev",
-        "inovuz/panel-esteroids": "@dev"
+        "trin4ik/nova-switcher": "^0.3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

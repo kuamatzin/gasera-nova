@@ -6,6 +6,7 @@ use App\Imports\RecordsImport;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PdfGeneratorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -206,3 +207,5 @@ Route::get('test2', function () {
         }
     }
 });
+
+Route::get('pdf', [PdfGeneratorController::class, 'generate']);
