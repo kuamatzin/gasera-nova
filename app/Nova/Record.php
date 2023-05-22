@@ -511,7 +511,7 @@ class Record extends Resource
                 }
             }
         )->showOnDetail(function (NovaRequest $request, $resource) use ($option, $optionSelected) {
-            return $this[$option] === $optionSelected;
+            return $this->getRawOriginal($option) === $optionSelected;
         })->storeAs(function ($request) use ($value) {
             $file_type = explode('_', $value)[0];
             return $request->numero_expediente . '_' . strtoupper($file_type) . '.pdf';

@@ -75,7 +75,7 @@
                     </tr>
                 </table>
 
-                <h4>Propietario</h4>
+                <h4>Planilla de Identificación</h4>
 
                 <table class="mt-2 table table-bordered">
                     <tbody>
