@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-show="panel.showOnDetail">
         <slot>
             <div class="flex items-center">
                 <Heading :level="1" :class="panel.helpText ? 'mb-0' : 'mb-0'" class="w-full">
@@ -80,6 +80,10 @@ import BehavesAsPanel from './../mixins/BehavesAsPanel'
 
 export default {
     mixins: [Collapsable, BehavesAsPanel],
+
+    mounted() {
+        console.log(this.panel.showOnDetail)
+    },
 
     methods: {
         /**

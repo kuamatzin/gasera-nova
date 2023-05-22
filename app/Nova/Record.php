@@ -128,7 +128,7 @@ class Record extends Resource
             new PanelEsteroids('Superficies a contratar', $this->superficieFields()),
             new PanelEsteroids('Mapa de afectación', $this->mapaFields()),
             new PanelEsteroids('Documentación', $this->documentacionFields()),
-            new PanelEsteroids('Cónyuge/Bienes mancomunados', $this->documentacionBienesMancomunados()),
+            (new PanelEsteroids('Cónyuge/Bienes mancomunados', $this->documentacionBienesMancomunados()))->showOnDetail(fn() => $this->conyuge_bienes_mancomunados),
             new PanelEsteroids('Dictamen Legal', $this->dictamenLegalFields()),
             new PanelEsteroids('Fase 1', $this->faseUnoFields()),
             new PanelEsteroids('Fase 2', $this->faseDosFields()),
