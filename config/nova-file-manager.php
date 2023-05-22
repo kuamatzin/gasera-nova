@@ -151,7 +151,7 @@ return [
     |
     */
     'tour' => [
-        'enabled' => env('NOVA_FILE_MANAGER_TOUR_ENABLED', true),
+        'enabled' => env('NOVA_FILE_MANAGER_TOUR_ENABLED', false),
     ],
 
     /*
