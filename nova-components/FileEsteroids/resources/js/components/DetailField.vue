@@ -9,10 +9,11 @@
                 :aspect="field.aspect"
             />
 
-            <span v-if="fieldValue && !imageUrl" class="break-words">
-      </span>
+            <span v-if="fieldValue && !imageUrl" class="break-words"></span>
 
-            <span v-if="!fieldValue && !imageUrl">&mdash;</span>
+            <span v-if="!fieldValue && !imageUrl">
+                <img src="https://files.inovuz.com/files/gasera/switch-off.png" style="width: 30px">
+            </span>
 
             <p v-if="shouldShowToolbar" class="flex items-center text-sm">
                 <a
@@ -26,10 +27,12 @@
                         class="mr-2"
                         type="eye"
                         view-box="0 0 24 24"
-                        width="16"
-                        height="16"
+                        width="25"
+                        height="25"
                     />
-                    <span class="class mt-1">Previsualizar</span>
+                    <span class="class mt-1">
+                        <img src="https://files.inovuz.com/files/gasera/on-button.png" style="width: 30px">
+                    </span>
                 </a>
             </p>
         </template>
