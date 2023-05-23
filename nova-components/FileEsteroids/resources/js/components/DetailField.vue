@@ -23,13 +23,6 @@
                     tabindex="0"
                     class="cursor-pointer text-gray-500 inline-flex items-center"
                 >
-                    <Icon
-                        class="mr-2"
-                        type="eye"
-                        view-box="0 0 24 24"
-                        width="25"
-                        height="25"
-                    />
                     <span class="class mt-1">
                         <img src="https://files.inovuz.com/files/gasera/on-button.png" style="width: 30px">
                     </span>
