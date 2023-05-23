@@ -441,16 +441,16 @@ class Record extends Resource
     {
         return [
             JSON::make('', 'documentacion', [
-                ...$this->addHideFieldUntilOptionIsSelected('Acta de elección de los órganos', 'aeo_ca', 'regimen_propiedad_inmueble', 'ca'),
-                ...$this->addHideFieldUntilOptionIsSelected('Resolución presidencial de dotación de tierras', 'rdt_ca', 'regimen_propiedad_inmueble', 'ca'),
-                ...$this->addHideFieldUntilOptionIsSelected('Carpeta básica del ejido', 'cbe_ca', 'regimen_propiedad_inmueble', 'ca'),
-                ...$this->addHideFieldUntilOptionIsSelected('Plano general del ejido', 'pge_ca', 'regimen_propiedad_inmueble', 'ca'),
-                ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial de los representantes ejidales', 'ide_ca', 'regimen_propiedad_inmueble', 'ca'),
-                ...$this->addHideFieldUntilOptionIsSelected('Padrón vigente de ejidatarios', 'pve_ca', 'regimen_propiedad_inmueble', 'ca'),
-                ...$this->addHideFieldUntilOptionIsSelected('Acta de asamblea autorizando el proyecto', 'aap_ca', 'regimen_propiedad_inmueble', 'ca'),
-                ...$this->addHideFieldUntilOptionIsSelected('Certificado parcelario con destino específico', 'cpd_ca', 'regimen_propiedad_inmueble', 'ca'),
-                ...$this->addHideFieldUntilOptionIsSelected('Reglamento del ejido', 'ree_ca', 'regimen_propiedad_inmueble', 'ca'),
-                ...$this->addHideFieldUntilOptionIsSelected('Otro', 'otr_ca', 'regimen_propiedad_inmueble', 'ca')
+                ...$this->addHideFieldUntilOptionIsSelected('Acta de elección de los órganos', 'aeoca_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Resolución presidencial de dotación de tierras', 'rdtca_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Carpeta básica del ejido', 'cbeca_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Plano general del ejido', 'pgeca_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial de los representantes ejidales', 'ideca_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Padrón vigente de ejidatarios', 'pveca_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Acta de asamblea autorizando el proyecto', 'aapca_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Certificado parcelario con destino específico', 'cpdca_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Reglamento del ejido', 'reeca_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('Otro', 'otrca_ca', 'regimen_propiedad_inmueble', 'ca')
             ])
         ];
     }
