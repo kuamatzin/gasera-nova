@@ -1,33 +1,32 @@
 <template>
-  <PanelItem :index="index" :field="field">
-    <template #value>
-      <Icon
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-        :type="type"
-        :class="color"
-      />
-    </template>
-  </PanelItem>
+    <PanelItem :index="index" :field="field">
+        <template #value>
+            <div v-if="field.value">
+                <img src="https://files.inovuz.com/files/gasera/cuadro_verde.png" alt="" style="width: 20px;">
+            </div>
+            <div v-else>
+                <img src="https://files.inovuz.com/files/gasera/cuadro_gris.png" alt="" style="width: 20px;">
+            </div>
+        </template>
+    </PanelItem>
 </template>
 
 <script>
 export default {
-  props: ['index', 'resource', 'resourceName', 'resourceId', 'field'],
+    props: ["index", "resource", "resourceName", "resourceId", "field"],
 
-  computed: {
-    label() {
-      return this.field.value == true ? this.__('Yes') : this.__('No')
-    },
+    computed: {
+        label() {
+            return this.field.value == true ? this.__("Yes") : this.__("No");
+        },
 
-    type() {
-      return this.field.value == true ? 'check-circle' : 'x-circle'
-    },
+        type() {
+            return this.field.value == true ? "check-circle" : "x-circle";
+        },
 
-    color() {
-      return this.field.value == true ? 'text-green-500' : 'text-red-500'
+        color() {
+            return this.field.value == true ? "text-green-500" : "text-red-500";
+        },
     },
-  },
-}
+};
 </script>

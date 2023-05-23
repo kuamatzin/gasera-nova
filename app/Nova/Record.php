@@ -312,7 +312,7 @@ class Record extends Resource
     public function documentacionBienesMancomunados()
     {
         return [
-            Boolean::make('Cónyuge/Bienes mancomunados', 'conyuge_bienes_mancomunados')->hideFromIndex()->size('w-full'),
+            BooleanSwitcher::make('Cónyuge/Bienes mancomunados', 'conyuge_bienes_mancomunados')->hideFromIndex()->size('w-full'),
             JSON::make('', 'conyuge_bienes_mancomunados_documentacion', [
                 ...$this->addHideFieldUntilOptionIsSelected('Acta de matrimonio', 'ama', 'conyuge_bienes_mancomunados', true),
                 ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial cónyuge', 'idc', 'conyuge_bienes_mancomunados', true),
@@ -407,7 +407,7 @@ class Record extends Resource
                 ...$this->addHideFieldUntilOptionIsSelected('Plano de propiedad', 'pla_po', 'regimen_propiedad_inmueble', 'po'),
                 ...$this->addHideFieldUntilOptionIsSelected('Predial', 'pre_po', 'regimen_propiedad_inmueble', 'po'),
                 ...$this->addHideFieldUntilOptionIsSelected('Otro', 'otr_po', 'regimen_propiedad_inmueble', 'po'),
-                Boolean::make('Expediente completo', 'expediente_completo')->hide()->dependsOn(
+                BooleanSwitcher::make('Expediente completo', 'expediente_completo')->hide()->dependsOn(
                     ['regimen_propiedad_inmueble'],
                     function (Boolean $field, NovaRequest $request, FormData $formData) {
                         if ($formData->regimen_propiedad_inmueble === 'po') {
