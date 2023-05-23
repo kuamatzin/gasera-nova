@@ -47,7 +47,7 @@ class Record extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'numero_expediente';
 
     /**
      * The columns that should be searched.
