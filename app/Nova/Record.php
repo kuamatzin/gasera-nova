@@ -218,7 +218,7 @@ class Record extends Resource
                     }
                 }
             )->hideFromDetail(function (NovaRequest $request) {
-                if ($this->regimen_propiedad_inmueble === 'ej') {
+                if ($this->getRawOriginal('regimen_propiedad_inmueble') === 'pr') {
                     return true;
                 }
                 return false;
