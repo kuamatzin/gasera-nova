@@ -172,7 +172,14 @@ class Record extends Resource
                         $field->show();
                     }
                 }
-            )->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3');
+            )->hideFromIndex()
+            ->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3')
+            ->hideFromDetail(function () {
+                if ($this->representante_legal) {
+                    return false;
+                }
+                return true;
+            });
     }
 
     public function propietarioFields()
