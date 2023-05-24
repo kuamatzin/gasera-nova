@@ -2,13 +2,9 @@
 
 namespace App\Nova\Dashboards;
 
-use App\Nova\Metrics\AnuenciaTrabajosPreliminares;
-use App\Nova\Metrics\CertificadoLibertadGravamen;
-use App\Nova\Metrics\CuantificacionDBTS;
-use App\Nova\Metrics\DcitamenLegal;
+use App\Nova\Filters\RecordState;
 use App\Nova\Metrics\DocumentMetric;
-use App\Nova\Metrics\PlanoAfectacion;
-use App\Nova\Metrics\ReporteFotograficoBDTS;
+use Nemrutco\NovaGlobalFilter\NovaGlobalFilter;
 use Laravel\Nova\Dashboards\Main as Dashboard;
 
 class Main extends Dashboard
@@ -33,46 +29,49 @@ class Main extends Dashboard
             [
                 'titulo' => 'Anuencia de trabajos preliminares',
                 'fase' => '1',
-                'type' => 'atp_status'
+                'type' => 'atp'
             ],
             [
                 'titulo' => 'Anuencia cambio de uso de suelo',
                 'fase' => '1',
-                'type' => 'aus_status'
+                'type' => 'aus'
             ],
             [
-                'titulo' => 'Certificado de Libertad de Gravamen/Constancia Vigencia de Derechos',
+                'titulo' => 'Cert. de Libertad de Gravamen/Constancia',
                 'fase' => '1',
-                'type' => 'clg_status'
+                'type' => 'clg'
             ],
             [
                 'titulo' => 'Dictamen Legal',
                 'fase' => '1',
-                'type' => 'dictamen_legal_status'
+                'type' => 'dictamen_legal'
             ],
             [
                 'titulo' => 'Plano de afectación',
                 'fase' => '1',
-                'type' => 'paf_status'
+                'type' => 'paf'
             ],
             [
                 'titulo' => 'Cuantificación de BDTS',
                 'fase' => '1',
-                'type' => 'cbdts_status'
+                'type' => 'cbdts'
             ],
             [
                 'titulo' => 'Reporte Fotográfico BDTS',
                 'fase' => '1',
-                'type' => 'fbdts_status'
+                'type' => 'fbdts'
             ],
             [
                 'titulo' => 'Contrato de Promesa Firmado',
                 'fase' => '1',
-                'type' => 'cpf_status'
+                'type' => 'cpf'
             ]
         ];
         return [
-            ...array_map(fn($metric) => DocumentMetric::make()->withMeta(['titulo' => $metric['titulo'], 'fase' => $metric['fase'], 'type' => $metric['type']]), $metrics),
+            new NovaGlobalFilter([
+                new RecordState,
+            ]),
+            ...array_map(fn ($metric) => DocumentMetric::make()->withMeta(['titulo' => $metric['titulo'], 'fase' => $metric['fase'], 'type' => $metric['type']]), $metrics),
         ];
     }
 }

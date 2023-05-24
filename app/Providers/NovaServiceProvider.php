@@ -73,11 +73,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 if ($request->user()->role == 'admin') {
                     return true;
                 }
-            }),
-            Sonora::make()->showRefreshButton()->canSee(function($request) {
-                if ($request->user()->role == 'admin') {
-                    return true;
-                }
             })
         ];
     }

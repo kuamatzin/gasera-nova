@@ -5,9 +5,11 @@ namespace App\Nova\Metrics;
 use App\Models\Record;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
+use Nemrutco\NovaGlobalFilter\GlobalFilterable;
 
 class DocumentMetric extends Partition
 {
+    use GlobalFilterable;
 
     public function name()
     {
@@ -22,28 +24,33 @@ class DocumentMetric extends Partition
      */
     public function calculate(NovaRequest $request)
     {
-        $this->name('amskdmaskldmakslmdkl');
         $meta = $this->meta;
         $fase = $meta['fase'];
         $type = $meta['type'];
 
-        $records = Record::all();
-        $aceptado = 0;
-        $no_aceptado = 0;
+        $model = $this->globalFiltered($request, Record::class);
+
+        if ($model) {
+            $records = $model->get();
+        } else {
+            $records = Record::all();
+        }
+        $subido = 0;
+        $no_subido = 0;
         foreach ($records as $record) {
             $dictamen_legal = $fase === '1' ? $record->dictamen_legal_fase_uno : $record->dictamen_legal_fase_dos;
 
-            if ($dictamen_legal && isset($dictamen_legal[$type]) && $dictamen_legal[$type] === 'aceptado') {
-                $aceptado++;
+            if ($dictamen_legal && isset($dictamen_legal[$type]) && $dictamen_legal[$type] !== '' && $dictamen_legal[$type] !== null) {
+                $subido++;
             } else {
-                $no_aceptado++;
+                $no_subido++;
             }
         }
 
 
         return $this->result([
-            'No' => $no_aceptado,
-            'Si' => $aceptado,
+            'No' => $no_subido,
+            'Si' => $subido,
         ]);
     }
 

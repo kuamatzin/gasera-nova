@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4444dc9bd51ca25f4f830984471ff19",
+    "content-hash": "3e0ec868d438592e2e83404b03e798bc",
     "packages": [
         {
             "name": "acme/color-picker",
@@ -3955,6 +3955,56 @@
                 }
             ],
             "time": "2022-08-04T09:53:51+00:00"
+        },
+        {
+            "name": "nemrutco/nova-global-filter",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nemrutco/nova-global-filter.git",
+                "reference": "5e0fe10171d21af9ab217f2ea96a1fa331b6d520"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nemrutco/nova-global-filter/zipball/5e0fe10171d21af9ab217f2ea96a1fa331b6d520",
+                "reference": "5e0fe10171d21af9ab217f2ea96a1fa331b6d520",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Nemrutco\\NovaGlobalFilter\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nemrutco\\NovaGlobalFilter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This package allows you to broadcast any of your existing Laravel Nova filters to metrics or custom cards.",
+            "keywords": [
+                "Metrics",
+                "card",
+                "dashboard",
+                "filters",
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/nemrutco/nova-global-filter/issues",
+                "source": "https://github.com/nemrutco/nova-global-filter/tree/v1.3.0"
+            },
+            "time": "2023-03-08T06:09:20+00:00"
         },
         {
             "name": "nesbot/carbon",
