@@ -97,8 +97,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 if ($request->user()->role == 'admin') {
                     return true;
                 }
-            }),
-            new \PhpJunior\NovaLogViewer\Tool(),
+            })
         ];
     }
 
