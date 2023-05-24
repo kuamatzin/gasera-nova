@@ -605,8 +605,8 @@ class Record extends Resource
     public function actions(NovaRequest $request)
     {
         return [
-            (new \App\Nova\Actions\DownloadExcel)->allFields()->withFilename('expedientes-' . time() . '.xlsx'),
-            (new RunNumeroCadenamientoOrdering)->canSee(fn() => Auth::user()->role === 'admin')->canRun(fn() => Auth::user()->role === 'admin'),
+            (new \App\Nova\Actions\DownloadExcel)->allFields()->withFilename('expedientes-' . time() . '.xlsx')->standalone(),
+            (new RunNumeroCadenamientoOrdering)->canSee(fn() => Auth::user()->role === 'admin')->canRun(fn() => Auth::user()->role === 'admin')->standalone(),
             (new GenerateReport)->canSee(fn() => Auth::user()->role === 'admin')->canRun(fn() => Auth::user()->role === 'admin'),
         ];
     }
