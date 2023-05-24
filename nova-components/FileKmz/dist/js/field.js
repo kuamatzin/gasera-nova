@@ -69,17 +69,13 @@ __webpack_require__.r(__webpack_exports__);
       this.marker = null;
     },
     loadMap: function loadMap() {
-      var myLatlng = new google.maps.LatLng(17.173985, -95.042091);
+      var myLatlng = new google.maps.LatLng(29.283187136943198, -110.31398065149865);
       var src = window.location.origin + "/storage/" + this.fieldValue;
-      var kmlOptions = {};
-      if (false) {} else {
-        kmlOptions = {
-          suppressInfoWindows: false,
-          preserveViewport: true,
-          map: this.map
-        };
-      }
-      var kmlLayer = new google.maps.KmlLayer(src, kmlOptions);
+      var kmlLayer = new google.maps.KmlLayer(src, {
+        suppressInfoWindows: false,
+        preserveViewport: true,
+        map: this.map
+      });
       this.map.setZoom(8);
       this.map.setCenter(myLatlng);
       kmlLayer.setZoom(8);

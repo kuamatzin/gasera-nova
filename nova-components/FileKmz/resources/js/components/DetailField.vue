@@ -69,26 +69,18 @@ export default {
             this.marker = null;
         },
         loadMap() {
-            const myLatlng = new google.maps.LatLng(17.173985, -95.042091);
+            const myLatlng = new google.maps.LatLng(
+                29.283187136943198,
+                -110.31398065149865
+            );
 
             const src = window.location.origin + "/storage/" + this.fieldValue;
-            let kmlOptions = {};
 
-            if (17.173985 == 180.080365) {
-                kmlOptions = {
-                    suppressInfoWindows: false,
-                    preserveViewport: false,
-                    map: this.map,
-                };
-            } else {
-                kmlOptions = {
-                    suppressInfoWindows: false,
-                    preserveViewport: true,
-                    map: this.map,
-                };
-            }
-
-            var kmlLayer = new google.maps.KmlLayer(src, kmlOptions);
+            var kmlLayer = new google.maps.KmlLayer(src, {
+                suppressInfoWindows: false,
+                preserveViewport: true,
+                map: this.map,
+            });
             this.map.setZoom(8);
             this.map.setCenter(myLatlng);
             kmlLayer.setZoom(8);
