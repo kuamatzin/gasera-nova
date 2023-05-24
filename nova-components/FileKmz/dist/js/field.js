@@ -16,48 +16,74 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mixins: [laravel_nova__WEBPACK_IMPORTED_MODULE_0__.FieldValue],
-  props: ['index', 'resource', 'resourceName', 'resourceId', 'field'],
+  props: ["index", "resource", "resourceName", "resourceId", "field"],
+  data: function data() {
+    return {
+      location: null,
+      marker: null,
+      map: null
+    };
+  },
   mounted: function mounted() {
     var _this = this;
-    var recaptchaScript = document.createElement('script');
-    recaptchaScript.setAttribute('src', 'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js');
-    document.head.appendChild(recaptchaScript);
-    var script = document.createElement('script');
-    script.setAttribute('src', 'https://unpkg.com/leaflet-kmz@latest/dist/leaflet-kmz.js');
-    document.head.appendChild(script);
+    console.log(this.field);
+    //this.location = JSON.parse(this.field.value);
+    this.initGmaps();
+    if (this.location) {
+      // Add a little delay to fix panTo not registering on update
+      setTimeout(function () {
+        _this.setLocation(_this.location);
+      }, 100);
+    }
     setTimeout(function () {
-      console.log(_this.field);
       _this.loadMap();
-    }, 2000);
+    }, 500);
   },
   methods: {
+    initGmaps: function initGmaps() {
+      this.map = new google.maps.Map(this.$refs.map, {
+        center: this.field.defaultCoordinates || {
+          lat: -34.397,
+          lng: 150.644
+        },
+        zoom: this.field.zoom || 8
+      });
+    },
+    /**
+     * Set an active location
+     */
+    setLocation: function setLocation(location) {
+      this.clearMarker();
+      this.map.panTo(this.location.latlng);
+      this.marker = new google.maps.Marker({
+        position: this.location.latlng,
+        map: this.map
+      });
+    },
+    /**
+     * Clear the gmap's marker
+     */
+    clearMarker: function clearMarker() {
+      if (!this.marker) return;
+      this.marker.setMap(null);
+      this.marker = null;
+    },
     loadMap: function loadMap() {
-      var map = L.map('map', {
-        preferCanvas: true // recommended when loading large layers.
-      });
-
-      console.log('map', map);
-      map.setView(new L.LatLng(43.5978, 12.7059), 5);
-      var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-        maxZoom: 17,
-        attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
-        opacity: 0.90
-      });
-      OpenTopoMap.addTo(map);
-
-      // Instantiate KMZ layer (async)
-      var kmz = L.kmzLayer().addTo(map);
-      kmz.on('load', function (e) {
-        control.addOverlay(e.layer, e.name);
-        // e.layer.addTo(map);
-      });
-
-      // Add remote KMZ files as layers (NB if they are 3rd-party servers, they MUST have CORS enabled)
-      console.log("/storage/".concat(this.fieldValue));
-      kmz.load("/storage/".concat(this.fieldValue));
-      var control = L.control.layers(null, null, {
-        collapsed: false
-      }).addTo(map);
+      var myLatlng = new google.maps.LatLng(17.173985, -95.042091);
+      var src = window.location.origin + "/storage/" + this.fieldValue;
+      var kmlOptions = {};
+      if (false) {} else {
+        kmlOptions = {
+          suppressInfoWindows: false,
+          preserveViewport: true,
+          map: this.map
+        };
+      }
+      var kmlLayer = new google.maps.KmlLayer(src, kmlOptions);
+      this.map.setZoom(8);
+      this.map.setCenter(myLatlng);
+      kmlLayer.setZoom(8);
+      kmlLayer.setCenter(myLatlng);
     }
   }
 });
@@ -368,10 +394,11 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-0224618e"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  id: "map"
+  "class": "whitecube-gmap mt-4",
+  ref: "map"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, null, 512 /* NEED_PATCH */)]);
 }
 
 /***/ }),
@@ -703,7 +730,11 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         } else {
           _this3.setInitialValue();
         }
+        var emitChangesEvent = !_this3.syncedFieldValueHasNotChanged();
         _this3.onSyncedField();
+        if (emitChangesEvent) {
+          _this3.emitOnSyncedFieldValueChange();
+        }
       })["catch"](function (e) {
         if ((0,axios__WEBPACK_IMPORTED_MODULE_0__.isCancel)(e)) {
           return;
@@ -713,6 +744,14 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     },
     onSyncedField: function onSyncedField() {
       //
+    },
+    emitOnSyncedFieldValueChange: function emitOnSyncedFieldValueChange() {
+      this.emitFieldValueChange(this.field.attribute, this.currentField.value);
+    },
+    syncedFieldValueHasNotChanged: function syncedFieldValueHasNotChanged() {
+      var _this$value;
+      var value = this.currentField.value;
+      return !lodash_isNil__WEBPACK_IMPORTED_MODULE_6___default()(value) && (value === null || value === void 0 ? void 0 : value.toString()) === ((_this$value = this.value) === null || _this$value === void 0 ? void 0 : _this$value.toString());
     }
   },
   computed: {
@@ -1894,7 +1933,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#map[data-v-0224618e] {\n    height: 500px;\n    width: 400px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.whitecube-gmap[data-v-0224618e] {\n    height: 500px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2335,7 +2374,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DetailField_vue_vue_type_template_id_0224618e_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DetailField.vue?vue&type=template&id=0224618e&scoped=true */ "./resources/js/components/DetailField.vue?vue&type=template&id=0224618e&scoped=true");
 /* harmony import */ var _DetailField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DetailField.vue?vue&type=script&lang=js */ "./resources/js/components/DetailField.vue?vue&type=script&lang=js");
 /* harmony import */ var _DetailField_vue_vue_type_style_index_0_id_0224618e_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DetailField.vue?vue&type=style&index=0&id=0224618e&scoped=true&lang=css */ "./resources/js/components/DetailField.vue?vue&type=style&index=0&id=0224618e&scoped=true&lang=css");
-/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_carloscuamatzin_Developer_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -2343,7 +2382,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_DetailField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_DetailField_vue_vue_type_template_id_0224618e_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-0224618e"],['__file',"resources/js/components/DetailField.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Developer_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_DetailField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_DetailField_vue_vue_type_template_id_0224618e_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-0224618e"],['__file',"resources/js/components/DetailField.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2365,13 +2404,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormField.vue?vue&type=template&id=c023248a */ "./resources/js/components/FormField.vue?vue&type=template&id=c023248a");
 /* harmony import */ var _FormField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormField.vue?vue&type=script&lang=js */ "./resources/js/components/FormField.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_carloscuamatzin_Developer_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_FormField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/FormField.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Developer_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_FormField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/FormField.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2393,13 +2432,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexField.vue?vue&type=template&id=9e63f81a */ "./resources/js/components/IndexField.vue?vue&type=template&id=9e63f81a");
 /* harmony import */ var _IndexField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./IndexField.vue?vue&type=script&lang=js */ "./resources/js/components/IndexField.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Users_carloscuamatzin_Developer_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Projects_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_IndexField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/IndexField.vue"]])
+const __exports__ = /*#__PURE__*/(0,_Users_carloscuamatzin_Developer_carlos_gasera_nova_nova_components_FileKmz_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_IndexField_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/IndexField.vue"]])
 /* hot reload */
 if (false) {}
 

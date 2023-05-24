@@ -16,8 +16,9 @@ class FieldServiceProvider extends ServiceProvider
     public function boot()
     {
         Nova::serving(function (ServingNova $event) {
-            Nova::script('file-kmz', __DIR__.'/../dist/js/field.js');
-            Nova::style('file-kmz', __DIR__.'/../dist/css/field.css');
+            Nova::script('nova-google-maps_googlemaps', $this->gmapsScript());
+            Nova::script('file-kmz', __DIR__ . '/../dist/js/field.js');
+            Nova::style('file-kmz', __DIR__ . '/../dist/css/field.css');
         });
     }
 
@@ -29,5 +30,16 @@ class FieldServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    protected function gmapsScript()
+    {
+        return vsprintf(
+            'https://maps.googleapis.com/maps/api/js?key=%s&language=%s',
+            [
+                'AIzaSyAMsehXJFDs8U_p8iXS4sJVY386BUOBspk',
+                config('nova-google-maps.language'),
+            ]
+        );
     }
 }

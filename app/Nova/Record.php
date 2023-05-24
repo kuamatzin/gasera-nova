@@ -8,6 +8,7 @@ use App\Nova\Filters\RecordState;
 use Illuminate\Support\Facades\Auth;
 use Inovuz\BooleanSwitcher\BooleanSwitcher;
 use Inovuz\FileEsteroids\FileEsteroids;
+use Inovuz\FileKmz\FileKmz;
 use Inovuz\PanelEsteroids\PanelEsteroids;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -108,7 +109,7 @@ class Record extends Resource
             //ID::make('ID')->sortable(),
             Text::make('# Cad.', 'numero_cadenamiento')->sortable(),
             Text::make('Número de expediente', 'numero_expediente')->readonly(false)->size('w-1/3'),
-            BelongsTo::make('Gestor', 'user', User::class)->hideFromIndex(fn() => Auth::user()->role === 'cliente')->size('w-1/3'),
+            BelongsTo::make('Gestor', 'user', User::class)->hideFromIndex(fn () => Auth::user()->role === 'cliente')->size('w-1/3'),
             Select::make('Estatus', 'status')->options(function () {
                 if (Auth::user()->role === 'admin') {
                     return [
@@ -122,13 +123,13 @@ class Record extends Resource
                     'progress' => 'En progreso',
                     'revision' => 'Revisión',
                 ];
-            })->hideFromIndex()->displayUsingLabels()->hide()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            })->hideFromIndex()->displayUsingLabels()->hide()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
             new PanelEsteroids('Planilla de identificación', $this->propietarioFields()),
             new PanelEsteroids('Datos del inmueble a contratar', $this->inmuebleFields()),
             new PanelEsteroids('Superficies a contratar', $this->superficieFields()),
             new PanelEsteroids('Mapa de afectación', $this->mapaFields()),
             new PanelEsteroids('Documentación', $this->documentacionFields()),
-            (new PanelEsteroids('Cónyuge/Bienes mancomunados', $this->documentacionBienesMancomunados()))->showOnDetail(fn() => $this->conyuge_bienes_mancomunados),
+            (new PanelEsteroids('Cónyuge/Bienes mancomunados', $this->documentacionBienesMancomunados()))->showOnDetail(fn () => $this->conyuge_bienes_mancomunados),
             new PanelEsteroids('Dictamen Legal', $this->dictamenLegalFields()),
             new PanelEsteroids('Fase 1', $this->faseUnoFields()),
             new PanelEsteroids('Fase 2', $this->faseDosFields()),
@@ -173,7 +174,7 @@ class Record extends Resource
                     }
                 }
             )->hideFromIndex()
-            ->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3')
+            ->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3')
             ->hideFromDetail(function () {
                 if ($this->representante_legal) {
                     return false;
@@ -195,20 +196,20 @@ class Record extends Resource
                 }
                 return $this->status !== 'progress';
             })->size('w-1/3'),
-            Text::make('Celular, Teléfono local o para recados', 'telefono_recados')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Correo electrónico', 'correo_electronico')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Celular, Teléfono local o para recados', 'telefono_recados')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Correo electrónico', 'correo_electronico')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
             Select::make('Calificación del propietario', 'calificacion_propietario')->options([
                 'A' => 'A',
                 'B' => 'B',
                 'C' => 'C',
-            ])->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Dirección del propietario para notificaciones', 'direccion_propietario_notificaciones')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Código de Google Street', 'codigo_google_street')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            BooleanSwitcher::make('Representante Legal', 'representante_legal')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-full'),
+            ])->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Dirección del propietario para notificaciones', 'direccion_propietario_notificaciones')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Código de Google Street', 'codigo_google_street')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            BooleanSwitcher::make('Representante Legal', 'representante_legal')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-full'),
             $this->representateLegalConfig(Text::make('Representante Legal', 'nombre_representante_legal')),
             $this->representateLegalConfig(Text::make('Celular, Teléfono local para recados', 'telefono_recados_representante_legal')),
             $this->representateLegalConfig(Text::make('Correo electrónico', 'correo_electronico_representante_legal')),
-            Textarea::make('Observaciones o comentarios', 'observaciones_representante_legal')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-full'),
+            Textarea::make('Observaciones o comentarios', 'observaciones_representante_legal')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-full'),
             //$this->representateLegalConfig(Text::make('Observaciones o comentarios', 'observaciones_representante_legal')),
         ];
     }
@@ -216,8 +217,8 @@ class Record extends Resource
     public function inmuebleFields()
     {
         return [
-            Text::make('Dirección', 'direccion_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Ejido', 'ejido_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3')->hide()->dependsOn(
+            Text::make('Dirección', 'direccion_inmueble')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Ejido', 'ejido_inmueble')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3')->hide()->dependsOn(
                 ['regimen_propiedad_inmueble'],
                 function (Text $field, NovaRequest $request, FormData $formData) {
                     if ($formData->regimen_propiedad_inmueble === 'ej') {
@@ -233,7 +234,7 @@ class Record extends Resource
             Select::make('Estado', 'estado_inmueble')->options([
                 'chihuahua' => 'Chihuahua',
                 'sonora' => 'Sonora',
-            ])->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            ])->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
             Select::make('Municipio', 'municipio_inmueble')->options([])->hide()->dependsOn(
                 ['estado_inmueble'],
                 function (Select $field, NovaRequest $request, FormData $formData) {
@@ -264,15 +265,15 @@ class Record extends Resource
                         $field->hide();
                     }
                 }
-            )->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Poblado', 'poblado_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Select::make('Régimen de propiedad', 'regimen_propiedad_inmueble')->resolveUsing(fn() => $this->getRawOriginal('regimen_propiedad_inmueble'))->options([
+            )->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Poblado', 'poblado_inmueble')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Select::make('Régimen de propiedad', 'regimen_propiedad_inmueble')->resolveUsing(fn () => $this->getRawOriginal('regimen_propiedad_inmueble'))->options([
                 'pr' => 'Propiedad privada',
                 'ej' => 'Propiedad ejidal',
                 'pa' => 'Parcela',
                 'po' => 'Posesión',
                 'ca' => 'Comunidad Agraria',
-            ])->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3')->hideFromDetail(),
+            ])->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3')->hideFromDetail(),
             Select::make('Régimen de propiedad', 'regimen_propiedad_inmueble')->options([
                 'pr' => 'Propiedad privada',
                 'ej' => 'Propiedad ejidal',
@@ -280,7 +281,7 @@ class Record extends Resource
                 'po' => 'Posesión',
                 'ca' => 'Comunidad Agraria',
             ])->size('w-1/3')->onlyOnDetail(),
-            Text::make('Uso de suelo', 'uso_suelo_inmueble')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Uso de suelo', 'uso_suelo_inmueble')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
         ];
     }
 
@@ -291,16 +292,16 @@ class Record extends Resource
                 'servidumbre_voluntaria' => 'Servidumbre voluntaria',
                 'estacion_medicion' => 'Estación de medición',
                 'valvula_seccionamiento' => 'Válvula de seccionamiento',
-            ])->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Superficie contratada m2', 'superficie_contratada_m2_superficie')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Superficie m2 franja de uso temporal', 'superficia_m2_franja_uso_temporal_superficie')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Superficie m2 FUTE', 'superficie_m2_fute_superficie')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Superficie total contratada m2', 'superficie_total_contratada_m2_superficie')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Km inicial', 'km_inicial_superficie')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Km final', 'km_final_superficie')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Longitud de afectación ML', 'longitud_afectacion_superficie')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Coordenada E', 'coordenada_e_superficie')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
-            Text::make('Coordenada N', 'coordenada_n_superficie')->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn(NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            ])->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Superficie contratada m2', 'superficie_contratada_m2_superficie')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Superficie m2 franja de uso temporal', 'superficia_m2_franja_uso_temporal_superficie')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Superficie m2 FUTE', 'superficie_m2_fute_superficie')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Superficie total contratada m2', 'superficie_total_contratada_m2_superficie')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Km inicial', 'km_inicial_superficie')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Km final', 'km_final_superficie')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Longitud de afectación ML', 'longitud_afectacion_superficie')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Coordenada E', 'coordenada_e_superficie')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
+            Text::make('Coordenada N', 'coordenada_n_superficie')->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->hideFromIndex()->readonly(fn (NovaRequest $r) => $this->validateEditionField($r))->size('w-1/3'),
         ];
     }
 
@@ -414,7 +415,7 @@ class Record extends Resource
                             $field->show();
                         }
                     }
-                )->hideFromIndex()->showOnDetail(fn() => $this->regimen_propiedad_inmueble === 'po')
+                )->hideFromIndex()->showOnDetail(fn () => $this->regimen_propiedad_inmueble === 'po')
             ])
         ];
     }
@@ -458,30 +459,30 @@ class Record extends Resource
     public function dictamenLegalFields()
     {
         return [
-            BooleanSwitcher::make('Documentación completa para firmar contrato', 'documentación_completa_firmar_contrato')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/2'),
-            BooleanSwitcher::make('Cuenta con CLG/CVD', 'clg_cvd')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/2'),
-            Textarea::make('Dictamen Legal', 'dictamen_legal')->rows(35)->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-full'),
+            BooleanSwitcher::make('Documentación completa para firmar contrato', 'documentación_completa_firmar_contrato')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/2'),
+            BooleanSwitcher::make('Cuenta con CLG/CVD', 'clg_cvd')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/2'),
+            Textarea::make('Dictamen Legal', 'dictamen_legal')->rows(35)->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-full'),
             Select::make('Convenio de promesa', 'convenio_promesa')->options([
                 'Si' => 'Si',
                 'No' => 'No',
                 'n/a' => 'N/A'
-            ])->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            BooleanSwitcher::make('Contrato definitivo', 'contrato_definitivo')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            BooleanSwitcher::make('Convenio sujeto a condición', 'convenio_sujeto_condicion')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            BooleanSwitcher::make('Indique si se identificó alguna inconsistencia importante', 'identificacion_inconsistencia_importante')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Text::make('Descripción', 'identificacion_inconsistencia_importante_contenido')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            BooleanSwitcher::make('Acción legal que se tendría que realizar para regularizar la Legal Tenencia de la Tierra', 'accion_legal_regularizar_tierra')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Text::make('Descripción', 'accion_legal_regularizar_tierra_contenido')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            ])->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            BooleanSwitcher::make('Contrato definitivo', 'contrato_definitivo')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            BooleanSwitcher::make('Convenio sujeto a condición', 'convenio_sujeto_condicion')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            BooleanSwitcher::make('Indique si se identificó alguna inconsistencia importante', 'identificacion_inconsistencia_importante')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            Text::make('Descripción', 'identificacion_inconsistencia_importante_contenido')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            BooleanSwitcher::make('Acción legal que se tendría que realizar para regularizar la Legal Tenencia de la Tierra', 'accion_legal_regularizar_tierra')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            Text::make('Descripción', 'accion_legal_regularizar_tierra_contenido')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
             Select::make('Clasificación de la contingencia de acuerdo a la inconsistencia detectada', 'clasificacion_contingencia_detectada')->options([
                 'simple' => 'Simple de resolver',
                 'requiere_accion_legal_gasto' => 'Requiere acción legal, gasto, etc',
                 'complejo_costoso_tiempo_extenso' => 'Complejo, costoso, tiempo extenso para resolver',
-            ])->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Number::make('Meses para resolver la contingencia', 'meses_regularizar_contingencia')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Number::make('Monto aproximado (en pesos)', 'monto_aproximado')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Text::make('Terminos y condiciones para la celebración del Contrato Respectivo', 'terminos_condiciones_celebracion_contrato')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Text::make('Abogado emitió dictamen', 'abogado_emitio_dictamen')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Date::make('Fecha', 'fecha_dictamen')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn(NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            ])->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            Number::make('Meses para resolver la contingencia', 'meses_regularizar_contingencia')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            Number::make('Monto aproximado (en pesos)', 'monto_aproximado')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            Text::make('Terminos y condiciones para la celebración del Contrato Respectivo', 'terminos_condiciones_celebracion_contrato')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            Text::make('Abogado emitió dictamen', 'abogado_emitio_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            Date::make('Fecha', 'fecha_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
         ];
     }
 
@@ -556,7 +557,9 @@ class Record extends Resource
     {
         return [
             //Text::make('Dirección', 'direccion_inmueble')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
-            FileEsteroids::make('Mapa de afectación', 'mapa_afectacion_path')->size('w-full'),
+            FileKmz::make('Mapa de afectación', 'mapa_afectacion_path')->size('w-full')->acceptedTypes('.kmz')->storeAs(function ($request) {
+                return $request->mapa_afectacion_path->getClientOriginalName();
+            }),
         ];
     }
 
@@ -568,8 +571,7 @@ class Record extends Resource
      */
     public function cards(NovaRequest $request)
     {
-        return [
-        ];
+        return [];
     }
 
     /**
@@ -606,8 +608,8 @@ class Record extends Resource
     {
         return [
             (new \App\Nova\Actions\DownloadExcel)->allFields()->withFilename('expedientes-' . time() . '.xlsx')->standalone(),
-            (new RunNumeroCadenamientoOrdering)->canSee(fn() => Auth::user()->role === 'admin')->canRun(fn() => Auth::user()->role === 'admin')->standalone(),
-            (new GenerateReport)->canSee(fn() => Auth::user()->role === 'admin')->canRun(fn() => Auth::user()->role === 'admin'),
+            (new RunNumeroCadenamientoOrdering)->canSee(fn () => Auth::user()->role === 'admin')->canRun(fn () => Auth::user()->role === 'admin')->standalone(),
+            (new GenerateReport)->canSee(fn () => Auth::user()->role === 'admin')->canRun(fn () => Auth::user()->role === 'admin'),
         ];
     }
 

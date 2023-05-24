@@ -1,65 +1,105 @@
 <template>
-    <div id="map"></div>
+    <div>
+        <div class="whitecube-gmap mt-4" ref="map"></div>
+    </div>
 </template>
 
 <script>
-import {FieldValue} from 'laravel-nova'
+import { FieldValue } from "laravel-nova";
 
 export default {
     mixins: [FieldValue],
 
-    props: ['index', 'resource', 'resourceName', 'resourceId', 'field'],
+    props: ["index", "resource", "resourceName", "resourceId", "field"],
+
+    data() {
+        return {
+            location: null,
+            marker: null,
+            map: null,
+        };
+    },
 
     mounted() {
-        let recaptchaScript = document.createElement('script')
-        recaptchaScript.setAttribute('src', 'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js')
-        document.head.appendChild(recaptchaScript)
+        console.log(this.field);
+        //this.location = JSON.parse(this.field.value);
+        this.initGmaps();
 
-        let script = document.createElement('script')
-        script.setAttribute('src', 'https://unpkg.com/leaflet-kmz@latest/dist/leaflet-kmz.js')
-        document.head.appendChild(script)
+        if (this.location) {
+            // Add a little delay to fix panTo not registering on update
+            setTimeout(() => {
+                this.setLocation(this.location);
+            }, 100);
+        }
 
         setTimeout(() => {
-            console.log(this.field)
-            this.loadMap()
-        }, 2000)
+            this.loadMap();
+        }, 500);
     },
 
     methods: {
+        initGmaps() {
+            this.map = new google.maps.Map(this.$refs.map, {
+                center: this.field.defaultCoordinates || {
+                    lat: -34.397,
+                    lng: 150.644,
+                },
+                zoom: this.field.zoom || 8,
+            });
+        },
+        /**
+         * Set an active location
+         */
+        setLocation(location) {
+            this.clearMarker();
+            this.map.panTo(this.location.latlng);
+            this.marker = new google.maps.Marker({
+                position: this.location.latlng,
+                map: this.map,
+            });
+        },
+
+        /**
+         * Clear the gmap's marker
+         */
+        clearMarker() {
+            if (!this.marker) return;
+
+            this.marker.setMap(null);
+            this.marker = null;
+        },
         loadMap() {
-            var map = L.map('map', {
-                preferCanvas: true // recommended when loading large layers.
-            });
-            console.log('map', map)
-            map.setView(new L.LatLng(43.5978, 12.7059), 5);
+            const myLatlng = new google.maps.LatLng(17.173985, -95.042091);
 
-            var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-                maxZoom: 17,
-                attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
-                opacity: 0.90
-            });
-            OpenTopoMap.addTo(map);
+            const src = window.location.origin + "/storage/" + this.fieldValue;
+            let kmlOptions = {};
 
-            // Instantiate KMZ layer (async)
-            var kmz = L.kmzLayer().addTo(map);
+            if (17.173985 == 180.080365) {
+                kmlOptions = {
+                    suppressInfoWindows: false,
+                    preserveViewport: false,
+                    map: this.map,
+                };
+            } else {
+                kmlOptions = {
+                    suppressInfoWindows: false,
+                    preserveViewport: true,
+                    map: this.map,
+                };
+            }
 
-            kmz.on('load', function (e) {
-                control.addOverlay(e.layer, e.name);
-                // e.layer.addTo(map);
-            });
-
-            // Add remote KMZ files as layers (NB if they are 3rd-party servers, they MUST have CORS enabled)
-            console.log(`/storage/${this.fieldValue}`)
-            kmz.load(`/storage/${this.fieldValue}`);
-            var control = L.control.layers(null, null, {collapsed: false}).addTo(map);
-        }
-    }
-}
+            var kmlLayer = new google.maps.KmlLayer(src, kmlOptions);
+            this.map.setZoom(8);
+            this.map.setCenter(myLatlng);
+            kmlLayer.setZoom(8);
+            kmlLayer.setCenter(myLatlng);
+        },
+    },
+};
 </script>
 
 <style scoped>
-#map {
+.whitecube-gmap {
     height: 500px;
-    width: 400px;
 }
 </style>
