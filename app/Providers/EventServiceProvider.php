@@ -6,6 +6,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
+use Oneduo\NovaFileManager\Events\FileUploaded;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+            FileUploaded::class,
         ],
     ];
 
@@ -25,7 +28,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Event::listen(function (FileUploaded $event) {
+            Log::info($event->disk);
+            Log::info($event->path);
+        });
     }
 
     /**

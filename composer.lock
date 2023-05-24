@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "463f59e610e398927ddbe23f0e733bfc",
+    "content-hash": "d4444dc9bd51ca25f4f830984471ff19",
     "packages": [
         {
             "name": "acme/color-picker",
@@ -41,6 +41,144 @@
             "transport-options": {
                 "relative": true
             }
+        },
+        {
+            "name": "arcanedev/log-viewer",
+            "version": "10.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ARCANEDEV/LogViewer.git",
+                "reference": "e66b457f43f9b9c11e49c5a45193564f098c5a68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ARCANEDEV/LogViewer/zipball/e66b457f43f9b9c11e49c5a45193564f098c5a68",
+                "reference": "e66b457f43f9b9c11e49c5a45193564f098c5a68",
+                "shasum": ""
+            },
+            "require": {
+                "arcanedev/support": "^10.0",
+                "ext-json": "*",
+                "php": "^8.1",
+                "psr/log": "^1.0|^2.0|^3.0"
+            },
+            "require-dev": {
+                "laravel/framework": "^10.0",
+                "mockery/mockery": "^1.5.1",
+                "orchestra/testbench-core": "^8.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "10.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Arcanedev\\LogViewer\\LogViewerServiceProvider",
+                        "Arcanedev\\LogViewer\\Providers\\DeferredServicesProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Arcanedev\\LogViewer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ARCANEDEV",
+                    "email": "arcanedev.maroc@gmail.com",
+                    "homepage": "https://github.com/arcanedev-maroc",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides a Log Viewer for Laravel",
+            "homepage": "https://github.com/ARCANEDEV/LogViewer",
+            "keywords": [
+                "arcanedev",
+                "arcanesoft",
+                "laravel",
+                "log",
+                "log viewer",
+                "log-viewer",
+                "logviewer"
+            ],
+            "support": {
+                "issues": "https://github.com/ARCANEDEV/LogViewer/issues",
+                "source": "https://github.com/ARCANEDEV/LogViewer/tree/10.0.0"
+            },
+            "time": "2023-03-02T21:41:10+00:00"
+        },
+        {
+            "name": "arcanedev/support",
+            "version": "10.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ARCANEDEV/Support.git",
+                "reference": "7abc5802512329fd3dccbb467ad8e8e77e768f5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ARCANEDEV/Support/zipball/7abc5802512329fd3dccbb467ad8e8e77e768f5c",
+                "reference": "7abc5802512329fd3dccbb467ad8e8e77e768f5c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0",
+                "illuminate/support": "^10.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/framework": "^10.0",
+                "orchestra/testbench-core": "^8.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "10.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Arcanedev\\Support\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ARCANEDEV",
+                    "email": "arcanedev.maroc@gmail.com",
+                    "homepage": "https://github.com/arcanedev-maroc"
+                }
+            ],
+            "description": "ARCANEDEV Support Helpers",
+            "homepage": "https://github.com/ARCANEDEV/Support",
+            "keywords": [
+                "arcanedev",
+                "arcanesoft",
+                "laravel",
+                "support"
+            ],
+            "support": {
+                "issues": "https://github.com/ARCANEDEV/Support/issues",
+                "source": "https://github.com/ARCANEDEV/Support/tree/10.0.0"
+            },
+            "time": "2023-03-02T20:36:30+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -4646,6 +4784,73 @@
                 "source": "https://github.com/dompdf/php-svg-lib/tree/0.5.0"
             },
             "time": "2022-09-06T12:16:56+00:00"
+        },
+        {
+            "name": "php-junior/nova-logs",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPJunior/nova-logs.git",
+                "reference": "b9850109f5297f3a6c7bc121777d46da249f7d46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPJunior/nova-logs/zipball/b9850109f5297f3a6c7bc121777d46da249f7d46",
+                "reference": "b9850109f5297f3a6c7bc121777d46da249f7d46",
+                "shasum": ""
+            },
+            "require": {
+                "arcanedev/log-viewer": "*",
+                "laravel/nova": "^4.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.6",
+                "phpunit/phpunit": "7.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "PhpJunior\\NovaLogViewer\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpJunior\\NovaLogViewer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nyi Nyi Lwin",
+                    "email": "nyinyilwin1992@hotmail.com"
+                }
+            ],
+            "description": "Provides a Log Viewer for Laravel Nova",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/PHPJunior/nova-logs/issues",
+                "source": "https://github.com/PHPJunior/nova-logs/tree/v1.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/PHPJunior",
+                    "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/nyinyilwin",
+                    "type": "liberapay"
+                }
+            ],
+            "time": "2022-10-11T03:10:22+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",

@@ -163,7 +163,7 @@ Route::get('files', function () {
                     ]);
                 } else {
                     $documentacion = $expediente->documentacion;
-                    $key_file = $archivo . '_' . $expediente->regimen_propiedad_inmueble;
+                    $key_file = $archivo . '_' . $expediente->getRawOriginal('regimen_propiedad_inmueble');
                     $documentacion[$key_file] = $item;
                     $expediente->update([
                         'documentacion' => $documentacion

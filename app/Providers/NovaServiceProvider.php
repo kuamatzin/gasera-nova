@@ -98,6 +98,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     return true;
                 }
             }),
+            new \PhpJunior\NovaLogViewer\Tool(),
         ];
     }
 
