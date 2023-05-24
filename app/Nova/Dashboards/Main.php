@@ -15,7 +15,7 @@ class Main extends Dashboard
      */
     public function name(): string
     {
-        return 'Todos';
+        return 'Fase 1';
     }
 
     /**
@@ -65,8 +65,20 @@ class Main extends Dashboard
                 'titulo' => 'Contrato de Promesa Firmado',
                 'fase' => '1',
                 'type' => 'cpf'
+            ],
+            [
+                'titulo' => 'Contrato validado',
+                'fase' => '1',
+                'type' => 'cva'
+            ],
+            [
+                'titulo' => 'Inscripción de contrato RAN/RPP',
+                'fase' => '1',
+                'type' => 'icr'
             ]
         ];
+
+
         return [
             new NovaGlobalFilter([
                 new RecordState,

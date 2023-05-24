@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e0ec868d438592e2e83404b03e798bc",
+    "content-hash": "a133f5eec5927da77ef5d65a2ba2c2fe",
     "packages": [
         {
             "name": "acme/color-picker",
@@ -4427,6 +4427,58 @@
                 }
             ],
             "time": "2023-05-17T05:58:34+00:00"
+        },
+        {
+            "name": "norman-huth/nova-resource-card",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Muetze42/nova-resource-card.git",
+                "reference": "9446dc6026132c99bf1333e7a4792f9f5688c98b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Muetze42/nova-resource-card/zipball/9446dc6026132c99bf1333e7a4792f9f5688c98b",
+                "reference": "9446dc6026132c99bf1333e7a4792f9f5688c98b",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NormanHuth\\NovaResourceCard\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NormanHuth\\NovaResourceCard\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova card.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/Muetze42/nova-resource-card/issues",
+                "source": "https://github.com/Muetze42/nova-resource-card/tree/1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://huth.it/coffee",
+                    "type": "custom"
+                }
+            ],
+            "time": "2023-04-09T09:43:41+00:00"
         },
         {
             "name": "nova-kit/nova-packages-tool",
