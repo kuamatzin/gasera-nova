@@ -1,6 +1,36 @@
 <template>
     <div>
-        <button @click="showModalMap()">asdsad</button>
+        <PanelItem :index="index" :field="field">
+            <template #value>
+                <ImageLoader
+                    v-if="shouldShowLoader"
+                    :src="imageUrl"
+                    :maxWidth="field.maxWidth || field.detailWidth"
+                    :rounded="field.rounded"
+                    :aspect="field.aspect"
+                />
+
+                <span v-if="fieldValue && !imageUrl" class="break-words"></span>
+
+                <span v-if="!fieldValue && !imageUrl">
+                    <img src="https://files.inovuz.com/files/gasera/switch-off.png" style="width: 30px">
+                </span>
+
+                <p v-if="shouldShowToolbar" class="flex items-center text-sm">
+                    <a
+                        v-if="field.downloadable"
+                        @click.prevent="showModalMap()"
+                        tabindex="0"
+                        class="cursor-pointer text-gray-500 inline-flex items-center"
+                    >
+                        <span class="class mt-1">
+                            <img src="https://files.inovuz.com/files/gasera/on-button.png" style="width: 30px">
+                        </span>
+                    </a>
+                </p>
+            </template>
+        </PanelItem>
+
         <Modal :show="showModal" :size="'7xl'" :modalStyle="'fullscreen'">
             <div style="background: white">
                 <ModalHeader>
@@ -114,6 +144,9 @@ export default {
                     this.loadMap();
                 }, 500);
             }, 200);
+        },
+        shouldShowToolbar() {
+            return Boolean(this.field.downloadable && this.hasValue)
         },
     },
 };
