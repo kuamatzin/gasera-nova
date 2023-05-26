@@ -25,24 +25,12 @@ __webpack_require__.r(__webpack_exports__);
       map: null
     };
   },
+  mounted: function mounted() {
+    //this.location = JSON.parse(this.field.value);
+  },
   methods: {
-    preview: function preview() {
-      var _this = this;
-      this.showModal = true;
-      setTimeout(function () {
-        _this.initGmaps();
-        if (_this.location) {
-          // Add a little delay to fix panTo not registering on update
-          setTimeout(function () {
-            _this.setLocation(_this.location);
-          }, 100);
-        }
-      }, 500);
-      setTimeout(function () {
-        _this.loadMap();
-      }, 1000);
-    },
     initGmaps: function initGmaps() {
+      console.log(this.$refs.map);
       this.map = new google.maps.Map(this.$refs.map, {
         center: this.field.defaultCoordinates || {
           lat: -34.397,
@@ -73,20 +61,31 @@ __webpack_require__.r(__webpack_exports__);
     loadMap: function loadMap() {
       var myLatlng = new google.maps.LatLng(29.283187136943198, -110.31398065149865);
       var src = window.location.origin + "/storage/" + this.fieldValue;
-      console.log(src);
       var kmlLayer = new google.maps.KmlLayer(src, {
         suppressInfoWindows: false,
         preserveViewport: true,
         map: this.map
       });
-      console.log(kmlLayer);
       this.map.setZoom(8);
       this.map.setCenter(myLatlng);
       kmlLayer.setZoom(8);
       kmlLayer.setCenter(myLatlng);
     },
-    shouldShowToolbar: function shouldShowToolbar() {
-      return Boolean(this.field.downloadable && this.hasValue);
+    showModalMap: function showModalMap() {
+      var _this = this;
+      this.showModal = true;
+      setTimeout(function () {
+        _this.initGmaps();
+        if (_this.location) {
+          // Add a little delay to fix panTo not registering on update
+          setTimeout(function () {
+            _this.setLocation(_this.location);
+          }, 100);
+        }
+        setTimeout(function () {
+          _this.loadMap();
+        }, 500);
+      }, 200);
     }
   }
 });
@@ -397,96 +396,46 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-0224618e"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  key: 1,
-  "class": "break-words"
-};
-var _hoisted_2 = {
-  key: 2
-};
-var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: "https://files.inovuz.com/files/gasera/switch-off.png",
-    style: {
-      "width": "30px"
-    }
-  }, null, -1 /* HOISTED */);
-});
-var _hoisted_4 = [_hoisted_3];
-var _hoisted_5 = {
-  key: 3,
-  "class": "flex items-center text-sm"
-};
-var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": "class mt-1"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: "https://files.inovuz.com/files/gasera/on-button.png",
-    style: {
-      "width": "30px"
-    }
-  })], -1 /* HOISTED */);
-});
-var _hoisted_7 = [_hoisted_6];
-var _hoisted_8 = {
   style: {
     "background": "white"
   }
 };
-var _hoisted_9 = {
+var _hoisted_2 = {
   "class": "flex justify-between items-center mb-2"
 };
-var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
     "class": "text-xl font-bold"
-  }, "Previsualizar archivo", -1 /* HOISTED */);
+  }, "Mapa KMZ", -1 /* HOISTED */);
 });
-var _hoisted_11 = {
+var _hoisted_4 = {
   "class": "flex flex-wrap h-screen"
 };
-var _hoisted_12 = {
+var _hoisted_5 = {
+  "class": "w-full h-screen"
+};
+var _hoisted_6 = {
   "class": "whitecube-gmap mt-4",
   ref: "map"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_ImageLoader = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ImageLoader");
-  var _component_PanelItem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PanelItem");
   var _component_ModalHeader = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModalHeader");
   var _component_ModalContent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModalContent");
   var _component_Modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Modal");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PanelItem, {
-    index: $props.index,
-    field: $props.field
-  }, {
-    value: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_ctx.shouldShowLoader ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ImageLoader, {
-        key: 0,
-        src: _ctx.imageUrl,
-        maxWidth: $props.field.maxWidth || $props.field.detailWidth,
-        rounded: $props.field.rounded,
-        aspect: $props.field.aspect
-      }, null, 8 /* PROPS */, ["src", "maxWidth", "rounded", "aspect"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.fieldValue && !_ctx.imageUrl ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_1)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !_ctx.fieldValue && !_ctx.imageUrl ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_2, _hoisted_4)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $options.shouldShowToolbar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_5, [$props.field.downloadable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
-        key: 0,
-        onKeydown: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)((0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-          return $options.preview && $options.preview.apply($options, arguments);
-        }, ["prevent"]), ["enter"])),
-        onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-          return $options.preview && $options.preview.apply($options, arguments);
-        }, ["prevent"])),
-        tabindex: "0",
-        "class": "cursor-pointer text-gray-500 inline-flex items-center"
-      }, _hoisted_7, 32 /* HYDRATE_EVENTS */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
-    }),
-    _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["index", "field"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.showModalMap();
+    })
+  }, "asdsad"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
     show: $data.showModal,
     size: '7xl',
     modalStyle: 'fullscreen'
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalHeader, null, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalHeader, null, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-            onClick: _cache[2] || (_cache[2] = function ($event) {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+            onClick: _cache[1] || (_cache[1] = function ($event) {
               return $data.showModal = false;
             }),
             "class": "cursor-pointer text-3xl leading-none"
@@ -495,7 +444,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1 /* STABLE */
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModalContent, null, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, null, 512 /* NEED_PATCH */)])];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, null, 512 /* NEED_PATCH */)])])];
         }),
 
         _: 1 /* STABLE */
@@ -2038,7 +1987,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.whitecube-gmap[data-v-0224618e] {\n    height: 500px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.whitecube-gmap[data-v-0224618e] {\n    height: 90vh;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
