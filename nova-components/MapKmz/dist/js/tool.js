@@ -88,11 +88,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.markers.forEach(function (_ref) {
         var kml = _ref.mapa_afectacion_path;
         var src = window.location.origin + "/storage/" + kml;
-        new google.maps.KmlLayer(src, {
+        var layer = new google.maps.KmlLayer(src, {
           suppressInfoWindows: false,
           preserveViewport: true,
           map: _this2.map
         });
+        console.log(layer);
+        console.log(layer.status);
       });
       this.map.setZoom(8);
       this.map.setCenter(myLatlng);

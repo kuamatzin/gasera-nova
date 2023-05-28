@@ -70,11 +70,13 @@ export default {
 
             this.markers.forEach(({mapa_afectacion_path: kml}) => {
                 const src = window.location.origin + "/storage/" + kml;
-                new google.maps.KmlLayer(src, {
+                const layer = new google.maps.KmlLayer(src, {
                     suppressInfoWindows: false,
                     preserveViewport: true,
                     map: this.map,
                 });
+                console.log(layer)
+                console.log(layer.status)
             });
             this.map.setZoom(8);
             this.map.setCenter(myLatlng);
