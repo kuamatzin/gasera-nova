@@ -82,7 +82,6 @@ export default {
     mixins: [Collapsable, BehavesAsPanel],
 
     mounted() {
-        console.log(this.panel.showOnDetail)
     },
 
     methods: {

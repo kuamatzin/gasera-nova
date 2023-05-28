@@ -79,7 +79,6 @@ export default {
 
     methods: {
         initGmaps() {
-            console.log(this.$refs.map);
             this.map = new google.maps.Map(this.$refs.map, {
                 center: this.field.defaultCoordinates || {
                     lat: -34.397,

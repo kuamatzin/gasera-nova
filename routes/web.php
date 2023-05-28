@@ -209,3 +209,7 @@ Route::get('test2', function () {
 });
 
 Route::get('pdf', [PdfGeneratorController::class, 'generate']);
+
+Route::get('kmz', function () {
+    return Record::select('mapa_afectacion_path')->where('mapa_afectacion_path', '!=', null)->get();
+});

@@ -4,12 +4,7 @@
 
         <Heading class="mb-6">KMZ</Heading>
 
-        <Card
-            class="flex flex-col items-center justify-center"
-            style="min-height: 300px"
-        >
-            <div class="whitecubes-gmap mt-4" ref="mapkmz"></div>
-        </Card>
+        <div class="whitecubes-gmap mt-4" ref="mapkmz"></div>
     </div>
 </template>
 
@@ -18,27 +13,28 @@ export default {
     data() {
         return {
             location: null,
+            markers: [],
             marker: null,
             map: null
         }
     },
 
     mounted() {
-        this.initGmaps();
-
-        if (this.location) {
-            // Add a little delay to fix panTo not registering on update
-            setTimeout(() => {
-                this.setLocation(this.location);
-            }, 100);
-        }
+        this.getKmz();
     },
 
     methods: {
+        async getKmz() {
+            const {data} = await Nova.request().get('/kmz')
+            this.markers = data;
+            this.initGmaps();
+            this.loadMap();
+        },
         /**
          * Init the gmap
          */
         initGmaps() {
+
             this.map = new google.maps.Map(this.$refs.mapkmz, {
                 center: {lat: -34.397, lng: 150.644},
                 zoom: 8
@@ -72,17 +68,16 @@ export default {
                 -110.31398065149865
             );
 
-            const src = 'http://onlineu.mx/ductodegas/VERACRUZ20201110_161155.kmz'
-            console.log(src)
-            var kmlLayer = new google.maps.KmlLayer(src, {
-                suppressInfoWindows: false,
-                preserveViewport: true,
-                map: this.map,
+            this.markers.forEach(({mapa_afectacion_path: kml}) => {
+                const src = window.location.origin + "/storage/" + kml;
+                new google.maps.KmlLayer(src, {
+                    suppressInfoWindows: false,
+                    preserveViewport: true,
+                    map: this.map,
+                });
             });
             this.map.setZoom(8);
             this.map.setCenter(myLatlng);
-            kmlLayer.setZoom(8);
-            kmlLayer.setCenter(myLatlng);
         },
     },
 }
@@ -90,6 +85,6 @@ export default {
 
 <style scoped>
 .whitecubes-gmap {
-    height: 90vh;
+    height: 80vh;
 }
 </style>

@@ -35,10 +35,9 @@ class FieldServiceProvider extends ServiceProvider
     protected function gmapsScript()
     {
         return vsprintf(
-            'https://maps.googleapis.com/maps/api/js?key=%s&language=%s',
+            'https://maps.googleapis.com/maps/api/js?key=%s&language=en&callback=initialize',
             [
-                'AIzaSyAMsehXJFDs8U_p8iXS4sJVY386BUOBspk',
-                config('nova-google-maps.language'),
+                'AIzaSyAMsehXJFDs8U_p8iXS4sJVY386BUOBspk'
             ]
         );
     }
