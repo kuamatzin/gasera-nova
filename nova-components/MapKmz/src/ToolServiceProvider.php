@@ -23,8 +23,19 @@ class ToolServiceProvider extends ServiceProvider
         });
 
         Nova::serving(function (ServingNova $event) {
-            //
+            //Nova::script('nova-google-maps_googlemaps', $this->gmapsScript());
         });
+    }
+
+    protected function gmapsScript()
+    {
+        return vsprintf(
+            'https://maps.googleapis.com/maps/api/js?key=%s&language=%s',
+            [
+                'AIzaSyDb50wjGCHiWta4av3__VC3Rv-Hf0l3PZ8',
+                config('nova-google-maps.language'),
+            ]
+        );
     }
 
     /**
