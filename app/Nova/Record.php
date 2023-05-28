@@ -21,7 +21,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use NormanHuth\NovaRadioField\Radio;
-use Stepanenko3\NovaJson\JSON;
+use Naoray\NovaJson\JSON;
 
 class Record extends Resource
 {
