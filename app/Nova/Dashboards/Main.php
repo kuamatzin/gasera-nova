@@ -79,18 +79,11 @@ class Main extends Dashboard
         ];
 
 
-        $documentMetric = [];
-        foreach ($metrics as $metric) {
-            $documentMetric[] = DocumentMetric::make()->withMeta(['titulo' => $metric['titulo'], 'fase' => $metric['fase'], 'type' => $metric['type']]);
-        }
-
         return [
             new NovaGlobalFilter([
                 new RecordState,
             ]),
-            DocumentMetric::make()->withMeta(['titulo' => 'Anuencia de trabajos preliminares', 'fase' => '1', 'type' => 'atp']),
-            DocumentMetric::make()->withMeta(['titulo' => 'Anuencia cambio de uso de suelo', 'fase' => '1', 'type' => 'aus']),
-            DocumentMetric::make()->withMeta(['titulo' => 'Cert. de Libertad de Gravamen/Constancia', 'fase' => '1', 'type' => 'clg'])
+            ...array_map(fn ($metric) => DocumentMetric::make()->withMeta(['titulo' => $metric['titulo'], 'fase' => $metric['fase'], 'type' => $metric['type']]), $metrics),
         ];
     }
 }
