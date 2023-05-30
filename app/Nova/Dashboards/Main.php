@@ -83,7 +83,6 @@ class Main extends Dashboard
         foreach ($metrics as $metric) {
             array_push($documentMetric, DocumentMetric::make()->withMeta(['titulo' => $metric['titulo'], 'fase' => $metric['fase'], 'type' => $metric['type']]), $metrics);
         }
-        dd($documentMetric);
 
 
         return [
