@@ -31,7 +31,7 @@ class DocumentMetric extends Partition
         $model = $this->globalFiltered($request, Record::class);
 
         if ($model) {
-            $records = $model->get();
+            $records = Record::all();
         } else {
             $records = Record::all();
         }
