@@ -25,9 +25,9 @@ class DocumentMetric extends Partition
     public function calculate(NovaRequest $request)
     {
         $meta = $this->meta;
-        
+
         $fase = $meta['fase'];
-        $type = $meta['type'];
+        $type = 'aus';
 
         $model = $this->globalFiltered($request, Record::class);
 
