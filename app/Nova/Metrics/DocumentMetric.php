@@ -27,7 +27,7 @@ class DocumentMetric extends Partition
         $meta = $this->meta;
 
         $fase = $meta['fase'];
-        $type = 'aus';
+        $type = $meta['type'];
 
         $model = $this->globalFiltered($request, Record::class);
 
