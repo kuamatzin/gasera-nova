@@ -148,7 +148,12 @@ Route::get('files', function () {
                         dd($expediente->dictamen_legal_fase_uno);
                     }
                 }*/
-                if (in_array($archivo, $docsFaseUno)) {
+                if ($archivo === 'dil') {
+                    $expediente->updated([
+                        'dictamen_legal' => $item
+                    ]);
+                }
+                elseif (in_array($archivo, $docsFaseUno)) {
                     $dictamen_legal_fase_uno = $expediente->dictamen_legal_fase_uno;
                     $key_file = $archivo;
                     $dictamen_legal_fase_uno[$key_file] = $item;

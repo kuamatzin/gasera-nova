@@ -10,7 +10,6 @@ use Inovuz\BooleanSwitcher\BooleanSwitcher;
 use Inovuz\FileEsteroids\FileEsteroids;
 use Inovuz\FileKmz\FileKmz;
 use Inovuz\PanelEsteroids\PanelEsteroids;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\FormData;
@@ -19,7 +18,6 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Panel;
 use NormanHuth\NovaRadioField\Radio;
 use Naoray\NovaJson\JSON;
 
@@ -460,7 +458,10 @@ class Record extends Resource
         return [
             BooleanSwitcher::make('Documentación completa para firmar contrato', 'documentación_completa_firmar_contrato')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/2'),
             BooleanSwitcher::make('Cuenta con CLG/CVD', 'clg_cvd')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/2'),
-            Textarea::make('Dictamen Legal', 'dictamen_legal')->rows(35)->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-full'),
+            //Textarea::make('Dictamen Legal', 'dictamen_legal')->rows(35)->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-full'),
+            FileEsteroids::make('Dictamen Legal', 'dictamen_legal')->storeAs(function ($request) {
+                return $request->numero_expediente . '_' . 'DIL' . '.pdf';
+            })->disk('public')->acceptedTypes('.pdf')->nullable()->hideFromIndex()->size('w-1/4'),
             Select::make('Convenio de promesa', 'convenio_promesa')->options([
                 'Si' => 'Si',
                 'No' => 'No',
