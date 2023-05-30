@@ -109,7 +109,6 @@ class Record extends Resource
             //ID::make('ID')->sortable(),
             Text::make('# Cad.', 'numero_cadenamiento')->sortable(),
             Text::make('Número de expediente', 'numero_expediente')->readonly(false)->size('w-1/3'),
-            BelongsTo::make('Gestor', 'user', User::class)->hideFromIndex(fn () => Auth::user()->role === 'cliente')->size('w-1/3'),
             Select::make('Estatus', 'status')->options(function () {
                 if (Auth::user()->role === 'admin') {
                     return [
