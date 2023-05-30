@@ -52,6 +52,9 @@ class DocumentMetric extends Partition
         return $this->result([
             'No' => $no_subido,
             'Si' => $subido,
+        ])->colors([
+            'No' => 'rgba(151, 151, 151, 1.00)',
+            'Si' => 'rgba(53, 170, 216, 1.00)',
         ]);
     }
 
