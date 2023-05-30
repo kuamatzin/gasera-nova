@@ -81,15 +81,16 @@ class Main extends Dashboard
 
         $documentMetric = [];
         foreach ($metrics as $metric) {
-            array_push($documentMetric, DocumentMetric::make()->withMeta(['titulo' => $metric['titulo'], 'fase' => $metric['fase'], 'type' => $metric['type']]), $metrics);
+            $documentMetric[] = DocumentMetric::make()->withMeta(['titulo' => $metric['titulo'], 'fase' => $metric['fase'], 'type' => $metric['type']]);
         }
+        dd($documentMetric);
 
 
         return [
             new NovaGlobalFilter([
                 new RecordState,
             ]),
-            ...array_map(fn ($metric) => DocumentMetric::make()->withMeta(['titulo' => $metric['titulo'], 'fase' => $metric['fase'], 'type' => $metric['type']]), $metrics),
+            ...array_map(fn($metric) => DocumentMetric::make()->withMeta(['titulo' => $metric['titulo'], 'fase' => $metric['fase'], 'type' => $metric['type']]), $metrics),
         ];
     }
 }
