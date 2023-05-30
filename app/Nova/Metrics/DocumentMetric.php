@@ -72,6 +72,6 @@ class DocumentMetric extends Partition
      */
     public function uriKey()
     {
-        return 'contrato-promesa-firmado';
+        return 'document-metric-' . $this->meta['fase'] . '-' . $this->meta['type'];
     }
 }
