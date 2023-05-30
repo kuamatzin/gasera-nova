@@ -25,6 +25,8 @@ class DocumentMetric extends Partition
     public function calculate(NovaRequest $request)
     {
         $meta = $this->meta;
+
+        dd($meta);
         $fase = $meta['fase'];
         $type = $meta['type'];
 
