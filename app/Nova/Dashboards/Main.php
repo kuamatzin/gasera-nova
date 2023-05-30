@@ -88,7 +88,9 @@ class Main extends Dashboard
             new NovaGlobalFilter([
                 new RecordState,
             ]),
-            ...$documentMetric
+            DocumentMetric::make()->withMeta(['titulo' => 'Anuencia de trabajos preliminares', 'fase' => '1', 'type' => 'atp']),
+            DocumentMetric::make()->withMeta(['titulo' => 'Anuencia cambio de uso de suelo', 'fase' => '1', 'type' => 'aus']),
+            DocumentMetric::make()->withMeta(['titulo' => 'Cert. de Libertad de Gravamen/Constancia', 'fase' => '1', 'type' => 'clg'])
         ];
     }
 }
