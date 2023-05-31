@@ -365,7 +365,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */   render: () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
@@ -490,7 +490,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */   render: () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
@@ -549,7 +549,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "position": "relative",
           "left": "-5%",
           "top": "12px",
-          "z-index": "10000"
+          "z-index": "2"
         }
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Icon, {
         type: "eye",
@@ -626,7 +626,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */   render: () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
@@ -668,7 +668,7 @@ Nova.booting(function (app, store) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "useLocalization": () => (/* binding */ useLocalization)
+/* harmony export */   useLocalization: () => (/* binding */ useLocalization)
 /* harmony export */ });
 /* harmony import */ var _util_localization__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/localization */ "../../vendor/laravel/nova/resources/js/util/localization.js");
 
@@ -692,7 +692,7 @@ function useLocalization() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "useCopyValueToClipboard": () => (/* binding */ useCopyValueToClipboard)
+/* harmony export */   useCopyValueToClipboard: () => (/* binding */ useCopyValueToClipboard)
 /* harmony export */ });
 var mixin = {
   methods: {
@@ -1367,6 +1367,12 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.handleResponseError(error);
       }
+    },
+    /**
+     * Reset validation errors.
+     */
+    resetErrors: function resetErrors() {
+      this.validationErrors = new form_backend_validation__WEBPACK_IMPORTED_MODULE_0__.Errors();
     }
   }
 });
@@ -1846,25 +1852,25 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CopiesToClipboard": () => (/* reexport safe */ _CopiesToClipboard__WEBPACK_IMPORTED_MODULE_1__["default"]),
-/* harmony export */   "DependentFormField": () => (/* reexport safe */ _DependentFormField__WEBPACK_IMPORTED_MODULE_4__["default"]),
-/* harmony export */   "Errors": () => (/* reexport safe */ form_backend_validation__WEBPACK_IMPORTED_MODULE_16__.Errors),
-/* harmony export */   "FieldValue": () => (/* reexport safe */ _FieldValue__WEBPACK_IMPORTED_MODULE_9__["default"]),
-/* harmony export */   "FormEvents": () => (/* reexport safe */ _FormEvents__WEBPACK_IMPORTED_MODULE_10__["default"]),
-/* harmony export */   "FormField": () => (/* reexport safe */ _FormField__WEBPACK_IMPORTED_MODULE_11__["default"]),
-/* harmony export */   "HandlesFieldAttachments": () => (/* reexport safe */ _HandlesFieldAttachments__WEBPACK_IMPORTED_MODULE_12__["default"]),
-/* harmony export */   "HandlesFormRequest": () => (/* reexport safe */ _HandlesFormRequest__WEBPACK_IMPORTED_MODULE_5__["default"]),
-/* harmony export */   "HandlesPanelVisibility": () => (/* reexport safe */ _HandlesPanelVisibility__WEBPACK_IMPORTED_MODULE_15__["default"]),
-/* harmony export */   "HandlesUploads": () => (/* reexport safe */ _HandlesUploads__WEBPACK_IMPORTED_MODULE_6__["default"]),
-/* harmony export */   "HandlesValidationErrors": () => (/* reexport safe */ _HandlesValidationErrors__WEBPACK_IMPORTED_MODULE_13__["default"]),
-/* harmony export */   "HasCards": () => (/* reexport safe */ _HasCards__WEBPACK_IMPORTED_MODULE_14__["default"]),
-/* harmony export */   "Localization": () => (/* reexport safe */ _Localization__WEBPACK_IMPORTED_MODULE_7__["default"]),
-/* harmony export */   "MetricBehavior": () => (/* reexport safe */ _MetricBehavior__WEBPACK_IMPORTED_MODULE_8__["default"]),
-/* harmony export */   "PreventsFormAbandonment": () => (/* reexport safe */ _PreventsFormAbandonment__WEBPACK_IMPORTED_MODULE_2__["default"]),
-/* harmony export */   "PreventsModalAbandonment": () => (/* reexport safe */ _PreventsModalAbandonment__WEBPACK_IMPORTED_MODULE_3__["default"]),
-/* harmony export */   "mapProps": () => (/* reexport safe */ _propTypes__WEBPACK_IMPORTED_MODULE_0__.mapProps),
-/* harmony export */   "useCopyValueToClipboard": () => (/* reexport safe */ _CopiesToClipboard__WEBPACK_IMPORTED_MODULE_1__.useCopyValueToClipboard),
-/* harmony export */   "useLocalization": () => (/* reexport safe */ _composables_useLocalization__WEBPACK_IMPORTED_MODULE_17__.useLocalization)
+/* harmony export */   CopiesToClipboard: () => (/* reexport safe */ _CopiesToClipboard__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   DependentFormField: () => (/* reexport safe */ _DependentFormField__WEBPACK_IMPORTED_MODULE_4__["default"]),
+/* harmony export */   Errors: () => (/* reexport safe */ form_backend_validation__WEBPACK_IMPORTED_MODULE_16__.Errors),
+/* harmony export */   FieldValue: () => (/* reexport safe */ _FieldValue__WEBPACK_IMPORTED_MODULE_9__["default"]),
+/* harmony export */   FormEvents: () => (/* reexport safe */ _FormEvents__WEBPACK_IMPORTED_MODULE_10__["default"]),
+/* harmony export */   FormField: () => (/* reexport safe */ _FormField__WEBPACK_IMPORTED_MODULE_11__["default"]),
+/* harmony export */   HandlesFieldAttachments: () => (/* reexport safe */ _HandlesFieldAttachments__WEBPACK_IMPORTED_MODULE_12__["default"]),
+/* harmony export */   HandlesFormRequest: () => (/* reexport safe */ _HandlesFormRequest__WEBPACK_IMPORTED_MODULE_5__["default"]),
+/* harmony export */   HandlesPanelVisibility: () => (/* reexport safe */ _HandlesPanelVisibility__WEBPACK_IMPORTED_MODULE_15__["default"]),
+/* harmony export */   HandlesUploads: () => (/* reexport safe */ _HandlesUploads__WEBPACK_IMPORTED_MODULE_6__["default"]),
+/* harmony export */   HandlesValidationErrors: () => (/* reexport safe */ _HandlesValidationErrors__WEBPACK_IMPORTED_MODULE_13__["default"]),
+/* harmony export */   HasCards: () => (/* reexport safe */ _HasCards__WEBPACK_IMPORTED_MODULE_14__["default"]),
+/* harmony export */   Localization: () => (/* reexport safe */ _Localization__WEBPACK_IMPORTED_MODULE_7__["default"]),
+/* harmony export */   MetricBehavior: () => (/* reexport safe */ _MetricBehavior__WEBPACK_IMPORTED_MODULE_8__["default"]),
+/* harmony export */   PreventsFormAbandonment: () => (/* reexport safe */ _PreventsFormAbandonment__WEBPACK_IMPORTED_MODULE_2__["default"]),
+/* harmony export */   PreventsModalAbandonment: () => (/* reexport safe */ _PreventsModalAbandonment__WEBPACK_IMPORTED_MODULE_3__["default"]),
+/* harmony export */   mapProps: () => (/* reexport safe */ _propTypes__WEBPACK_IMPORTED_MODULE_0__.mapProps),
+/* harmony export */   useCopyValueToClipboard: () => (/* reexport safe */ _CopiesToClipboard__WEBPACK_IMPORTED_MODULE_1__.useCopyValueToClipboard),
+/* harmony export */   useLocalization: () => (/* reexport safe */ _composables_useLocalization__WEBPACK_IMPORTED_MODULE_17__.useLocalization)
 /* harmony export */ });
 /* harmony import */ var _propTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./propTypes */ "../../vendor/laravel/nova/resources/js/mixins/propTypes.js");
 /* harmony import */ var _CopiesToClipboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CopiesToClipboard */ "../../vendor/laravel/nova/resources/js/mixins/CopiesToClipboard.js");
@@ -1914,7 +1920,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "mapProps": () => (/* binding */ mapProps)
+/* harmony export */   mapProps: () => (/* binding */ mapProps)
 /* harmony export */ });
 /* harmony import */ var lodash_pick__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/pick */ "../../vendor/laravel/nova/node_modules/lodash/pick.js");
 /* harmony import */ var lodash_pick__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_pick__WEBPACK_IMPORTED_MODULE_0__);
@@ -2002,7 +2008,7 @@ function mapProps(attributes) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "escapeUnicode": () => (/* binding */ escapeUnicode)
+/* harmony export */   escapeUnicode: () => (/* binding */ escapeUnicode)
 /* harmony export */ });
 function escapeUnicode(str) {
   return str.replace(/[^\0-~]/g, function (c) {
@@ -2242,7 +2248,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DetailField_vue_vue_type_template_id_0224618e__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DetailField_vue_vue_type_template_id_0224618e__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DetailField_vue_vue_type_template_id_0224618e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./DetailField.vue?vue&type=template&id=0224618e */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/DetailField.vue?vue&type=template&id=0224618e");
 
@@ -2258,7 +2264,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_FormField_vue_vue_type_template_id_c023248a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./FormField.vue?vue&type=template&id=c023248a */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/FormField.vue?vue&type=template&id=c023248a");
 
@@ -2274,7 +2280,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_IndexField_vue_vue_type_template_id_9e63f81a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./IndexField.vue?vue&type=template&id=9e63f81a */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/IndexField.vue?vue&type=template&id=9e63f81a");
 
@@ -2302,8 +2308,8 @@ function e(e){return e&&"object"==typeof e&&"default"in e?e.default:e}var t=e(__
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "HOOK_PLUGIN_SETTINGS_SET": () => (/* binding */ HOOK_PLUGIN_SETTINGS_SET),
-/* harmony export */   "HOOK_SETUP": () => (/* binding */ HOOK_SETUP)
+/* harmony export */   HOOK_PLUGIN_SETTINGS_SET: () => (/* binding */ HOOK_PLUGIN_SETTINGS_SET),
+/* harmony export */   HOOK_SETUP: () => (/* binding */ HOOK_SETUP)
 /* harmony export */ });
 const HOOK_SETUP = 'devtools-plugin:setup';
 const HOOK_PLUGIN_SETTINGS_SET = 'plugin:settings:set';
@@ -2320,9 +2326,9 @@ const HOOK_PLUGIN_SETTINGS_SET = 'plugin:settings:set';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getDevtoolsGlobalHook": () => (/* binding */ getDevtoolsGlobalHook),
-/* harmony export */   "getTarget": () => (/* binding */ getTarget),
-/* harmony export */   "isProxyAvailable": () => (/* binding */ isProxyAvailable)
+/* harmony export */   getDevtoolsGlobalHook: () => (/* binding */ getDevtoolsGlobalHook),
+/* harmony export */   getTarget: () => (/* binding */ getTarget),
+/* harmony export */   isProxyAvailable: () => (/* binding */ isProxyAvailable)
 /* harmony export */ });
 function getDevtoolsGlobalHook() {
     return getTarget().__VUE_DEVTOOLS_GLOBAL_HOOK__;
@@ -2349,9 +2355,9 @@ const isProxyAvailable = typeof Proxy === 'function';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "isPerformanceSupported": () => (/* reexport safe */ _time_js__WEBPACK_IMPORTED_MODULE_0__.isPerformanceSupported),
-/* harmony export */   "now": () => (/* reexport safe */ _time_js__WEBPACK_IMPORTED_MODULE_0__.now),
-/* harmony export */   "setupDevtoolsPlugin": () => (/* binding */ setupDevtoolsPlugin)
+/* harmony export */   isPerformanceSupported: () => (/* reexport safe */ _time_js__WEBPACK_IMPORTED_MODULE_0__.isPerformanceSupported),
+/* harmony export */   now: () => (/* reexport safe */ _time_js__WEBPACK_IMPORTED_MODULE_0__.now),
+/* harmony export */   setupDevtoolsPlugin: () => (/* binding */ setupDevtoolsPlugin)
 /* harmony export */ });
 /* harmony import */ var _env_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./env.js */ "../../vendor/laravel/nova/node_modules/@vue/devtools-api/lib/esm/env.js");
 /* harmony import */ var _const_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./const.js */ "../../vendor/laravel/nova/node_modules/@vue/devtools-api/lib/esm/const.js");
@@ -2396,7 +2402,7 @@ function setupDevtoolsPlugin(pluginDescriptor, setupFn) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApiProxy": () => (/* binding */ ApiProxy)
+/* harmony export */   ApiProxy: () => (/* binding */ ApiProxy)
 /* harmony export */ });
 /* harmony import */ var _const_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./const.js */ "../../vendor/laravel/nova/node_modules/@vue/devtools-api/lib/esm/const.js");
 /* harmony import */ var _time_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./time.js */ "../../vendor/laravel/nova/node_modules/@vue/devtools-api/lib/esm/time.js");
@@ -2520,8 +2526,8 @@ class ApiProxy {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "isPerformanceSupported": () => (/* binding */ isPerformanceSupported),
-/* harmony export */   "now": () => (/* binding */ now)
+/* harmony export */   isPerformanceSupported: () => (/* binding */ isPerformanceSupported),
+/* harmony export */   now: () => (/* binding */ now)
 /* harmony export */ });
 let supported;
 let perf;
@@ -13852,24 +13858,24 @@ module.exports = function getSideChannel() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Store": () => (/* binding */ Store),
-/* harmony export */   "createLogger": () => (/* binding */ createLogger),
-/* harmony export */   "createNamespacedHelpers": () => (/* binding */ createNamespacedHelpers),
-/* harmony export */   "createStore": () => (/* binding */ createStore),
+/* harmony export */   Store: () => (/* binding */ Store),
+/* harmony export */   createLogger: () => (/* binding */ createLogger),
+/* harmony export */   createNamespacedHelpers: () => (/* binding */ createNamespacedHelpers),
+/* harmony export */   createStore: () => (/* binding */ createStore),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "mapActions": () => (/* binding */ mapActions),
-/* harmony export */   "mapGetters": () => (/* binding */ mapGetters),
-/* harmony export */   "mapMutations": () => (/* binding */ mapMutations),
-/* harmony export */   "mapState": () => (/* binding */ mapState),
-/* harmony export */   "storeKey": () => (/* binding */ storeKey),
-/* harmony export */   "useStore": () => (/* binding */ useStore)
+/* harmony export */   mapActions: () => (/* binding */ mapActions),
+/* harmony export */   mapGetters: () => (/* binding */ mapGetters),
+/* harmony export */   mapMutations: () => (/* binding */ mapMutations),
+/* harmony export */   mapState: () => (/* binding */ mapState),
+/* harmony export */   storeKey: () => (/* binding */ storeKey),
+/* harmony export */   useStore: () => (/* binding */ useStore)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _vue_devtools_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/devtools-api */ "../../vendor/laravel/nova/node_modules/@vue/devtools-api/lib/esm/index.js");
 /*!
- * vuex v4.0.2
- * (c) 2021 Evan You
+ * vuex v4.1.0
+ * (c) 2022 Evan You
  * @license MIT
  */
 
@@ -13986,6 +13992,7 @@ function resetStore (store, hot) {
 
 function resetStoreState (store, state, hot) {
   var oldState = store._state;
+  var oldScope = store._scope;
 
   // bind store public getters
   store.getters = {};
@@ -13993,22 +14000,33 @@ function resetStoreState (store, state, hot) {
   store._makeLocalGettersCache = Object.create(null);
   var wrappedGetters = store._wrappedGetters;
   var computedObj = {};
-  forEachValue(wrappedGetters, function (fn, key) {
-    // use computed to leverage its lazy-caching mechanism
-    // direct inline function use will lead to closure preserving oldState.
-    // using partial to return function with only arguments preserved in closure environment.
-    computedObj[key] = partial(fn, store);
-    Object.defineProperty(store.getters, key, {
-      // TODO: use `computed` when it's possible. at the moment we can't due to
-      // https://github.com/vuejs/vuex/pull/1883
-      get: function () { return computedObj[key](); },
-      enumerable: true // for local getters
+  var computedCache = {};
+
+  // create a new effect scope and create computed object inside it to avoid
+  // getters (computed) getting destroyed on component unmount.
+  var scope = (0,vue__WEBPACK_IMPORTED_MODULE_0__.effectScope)(true);
+
+  scope.run(function () {
+    forEachValue(wrappedGetters, function (fn, key) {
+      // use computed to leverage its lazy-caching mechanism
+      // direct inline function use will lead to closure preserving oldState.
+      // using partial to return function with only arguments preserved in closure environment.
+      computedObj[key] = partial(fn, store);
+      computedCache[key] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () { return computedObj[key](); });
+      Object.defineProperty(store.getters, key, {
+        get: function () { return computedCache[key].value; },
+        enumerable: true // for local getters
+      });
     });
   });
 
   store._state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
     data: state
   });
+
+  // register the newly created effect scope to the store so that we can
+  // dispose the effects when this method runs again in the future.
+  store._scope = scope;
 
   // enable strict mode for new state
   if (store.strict) {
@@ -14023,6 +14041,11 @@ function resetStoreState (store, state, hot) {
         oldState.data = null;
       });
     }
+  }
+
+  // dispose previously registered effect scope if there is one.
+  if (oldScope) {
+    oldScope.stop();
   }
 }
 
@@ -14772,6 +14795,12 @@ var Store = function Store (options) {
   this._modulesNamespaceMap = Object.create(null);
   this._subscribers = [];
   this._makeLocalGettersCache = Object.create(null);
+
+  // EffectScope instance. when registering new getters, we wrap them inside
+  // EffectScope so that getters (computed) would not be destroyed on
+  // component unmount.
+  this._scope = null;
+
   this._devtools = devtools;
 
   // bind commit and dispatch to self
@@ -15314,7 +15343,7 @@ function pad (num, maxLength) {
 }
 
 var index = {
-  version: '4.0.2',
+  version: '4.1.0',
   Store: Store,
   storeKey: storeKey,
   createStore: createStore,
@@ -15361,7 +15390,7 @@ module.exports = Vue;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_from":"axios@0.21.4"}');
+module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
 
 /***/ })
 

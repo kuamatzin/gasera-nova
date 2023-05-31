@@ -13,6 +13,7 @@
                     v-if="hasValue && previewFile && files.length == 0"
                     class="flex items-center justify-center"
                 >
+
                     <div>
                         <div @click="preview" class="cursor-pointer"
                              style="position: relative; left: -5%; top: 12px; z-index: 2;">
