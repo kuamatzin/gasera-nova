@@ -15,7 +15,7 @@
                 >
                     <div>
                         <div @click="preview" class="cursor-pointer"
-                             style="position: relative; left: -5%; top: 12px; z-index: 10000;">
+                             style="position: relative; left: -5%; top: 12px; z-index: 2;">
                             <Icon
                                 type="eye"
                                 :solid="true"
