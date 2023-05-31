@@ -18,7 +18,7 @@ class GenerateReport extends Action
 
     public function name()
     {
-        return ('Generar reporte');
+        return ('Generar planillas de identificación');
     }
 
     /**

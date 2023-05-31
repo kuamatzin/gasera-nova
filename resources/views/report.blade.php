@@ -58,15 +58,11 @@
         @foreach ($records as $key => $record)
             <div class="container">
 
-                <h2 class="text-center">Reporte</h2>
+                <h2 class="text-center">Sierra Madre</h2>
+
+                <h4 style="margin-top: 10px">Planilla de Identificación</h4>
 
                 <table class="table table-bordered">
-                    <tr>
-                        <td>Número cadenamiento</td>
-                        <td>
-                            <strong>{{ $record->numero_cadenamiento }}</strong>
-                        </td>
-                    </tr>
                     <tr>
                         <td>Número expediente</td>
                         <td>
@@ -74,8 +70,6 @@
                         </td>
                     </tr>
                 </table>
-
-                <h4>Planilla de Identificación</h4>
 
                 <table class="mt-2 table table-bordered">
                     <tbody>
@@ -99,22 +93,20 @@
                             <td>Dirección notificaciones</td>
                             <td>{{ $record->direccion_propietario_notificaciones }}</td>
                         </tr>
-                        <tr>
-                            <td>Representante legal</td>
-                            <td>{{ $record->representante_legal }}</td>
-                        </tr>
-                        <tr>
-                            <td>Nombre representante legal</td>
-                            <td>{{ $record->nombre_representante_legal }}</td>
-                        </tr>
-                        <tr>
-                            <td>Teléfono recados</td>
-                            <td>{{ $record->telefono_recados_representante_legal }}</td>
-                        </tr>
-                        <tr>
-                            <td>Correo electrónico</td>
-                            <td>{{ $record->correo_electronico_representante_legal }}</td>
-                        </tr>
+                        @if ($record->representante_legal)
+                            <tr>
+                                <td>Nombre representante legal</td>
+                                <td>{{ $record->nombre_representante_legal }}</td>
+                            </tr>
+                            <tr>
+                                <td>Teléfono recados</td>
+                                <td>{{ $record->telefono_recados_representante_legal }}</td>
+                            </tr>
+                            <tr>
+                                <td>Correo electrónico</td>
+                                <td>{{ $record->correo_electronico_representante_legal }}</td>
+                            </tr>
+                        @endif
                         <tr>
                             <td>Observaciones</td>
                             <td>{{ $record->observaciones_representante_legal }}</td>
@@ -122,7 +114,7 @@
                     </tbody>
                 </table>
 
-                <h4>Inmueble</h4>
+                <h4>Datos del inmueble a contratar</h4>
 
                 <table class="mt-2 table table-bordered">
                     <tbody>
@@ -157,6 +149,7 @@
                     </tbody>
                 </table>
                 <br><br><br><br>
+                <!--
                 <h4 style="margin-top: 70px">Superficies a contratar</h4>
 
                 <table class="mt-2 table table-bordered">
@@ -204,7 +197,7 @@
                     </tbody>
                 </table>
             </div>
-
+            -->
             @if ($key != count($records) - 1)
                 <div class="page-break"></div>
             @endif
