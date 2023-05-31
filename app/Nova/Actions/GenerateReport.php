@@ -33,11 +33,11 @@ class GenerateReport extends Action
     {
         view()->share('records', $models);
         view()->share('download', true);
-        view()->share('date', Carbon::now()->setTimezone('America/Mexico_City')->format('Y-m-d H:i'));
+        view()->share('date', Carbon::now()->setTimezone('America/Mexico_City')->format('d-m-Y'));
         $pdf = Pdf::loadView('report');
         $pdf->save('testsave.pdf');
 
-        return Action::download(url('testsave.pdf'), 'report.pdf');
+        return Action::download(url('testsave.pdf'), 'planilla_identificacion.pdf');
     }
 
     /**
