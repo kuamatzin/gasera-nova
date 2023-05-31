@@ -68,7 +68,7 @@
                             </p>
                         </td>
                         <td style="border: 0px solid white">
-                            <br>
+                            <p class="text-center" style="font-size: 12px">{{ $date }}</p>
                             <p class="text-center text-bold" style="font-size: 18px; font-weight: bold">Sierra Madre</p>
                         </td>
                         <td style="border: 0px solid white">

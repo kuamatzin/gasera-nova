@@ -10,6 +10,7 @@ use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class GenerateReport extends Action
@@ -32,6 +33,7 @@ class GenerateReport extends Action
     {
         view()->share('records', $models);
         view()->share('download', true);
+        view()->share('date', Carbon::now()->setTimezone('America/Mexico_City')->format('Y-m-d H:i'));
         $pdf = Pdf::loadView('report');
         $pdf->save('testsave.pdf');
 
