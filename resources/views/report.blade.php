@@ -94,7 +94,7 @@
                 <table class="mt-2 table table-bordered">
                     <tbody>
                         <tr>
-                            <td style="width: 250px">Nombre de propietario/dependencia:</td>
+                            <td style="width: 250px">Nombre de propietario o dependencia:</td>
                             <td>{{ $record->nombre_propietario_dependencia }}</td>
                         </tr>
                         <tr>
