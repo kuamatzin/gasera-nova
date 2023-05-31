@@ -48,23 +48,43 @@
         .mt-7 {
             margin-top: 5rem !important;
         }
+        td {
+            font-size: 16px;
+            padding: 4px !important;
+        }
     </style>
 </head>
 
 
 <body>
-
     <main>
         @foreach ($records as $key => $record)
             <div class="container">
+                <table class="table table-bordered" style="border: 0px solid white">
+                    <tr style="border: 0px solid white">
+                        <td style="border: 0px solid white">
+                            <p>
+                                <img class src="https://files.inovuz.com/files/gasera/mexico.jpeg" style="width: 90px">
+                            </p>
+                        </td>
+                        <td style="border: 0px solid white">
+                            <br>
+                            <p class="text-center text-bold" style="font-size: 18px; font-weight: bold">Sierra Madre</p>
+                        </td>
+                        <td style="border: 0px solid white">
+                            <p class="text-right">
+                                <img src="https://files.inovuz.com/files/gasera/blapp.jpeg" style="width: 90px;">
+                            </p>
+                        </td>
+                    </tr>
+                </table>
 
-                <h2 class="text-center">Sierra Madre</h2>
-
-                <h4 style="margin-top: 10px">Planilla de Identificación</h4>
+                <p style="font-size: 18px; font-weight: bold" class="text-center text-bold">Planilla de Identificación</p>
+                <br>
 
                 <table class="table table-bordered">
                     <tr>
-                        <td>Número expediente</td>
+                        <td style="width: 250px">Número de expediente:</td>
                         <td>
                             <strong>{{ $record->numero_expediente }}</strong>
                         </td>
@@ -74,23 +94,23 @@
                 <table class="mt-2 table table-bordered">
                     <tbody>
                         <tr>
-                            <td>Nombre propietario o dependencia</td>
+                            <td style="width: 250px">Nombre de propietario/dependencia:</td>
                             <td>{{ $record->nombre_propietario_dependencia }}</td>
                         </tr>
                         <tr>
-                            <td>Teléfono recados</td>
+                            <td style="width: 250px">Celular, teléfono/recados:</td>
                             <td>{{ $record->telefono_recados }}</td>
                         </tr>
                         <tr>
-                            <td>Correo electrónico</td>
+                            <td style="width: 250px">Correo electrónico:</td>
                             <td>{{ $record->correo_electronico }}</td>
                         </tr>
                         <tr>
-                            <td>Calificación propietario</td>
+                            <td style="width: 250px">Calificación del propietario:</td>
                             <td>{{ $record->calificacion_propietario }}</td>
                         </tr>
                         <tr>
-                            <td>Dirección notificaciones</td>
+                            <td style="width: 250px">Dirección del propietario:</td>
                             <td>{{ $record->direccion_propietario_notificaciones }}</td>
                         </tr>
                         @if ($record->representante_legal)
@@ -108,42 +128,43 @@
                             </tr>
                         @endif
                         <tr>
-                            <td>Observaciones</td>
+                            <td style="width: 250px">Observaciones:</td>
                             <td>{{ $record->observaciones_representante_legal }}</td>
                         </tr>
                     </tbody>
                 </table>
+                <br>
 
-                <h4>Datos del inmueble a contratar</h4>
+                <p style="margin-top: 10px; font-size: 18px; font-weight: bold" class="text-bold">Datos del inmueble a contratar</p>
 
                 <table class="mt-2 table table-bordered">
                     <tbody>
                         <tr>
-                            <td>Dirección inmueble</td>
+                            <td style="width: 250px">Dirección del inmueble:</td>
                             <td>{{ $record->direccion_inmueble }}</td>
                         </tr>
                         <tr>
-                            <td>Ejido</td>
+                            <td style="width: 250px">Ejido:</td>
                             <td>{{ $record->ejido_inmueble }}</td>
                         </tr>
                         <tr>
-                            <td>Poblado</td>
+                            <td style="width: 250px">Poblado:</td>
                             <td>{{ $record->poblado_inmueble }}</td>
                         </tr>
                         <tr>
-                            <td>Municipio</td>
+                            <td style="width: 250px">Municipio:</td>
                             <td>{{ $record->municipio_inmueble }}</td>
                         </tr>
                         <tr>
-                            <td>Estado</td>
+                            <td style="width: 250px">Estado:</td>
                             <td>{{ $record->estado_inmueble }}</td>
                         </tr>
                         <tr>
-                            <td>Regimen de propiedad</td>
+                            <td style="width: 250px">Régimen de propiedad:</td>
                             <td>{{ $record->regimen_propiedad_inmueble }}</td>
                         </tr>
                         <tr>
-                            <td>Uso de suelo</td>
+                            <td style="width: 250px">Uso de suelo:</td>
                             <td>{{ $record->uso_suelo_inmueble }}</td>
                         </tr>
                     </tbody>
@@ -155,43 +176,43 @@
                 <table class="mt-2 table table-bordered">
                     <tbody>
                         <tr>
-                            <td>Tipo de afectación</td>
+                            <td style="width: 250px">Tipo de afectación:</td>
                             <td>{{ $record->tipo_afectacion_superficie }}</td>
                         </tr>
                         <tr>
-                            <td>Superficie contratado m2</td>
+                            <td style="width: 250px">Superficie contratado m2:</td>
                             <td>{{ $record->superficie_contratada_m2_superficie }}</td>
                         </tr>
                         <tr>
-                            <td>Superficie m2 franja uso temporal</td>
+                            <td style="width: 250px">Superficie m2 franja uso temporal:</td>
                             <td>{{ $record->superficia_m2_franja_uso_temporal_superficie }}</td>
                         </tr>
                         <tr>
-                            <td>Superficie m2 fute</td>
+                            <td style="width: 250px">Superficie m2 fute:</td>
                             <td>{{ $record->superficie_m2_fute_superficie }}</td>
                         </tr>
                         <tr>
-                            <td>Superficie total contratado m2</td>
+                            <td style="width: 250px">Superficie total contratado m2:</td>
                             <td>{{ $record->superficie_total_contratada_m2_superficie }}</td>
                         </tr>
                         <tr>
-                            <td>km inicial</td>
+                            <td style="width: 250px">km inicial:</td>
                             <td>{{ $record->km_inicial_superficie }}</td>
                         </tr>
                         <tr>
-                            <td>km final</td>
+                            <td style="width: 250px">km final:</td>
                             <td>{{ $record->km_final_superficie }}</td>
                         </tr>
                         <tr>
-                            <td>Longitud de afectacion</td>
+                            <td style="width: 250px">Longitud de afectacion:</td>
                             <td>{{ $record->longitud_afectacion_superficie }}</td>
                         </tr>
                         <tr>
-                            <td>Coordenada e</td>
+                            <td style="width: 250px">Coordenada e:</td>
                             <td>{{ $record->coordenada_e_superficie }}</td>
                         </tr>
                         <tr>
-                            <td>Coordenada n</td>
+                            <td style="width: 250px">Coordenada n:</td>
                             <td>{{ $record->coordenada_n_superficie }}</td>
                         </tr>
                     </tbody>
