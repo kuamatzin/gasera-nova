@@ -10,6 +10,7 @@ use Inovuz\BooleanSwitcher\BooleanSwitcher;
 use Inovuz\FileEsteroids\FileEsteroids;
 use Inovuz\FileKmz\FileKmz;
 use Inovuz\PanelEsteroids\PanelEsteroids;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\FormData;
@@ -105,6 +106,9 @@ class Record extends Resource
     {
         return [
             //ID::make('ID')->sortable(),
+            BelongsTo::make('Gestor', 'user', User::class)->hideFromIndex()->hideFromDetail()->hideWhenUpdating()->showOnCreating(function() {
+                return Auth::user()->role === 'admin';
+            }),
             Text::make('# Cad.', 'numero_cadenamiento')->sortable(),
             Text::make('Número de expediente', 'numero_expediente')->readonly(false)->size('w-1/3'),
             Select::make('Estatus', 'status')->options(function () {
