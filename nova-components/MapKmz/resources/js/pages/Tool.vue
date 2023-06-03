@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Head title="Map Kmz"/>
+        <Head title="Map Kmz" />
 
         <Heading class="mb-6">KMZ</Heading>
 
@@ -15,8 +15,8 @@ export default {
             location: null,
             markers: [],
             marker: null,
-            map: null
-        }
+            map: null,
+        };
     },
 
     mounted() {
@@ -25,7 +25,7 @@ export default {
 
     methods: {
         async getKmz() {
-            const {data} = await Nova.request().get('/kmz')
+            const { data } = await Nova.request().get("/kmz");
             this.markers = data;
             this.initGmaps();
             this.loadMap();
@@ -34,10 +34,9 @@ export default {
          * Init the gmap
          */
         initGmaps() {
-
             this.map = new google.maps.Map(this.$refs.mapkmz, {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 8
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8,
             });
         },
 
@@ -49,7 +48,7 @@ export default {
             this.map.panTo(this.location.latlng);
             this.marker = new google.maps.Marker({
                 position: this.location.latlng,
-                map: this.map
+                map: this.map,
             });
         },
 
@@ -68,21 +67,18 @@ export default {
                 -110.31398065149865
             );
 
-            this.markers.forEach(({mapa_afectacion_path: kml}) => {
-                const src = window.location.origin + "/storage/" + kml;
-                const layer = new google.maps.KmlLayer(src, {
-                    suppressInfoWindows: false,
-                    preserveViewport: true,
-                    map: this.map,
-                });
-                console.log(layer)
-                console.log(layer.status)
+            const src = window.location.origin + "/storage/" + 'mapa.kmz';
+            new google.maps.KmlLayer(src, {
+                suppressInfoWindows: false,
+                preserveViewport: true,
+                map: this.map,
             });
+
             this.map.setZoom(8);
             this.map.setCenter(myLatlng);
         },
     },
-}
+};
 </script>
 
 <style scoped>

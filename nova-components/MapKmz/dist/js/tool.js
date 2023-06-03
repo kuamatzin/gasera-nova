@@ -37,7 +37,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return Nova.request().get('/kmz');
+              return Nova.request().get("/kmz");
             case 2:
               _yield$Nova$request$g = _context.sent;
               data = _yield$Nova$request$g.data;
@@ -83,18 +83,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.marker = null;
     },
     loadMap: function loadMap() {
-      var _this2 = this;
       var myLatlng = new google.maps.LatLng(29.283187136943198, -110.31398065149865);
-      this.markers.forEach(function (_ref) {
-        var kml = _ref.mapa_afectacion_path;
-        var src = window.location.origin + "/storage/" + kml;
-        var layer = new google.maps.KmlLayer(src, {
-          suppressInfoWindows: false,
-          preserveViewport: true,
-          map: _this2.map
-        });
-        console.log(layer);
-        console.log(layer.status);
+      var src = window.location.origin + "/storage/" + 'mapa.kmz';
+      new google.maps.KmlLayer(src, {
+        suppressInfoWindows: false,
+        preserveViewport: true,
+        map: this.map
       });
       this.map.setZoom(8);
       this.map.setCenter(myLatlng);
