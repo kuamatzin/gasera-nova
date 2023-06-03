@@ -39,7 +39,7 @@ class Main extends Dashboard
             [
                 'titulo' => 'Cert. de Libertad de Gravamen/Constancia',
                 'fase' => '1',
-                'type' => 'clg'
+                'type' => 'clg2'
             ],
             [
                 'titulo' => 'Dictamen Legal',
