@@ -32,6 +32,14 @@ class DocumentMetric extends Partition
         $model = $this->globalFiltered($request, Record::class);
 
         if ($model) {
+            if ($request->user()->entity === 'sonora') {
+                return $model->where('estado_inmueble', 'sonora');
+            }
+
+            if ($request->user()->entity === 'chihuahua') {
+                return $model->where('estado_inmueble', 'chihuahua');
+            }
+
             $records = $model->get();
         } else {
             $records = Record::all();

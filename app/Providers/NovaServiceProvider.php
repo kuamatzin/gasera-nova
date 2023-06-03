@@ -71,12 +71,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             Main::make()->showRefreshButton()->canSee(function($request) {
-                if ($request->user()->role == 'admin' || $request->user()->role == 'cliente') {
+                if ($request->user()->role == 'admin' || $request->user()->role == 'cliente' || $request->user()->role == 'abogado') {
                     return true;
                 }
             }),
             Sonora::make()->showRefreshButton()->canSee(function($request) {
-                if ($request->user()->role == 'admin' || $request->user()->role == 'cliente') {
+                if ($request->user()->role == 'admin' || $request->user()->role == 'cliente' || $request->user()->role == 'abogado') {
                     return true;
                 }
             })
