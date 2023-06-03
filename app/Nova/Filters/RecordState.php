@@ -43,6 +43,18 @@ class RecordState extends Filter
      */
     public function options(NovaRequest $request)
     {
+        if ($request->user()->entity === 'chihuahua') {
+            return [
+                'Chihuahua' => 'CHIHUAHUA',
+            ];
+        }
+
+        if ($request->user()->entity === 'sonora') {
+            return [
+                'Sonora' => 'SONORA'
+            ];
+        }
+
         return [
             'Todos' => 'all',
             'Chihuahua' => 'CHIHUAHUA',

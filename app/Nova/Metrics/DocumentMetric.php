@@ -33,17 +33,18 @@ class DocumentMetric extends Partition
 
         if ($model) {
             if ($request->user()->entity === 'sonora') {
-                return $model->where('estado_inmueble', 'sonora');
+                $model->where('estado_inmueble', 'sonora');
             }
 
             if ($request->user()->entity === 'chihuahua') {
-                return $model->where('estado_inmueble', 'chihuahua');
+                $model->where('estado_inmueble', 'chihuahua');
             }
 
             $records = $model->get();
         } else {
             $records = Record::all();
         }
+
         $subido = 0;
         $no_subido = 0;
         foreach ($records as $record) {
