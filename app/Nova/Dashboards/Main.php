@@ -65,7 +65,12 @@ class Main extends Dashboard
                 'titulo' => 'Contrato de Promesa Firmado',
                 'fase' => '1',
                 'type' => 'cpf'
-            ]
+            ],
+            [
+                'titulo' => 'Certificado libre de gravamen',
+                'fase' => 'docs',
+                'type' => 'clg_pr'
+            ],
         ];
 
 
