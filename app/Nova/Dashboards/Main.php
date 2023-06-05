@@ -36,11 +36,13 @@ class Main extends Dashboard
                 'fase' => '1',
                 'type' => 'aus'
             ],
+            /*
             [
                 'titulo' => 'Cert. de Libertad de Gravamen/Constancia',
                 'fase' => '1',
                 'type' => 'clg2'
             ],
+            */
             [
                 'titulo' => 'Dictamen Legal',
                 'fase' => '1',
