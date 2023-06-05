@@ -61,6 +61,7 @@ export default {
             this.marker.setMap(null);
             this.marker = null;
         },
+
         loadMap() {
             const myLatlng = new google.maps.LatLng(
                 29.283187136943198,
@@ -68,11 +69,12 @@ export default {
             );
 
             const src = window.location.origin + "/storage/" + 'mapa.kmz';
-            new google.maps.KmlLayer(src, {
+            const kmz = new google.maps.KmlLayer(src, {
                 suppressInfoWindows: false,
                 preserveViewport: true,
                 map: this.map,
             });
+            console.log(kmz);
 
             this.map.setZoom(8);
             this.map.setCenter(myLatlng);
