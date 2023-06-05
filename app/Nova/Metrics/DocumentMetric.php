@@ -57,7 +57,7 @@ class DocumentMetric extends Partition
                     $no_subido++;
                 }
             }
-            if ($record->getRawOriginal('regimen_propiedad_inmueble') === 'pr' || $record->getRawOriginal('regimen_propiedad_inmueble') === 'pa') {
+            if ($record->getRawOriginal('regimen_propiedad_inmueble') === 'pa') {
                 $dictamen_legal = $record->documentacion;
                 $type_pr = 'cvd_pa';
                 if ($dictamen_legal && isset($dictamen_legal[$type_pr]) && $dictamen_legal[$type_pr] !== '' && $dictamen_legal[$type_pr] !== null) {
