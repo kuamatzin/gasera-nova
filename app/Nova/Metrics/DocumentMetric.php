@@ -18,13 +18,13 @@ class DocumentMetric extends Partition
     }
 
 
-    public function getDocsMetrics(NovaRequest $request, $fase, $type, $records)
+    public function getFasesMetrics(NovaRequest $request, $fase, $type, $records)
     {
         $subido = 0;
         $no_subido = 0;
 
         foreach ($records as $record) {
-            $dictamen_legal = 'documentacion';
+            $dictamen_legal = $fase === '1' ? $record->dictamen_legal_fase_uno : $record->dictamen_legal_fase_dos;
 
             if ($dictamen_legal && isset($dictamen_legal[$type]) && $dictamen_legal[$type] !== '' && $dictamen_legal[$type] !== null) {
                 $subido++;
@@ -43,7 +43,7 @@ class DocumentMetric extends Partition
         ]);
     }
 
-    public function getFasesMetrics(NovaRequest $request, $fase, $type, $records)
+    public function getDocsMetrics(NovaRequest $request, $fase, $type, $records)
     {
         $subido = 0;
         $no_subido = 0;
