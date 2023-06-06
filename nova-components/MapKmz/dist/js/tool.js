@@ -79,7 +79,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     loadMap: function loadMap() {
       var myLatlng = new google.maps.LatLng(29.283187136943198, -110.31398065149865);
-      var src = window.location.origin + "/storage/" + 'mapa.kmz';
+      var src = window.location.origin + "/storage/" + 'map.kmz';
       var kmz = new google.maps.KmlLayer(src, {
         suppressInfoWindows: false,
         preserveViewport: true,
