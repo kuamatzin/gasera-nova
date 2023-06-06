@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Imports\RecordsImport;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\HelperController;
 use App\Http\Controllers\PdfGeneratorController;
 use App\Nova\Metrics\DocumentMetric;
 
@@ -44,6 +44,8 @@ Route::get('/users-import', function () {
 
     return 'great';
 });
+
+Route::post('/kmz', [HelperController::class, 'uploadKmz']);
 
 function updatePropiedad(): void
 {
@@ -217,7 +219,7 @@ Route::get('test2', function () {
 Route::get('pdf', [PdfGeneratorController::class, 'generate']);
 
 Route::get('kmz', function () {
-    return Record::select('mapa_afectacion_path')->where('mapa_afectacion_path', '!=', null)->get();
+    return Record::findOrfail(1);
 });
 
 

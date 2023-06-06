@@ -32,14 +32,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getKmz: function getKmz() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var _yield$Nova$request$g, data;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              //const { data } = await Nova.request().get("/kmz");
-              //this.markers = data;
+              _context.next = 2;
+              return Nova.request().get("/kmz");
+            case 2:
+              _yield$Nova$request$g = _context.sent;
+              data = _yield$Nova$request$g.data;
+              _this.markers = data;
               _this.initGmaps();
               _this.loadMap();
-            case 2:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -77,9 +82,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.marker.setMap(null);
       this.marker = null;
     },
+    submitKmz: function submitKmz() {
+      var _this2 = this;
+      console.log('submit');
+      var file = document.getElementById("formFile").files[0];
+      var formData = new FormData();
+      formData.append("file", file);
+      Nova.request().post("/kmz", formData).then(function (response) {
+        console.log(response);
+        _this2.getKmz();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     loadMap: function loadMap() {
       var myLatlng = new google.maps.LatLng(29.283187136943198, -110.31398065149865);
-      var src = window.location.origin + "/storage/" + 'mapa.kmz';
+      var src = window.location.origin + "/storage/" + this.markers.mapa_afectacion_path;
+      console.log(src);
       var kmz = new google.maps.KmlLayer(src, {
         suppressInfoWindows: false,
         preserveViewport: true,
@@ -111,7 +130,27 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-ef10eebe"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  "class": "whitecubes-gmap mt-4",
+  "class": "flex"
+};
+var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary",
+    type: "file",
+    id: "formFile",
+    accept: ".kmz"
+  })], -1 /* HOISTED */);
+});
+var _hoisted_3 = {
+  "class": "ml-4"
+};
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "hidden md:inline-block"
+  }, "Actualizar KMZ", -1 /* HOISTED */);
+});
+var _hoisted_5 = [_hoisted_4];
+var _hoisted_6 = {
+  "class": "whitecubes-gmap mt-6",
   ref: "mapkmz"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -126,7 +165,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Mapa KMZ")];
     }),
     _: 1 /* STABLE */
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, null, 512 /* NEED_PATCH */)]);
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    size: "md",
+    "class": "flex-shrink-0 h-9 px-4 focus:outline-none ring-primary-200 dark:ring-gray-600 focus:ring text-white dark:text-gray-800 inline-flex items-center font-bold shadow rounded focus:outline-none ring-primary-200 dark:ring-gray-600 focus:ring bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800 inline-flex items-center font-bold px-4 h-9 text-sm flex-shrink-0 h-9 px-4 focus:outline-none ring-primary-200 dark:ring-gray-600 focus:ring text-white dark:text-gray-800 inline-flex items-center font-bold",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.submitKmz();
+    })
+  }, _hoisted_5)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, null, 512 /* NEED_PATCH */)]);
 }
 
 /***/ }),
