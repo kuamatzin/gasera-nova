@@ -32,19 +32,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getKmz: function getKmz() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _yield$Nova$request$g, data;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return Nova.request().get("/kmz");
-            case 2:
-              _yield$Nova$request$g = _context.sent;
-              data = _yield$Nova$request$g.data;
-              _this.markers = data;
+              //const { data } = await Nova.request().get("/kmz");
+              //this.markers = data;
               _this.initGmaps();
               _this.loadMap();
-            case 7:
+            case 2:
             case "end":
               return _context.stop();
           }

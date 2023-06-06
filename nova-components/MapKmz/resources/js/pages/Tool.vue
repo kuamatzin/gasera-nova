@@ -25,8 +25,8 @@ export default {
 
     methods: {
         async getKmz() {
-            const { data } = await Nova.request().get("/kmz");
-            this.markers = data;
+            //const { data } = await Nova.request().get("/kmz");
+            //this.markers = data;
             this.initGmaps();
             this.loadMap();
         },
