@@ -68,7 +68,7 @@ export default {
                 -110.31398065149865
             );
 
-            const src = window.location.origin + "/storage/" + 'map.kmz';
+            const src = window.location.origin + "/storage/" + 'mapa.kmz';
             const kmz = new google.maps.KmlLayer(src, {
                 suppressInfoWindows: false,
                 preserveViewport: true,
