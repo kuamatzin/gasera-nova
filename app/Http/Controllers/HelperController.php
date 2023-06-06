@@ -10,7 +10,7 @@ class HelperController extends Controller
     public function uploadKmz(Request $request)
     {
         $file = $request->file('file');
-        $path = $request->file('file')->storeAs('avatars', time() . $file->getClientOriginalExtension(), 'public');
+        $path = $request->file('file')->storeAs('avatars', time() . '.' . $file->getClientOriginalExtension(), 'public');
 
         $record = Record::findOrFail(1);
 
