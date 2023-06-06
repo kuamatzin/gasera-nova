@@ -2,7 +2,7 @@
     <div>
         <Head title="Map Kmz" />
 
-        <Heading class="mb-6">KMZ</Heading>
+        <Heading class="mb-6">Mapa KMZ</Heading>
 
         <div class="whitecubes-gmap mt-4" ref="mapkmz"></div>
     </div>
