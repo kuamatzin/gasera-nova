@@ -69,7 +69,7 @@ class Main extends Dashboard
                 'type' => 'cpf'
             ],
             [
-                'titulo' => 'Certificado libre de gravamen',
+                'titulo' => 'CLG/CVD',
                 'fase' => 'docs',
                 'type' => 'clg_pr'
             ],
