@@ -1,8 +1,7 @@
 <template>
     <div>
         <Head title="Map Kmz" />
-
-        <Heading class="mb-6">Mapa Chihuahua KMZ</Heading>
+        <Heading class="mb-6">Mapa Chihuahua-KMZ</Heading>
         <div class="flex">
             <div>
                 <input

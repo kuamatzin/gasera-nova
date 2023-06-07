@@ -159,7 +159,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mb-6"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Mapa Sonora KMZ")];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Mapa Sonora-KMZ")];
     }),
     _: 1 /* STABLE */
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
