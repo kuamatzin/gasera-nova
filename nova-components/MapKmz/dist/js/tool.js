@@ -37,7 +37,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return Nova.request().get("/kmz");
+              return Nova.request().get("/kmz/1");
             case 2:
               _yield$Nova$request$g = _context.sent;
               data = _yield$Nova$request$g.data;
@@ -84,12 +84,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     submitKmz: function submitKmz() {
       var _this2 = this;
-      console.log('submit');
       var file = document.getElementById("formFile").files[0];
       var formData = new FormData();
       formData.append("file", file);
-      Nova.request().post("/kmz", formData).then(function (response) {
-        console.log(response);
+      Nova.request().post("/kmz/1", formData).then(function (response) {
         _this2.getKmz();
       })["catch"](function (error) {
         console.log(error);
@@ -97,8 +95,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     loadMap: function loadMap() {
       var myLatlng = new google.maps.LatLng(29.283187136943198, -110.31398065149865);
-      var src = window.location.origin + "/storage/" + this.markers.mapa_afectacion_path;
-      console.log(src);
+      var src = window.location.origin + "/storage/" + this.markers.chihuahua.mapa_afectacion_path;
       var kmz = new google.maps.KmlLayer(src, {
         suppressInfoWindows: false,
         preserveViewport: true,
@@ -162,7 +159,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mb-6"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Mapa KMZ")];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Mapa Chihuahua KMZ")];
     }),
     _: 1 /* STABLE */
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {

@@ -28,6 +28,14 @@ class Record extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function valves()
+    {
+        return $this->hasMany(Valve::class);
+    }
+
+    /**
      * @param $value
      * @return false|string
      */

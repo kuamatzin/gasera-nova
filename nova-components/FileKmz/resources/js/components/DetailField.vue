@@ -70,14 +70,27 @@ export default {
             location: null,
             marker: null,
             map: null,
+            data: null,
         };
     },
 
     mounted() {
+        this.getAllData();
         //this.location = JSON.parse(this.field.value);
     },
 
     methods: {
+        getAllData() {
+            const id = this.resource.id.value
+
+            Nova.request()
+                .get(`/get-latitude-longitude/${id}`)
+                .then((response) => {
+                    this.data = response.data;
+                    console.log('sadasd', this.data);
+                });
+        },
+
         initGmaps() {
             this.map = new google.maps.Map(this.$refs.map, {
                 center: this.field.defaultCoordinates || {
@@ -110,18 +123,18 @@ export default {
         },
         loadMap() {
             const myLatlng = new google.maps.LatLng(
-                29.283187136943198,
-                -110.31398065149865
+                Number(this.data.detail.latitud),
+                Number(this.data.detail.longitud)
             );
 
-            const src = window.location.origin + "/storage/" + this.fieldValue;
+            const src = window.location.origin + "/storage/" + this.data.sonora.mapa_afectacion_path;
 
             var kmlLayer = new google.maps.KmlLayer(src, {
                 suppressInfoWindows: false,
                 preserveViewport: true,
                 map: this.map,
             });
-            this.map.setZoom(8);
+            this.map.setZoom(12);
             this.map.setCenter(myLatlng);
             kmlLayer.setZoom(8);
             kmlLayer.setCenter(myLatlng);

@@ -28,8 +28,8 @@ class MapKmz extends Tool
      */
     public function menu(Request $request)
     {
-        return MenuSection::make('Map Kmz')
+        return MenuSection::make('Mapa KMZ Chihuahua')
             ->path('/map-kmz')
-            ->icon('server');
+            ->icon('map');
     }
 }

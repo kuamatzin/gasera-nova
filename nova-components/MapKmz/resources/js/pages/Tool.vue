@@ -2,8 +2,7 @@
     <div>
         <Head title="Map Kmz" />
 
-        <Heading class="mb-6">Mapa KMZ</Heading>
-
+        <Heading class="mb-6">Mapa Chihuahua KMZ</Heading>
         <div class="flex">
             <div>
                 <input
@@ -44,8 +43,9 @@ export default {
 
     methods: {
         async getKmz() {
-            const { data } = await Nova.request().get("/kmz");
+            const { data } = await Nova.request().get("/kmz/1");
             this.markers = data;
+
             this.initGmaps();
             this.loadMap();
         },
@@ -82,14 +82,12 @@ export default {
         },
 
         submitKmz() {
-            console.log('submit');
             const file = document.getElementById("formFile").files[0];
             const formData = new FormData();
             formData.append("file", file);
             Nova.request()
-                .post("/kmz", formData)
+                .post("/kmz/1", formData)
                 .then((response) => {
-                    console.log(response);
                     this.getKmz();
                 })
                 .catch((error) => {
@@ -103,8 +101,7 @@ export default {
                 -110.31398065149865
             );
 
-            const src = window.location.origin + "/storage/" + this.markers.mapa_afectacion_path;
-            console.log(src);
+            const src = window.location.origin + "/storage/" + this.markers.chihuahua.mapa_afectacion_path;
             const kmz = new google.maps.KmlLayer(src, {
                 suppressInfoWindows: false,
                 preserveViewport: true,

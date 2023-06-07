@@ -45,7 +45,9 @@ Route::get('/users-import', function () {
     return 'great';
 });
 
-Route::post('/kmz', [HelperController::class, 'uploadKmz']);
+Route::post('/kmz/{id}', [HelperController::class, 'uploadKmz']);
+Route::get('kmz/{id}', [HelperController::class, 'getKmz']);
+Route::get('get-latitude-longitude/{id}', [HelperController::class, 'getLatitudeLongitude']);
 
 function updatePropiedad(): void
 {
@@ -217,10 +219,6 @@ Route::get('test2', function () {
 });
 
 Route::get('pdf', [PdfGeneratorController::class, 'generate']);
-
-Route::get('kmz', function () {
-    return Record::findOrfail(1);
-});
 
 
 Route::get('stats', function () {

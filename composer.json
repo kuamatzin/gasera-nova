@@ -35,7 +35,8 @@
         "php-junior/nova-logs": "^1.1",
         "simonhamp/laravel-nova-csv-import": "^0.4.0",
         "trin4ik/nova-switcher": "^0.3.0",
-        "inovuz/map-kmz": "@dev"
+        "inovuz/map-kmz": "@dev",
+        "inovuz/map-kmz-sonora": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -133,6 +134,30 @@
         "8": {
             "type": "path",
             "url": "./nova-components/MapKmz"
+        },
+        "9": {
+            "type": "path",
+            "url": "./nova-components/MapKmzSonora"
+        },
+        "10": {
+            "type": "path",
+            "url": "./nova-components/MapKmzSonora"
+        },
+        "11": {
+            "type": "path",
+            "url": "./nova-components/MapKmzSonora"
+        },
+        "12": {
+            "type": "path",
+            "url": "./nova-components/MapKmzSonora"
+        },
+        "13": {
+            "type": "path",
+            "url": "./nova-components/MapKmzSonora"
+        },
+        "14": {
+            "type": "path",
+            "url": "./nova-components/MapKmzSonora"
         }
     }
 }

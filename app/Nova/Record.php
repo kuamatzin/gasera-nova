@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\FormData;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -111,6 +112,7 @@ class Record extends Resource
             }),
             Text::make('# Cad.', 'numero_cadenamiento')->sortable(),
             Text::make('Número de expediente', 'numero_expediente')->readonly(false)->size('w-1/3'),
+            //HasMany::make('Válvulas', 'valves', Valve::class),
             Select::make('Estatus', 'status')->options(function () {
                 if (Auth::user()->role === 'admin') {
                     return [
@@ -128,7 +130,7 @@ class Record extends Resource
             new PanelEsteroids('Planilla de identificación', $this->propietarioFields()),
             new PanelEsteroids('Datos del inmueble a contratar', $this->inmuebleFields()),
             new PanelEsteroids('Superficies a contratar', $this->superficieFields()),
-            //new PanelEsteroids('Mapa de afectación', $this->mapaFields()),
+            new PanelEsteroids('Mapa de afectación', $this->mapaFields()),
             new PanelEsteroids('Documentación', $this->documentacionFields()),
             (new PanelEsteroids('Cónyuge/Bienes mancomunados', $this->documentacionBienesMancomunados()))->showOnDetail(fn () => $this->conyuge_bienes_mancomunados),
             new PanelEsteroids('Dictamen Legal', $this->dictamenLegalFields()),
@@ -563,7 +565,9 @@ class Record extends Resource
             //Text::make('Dirección', 'direccion_inmueble')->hideFromIndex()->showOnUpdating(fn() => Auth::user()->role === 'admin' || Auth::user()->role === 'gestor')->readonly(fn(NovaRequest $r) => $this->validateEditionField($r)),
             FileKmz::make('Mapa de afectación', 'mapa_afectacion_path')->size('w-full')->acceptedTypes('.kmz,.kml')->storeAs(function ($request) {
                 return $request->mapa_afectacion_path->getClientOriginalName();
-            }),
+            })->hide()->showOnDetail(),
+            Text::make('Latitud', 'latitud'),
+            Text::make('Longitud', 'longitud'),
         ];
     }
 

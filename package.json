@@ -18,7 +18,9 @@
         "build-panel-esteroids": "cd nova-components/PanelEsteroids && npm run dev",
         "build-panel-esteroids-prod": "cd nova-components/PanelEsteroids && npm run prod",
         "build-map-kmz": "cd nova-components/MapKmz && npm run dev",
-        "build-map-kmz-prod": "cd nova-components/MapKmz && npm run prod"
+        "build-map-kmz-prod": "cd nova-components/MapKmz && npm run prod",
+        "build-map-kmz-sonora": "cd nova-components/MapKmzSonora && npm run dev",
+        "build-map-kmz-sonora-prod": "cd nova-components/MapKmzSonora && npm run prod"
     },
     "devDependencies": {
         "axios": "^1.1.2",

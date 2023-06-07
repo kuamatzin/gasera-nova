@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Inovuz\CustomGridSystem\CustomGridSystem;
 use Inovuz\MapKmz\MapKmz;
+use Inovuz\MapKmzSonora\MapKmzSonora;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Oneduo\NovaFileManager\NovaFileManager;
@@ -93,7 +94,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             //new NovaGridSystem
             //new LaravelNovaCsvImport,
-            new MapKmz,
+            (new MapKmz)->canSee(function($request) {
+                if ($request->user()->role == 'admin' || $request->user()->role == 'cliente' || ($request->user()->role == 'abogado' && $request->user()->entity == 'chihuahua')) {
+                    return true;
+                }
+            }),
+            (new MapKmzSonora)->canSee(function($request) {
+                if ($request->user()->role == 'admin' || $request->user()->role == 'cliente' || ($request->user()->role == 'abogado' && $request->user()->entity == 'sonora')) {
+                    return true;
+                }
+            }),
             new CustomGridSystem,
             NovaFileManager::make()->canSee(function($request) {
                 if ($request->user()->role == 'admin') {
