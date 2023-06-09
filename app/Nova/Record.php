@@ -565,8 +565,8 @@ class Record extends Resource
             FileKmz::make('Mapa de afectación', 'mapa_afectacion_path')->size('w-full')->acceptedTypes('.kmz,.kml')->storeAs(function ($request) {
                 return $request->mapa_afectacion_path->getClientOriginalName();
             })->hide()->showOnDetail(),
-            Text::make('Latitud', 'latitud'),
-            Text::make('Longitud', 'longitud'),
+            Text::make('Latitud', 'latitud')->hideFromIndex(),
+            Text::make('Longitud', 'longitud')->hideFromIndex(),
         ];
     }
 
