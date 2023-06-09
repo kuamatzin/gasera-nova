@@ -153,7 +153,7 @@ Route::get('files', function () {
                     }
                 }*/
                 if ($archivo === 'dil') {
-                    $expediente->updated([
+                    $expediente->update([
                         'dictamen_legal' => $item
                     ]);
                 }
