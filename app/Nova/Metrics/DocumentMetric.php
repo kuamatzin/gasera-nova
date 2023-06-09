@@ -48,19 +48,28 @@ class DocumentMetric extends Partition
         $subido = 0;
         $no_subido = 0;
         foreach ($records as $record) {
-            if ($record->getRawOriginal('regimen_propiedad_inmueble') === 'pr') {
-                $dictamen_legal = $record->documentacion;
-                $type_pr = 'clg_pr';
-                if ($dictamen_legal && isset($dictamen_legal[$type_pr]) && $dictamen_legal[$type_pr] !== '' && $dictamen_legal[$type_pr] !== null) {
-                    $subido++;
-                } else {
-                    $no_subido++;
+            if ($type === 'clg_pr') {
+                if ($record->getRawOriginal('regimen_propiedad_inmueble') === 'pr') {
+                    $dictamen_legal = $record->documentacion;
+                    $type_pr = 'clg_pr';
+                    if ($dictamen_legal && isset($dictamen_legal[$type_pr]) && $dictamen_legal[$type_pr] !== '' && $dictamen_legal[$type_pr] !== null) {
+                        $subido++;
+                    } else {
+                        $no_subido++;
+                    }
                 }
-            }
-            if ($record->getRawOriginal('regimen_propiedad_inmueble') === 'pa') {
-                $dictamen_legal = $record->documentacion;
-                $type_pr = 'cvd_pa';
-                if ($dictamen_legal && isset($dictamen_legal[$type_pr]) && $dictamen_legal[$type_pr] !== '' && $dictamen_legal[$type_pr] !== null) {
+                if ($record->getRawOriginal('regimen_propiedad_inmueble') === 'pa') {
+                    $dictamen_legal = $record->documentacion;
+                    $type_pr = 'cvd_pa';
+                    if ($dictamen_legal && isset($dictamen_legal[$type_pr]) && $dictamen_legal[$type_pr] !== '' && $dictamen_legal[$type_pr] !== null) {
+                        $subido++;
+                    } else {
+                        $no_subido++;
+                    }
+                }
+            } else {
+                $dictamen_legal = $record->dictamen_legal;
+                if ($dictamen_legal && $dictamen_legal !== '' && $dictamen_legal !== null) {
                     $subido++;
                 } else {
                     $no_subido++;

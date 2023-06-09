@@ -45,8 +45,8 @@ class Main extends Dashboard
             */
             [
                 'titulo' => 'Dictamen Legal',
-                'fase' => '1',
-                'type' => 'dictamen_legal'
+                'fase' => 'docs',
+                'type' => 'dil'
             ],
             [
                 'titulo' => 'Plano de afectación',
