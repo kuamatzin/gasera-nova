@@ -95,7 +95,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     loadMap: function loadMap() {
       var myLatlng = new google.maps.LatLng(29.283187136943198, -110.31398065149865);
-      var src = window.location.origin + "/storage/" + this.markers.chihuahua.mapa_afectacion_path;
+      var src = window.location.origin + "/storage/" + this.markers.mapa_afectacion_path;
       var kmz = new google.maps.KmlLayer(src, {
         suppressInfoWindows: false,
         preserveViewport: true,
@@ -159,7 +159,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mb-6"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Mapa Chihuahua-KMZ")];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Mapa Chihuahua")];
     }),
     _: 1 /* STABLE */
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {

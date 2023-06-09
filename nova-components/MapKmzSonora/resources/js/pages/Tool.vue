@@ -2,7 +2,7 @@
     <div>
         <Head title="Map Kmz" />
 
-        <Heading class="mb-6">Mapa Sonora-KMZ</Heading>
+        <Heading class="mb-6">Mapa Sonora</Heading>
 
         <div class="flex">
             <div>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <Head title="Map Kmz" />
-        <Heading class="mb-6">Mapa Chihuahua-KMZ</Heading>
+        <Heading class="mb-6">Mapa Chihuahua</Heading>
         <div class="flex">
             <div>
                 <input
@@ -100,7 +100,7 @@ export default {
                 -110.31398065149865
             );
 
-            const src = window.location.origin + "/storage/" + this.markers.chihuahua.mapa_afectacion_path;
+            const src = window.location.origin + "/storage/" + this.markers.mapa_afectacion_path;
             const kmz = new google.maps.KmlLayer(src, {
                 suppressInfoWindows: false,
                 preserveViewport: true,
