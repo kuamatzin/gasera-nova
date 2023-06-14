@@ -157,7 +157,7 @@
                         </tr>
                         <tr>
                             <td style="width: 250px">Estado:</td>
-                            <td>{{ $record->estado_inmueble }}</td>
+                            <td>{{ ucfirst($record->estado_inmueble) }}</td>
                         </tr>
                         <tr>
                             <td style="width: 250px">Régimen de propiedad:</td>
