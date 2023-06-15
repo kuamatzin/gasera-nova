@@ -367,7 +367,7 @@ class Record extends Resource
                 ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial', 'ido_pr', 'regimen_propiedad_inmueble', 'pr'),
                 ...$this->addHideFieldUntilOptionIsSelected('Acta de nacimiento', 'ana_pr', 'regimen_propiedad_inmueble', 'pr'),
                 ...$this->addHideFieldUntilOptionIsSelected('CURP', 'curp_pr', 'regimen_propiedad_inmueble', 'pr'),
-                ...$this->addHideFieldUntilOptionIsSelected('RFC', 'rfc_pr', 'regimen_propiedad_inmueble', 'pr'),
+                ...$this->addHideFieldUntilOptionIsSelected('CFDI o Constancia de Situación Fiscal', 'rfc_pr', 'regimen_propiedad_inmueble', 'pr'),
                 ...$this->addHideFieldUntilOptionIsSelected('Comprobante de domicilio', 'cdo_pr', 'regimen_propiedad_inmueble', 'pr'),
                 ...$this->addHideFieldUntilOptionIsSelected('Escrituras o título de propiedad', 'esc_pr', 'regimen_propiedad_inmueble', 'pr'),
                 ...$this->addHideFieldUntilOptionIsSelected('Plano de propiedad', 'pla_pr', 'regimen_propiedad_inmueble', 'pr'),
