@@ -106,9 +106,6 @@ class Record extends Resource
     {
         return [
             //ID::make('ID')->sortable(),
-            BelongsTo::make('Gestor', 'user', User::class)->hideFromIndex()->hideFromDetail()->hideWhenUpdating()->showOnCreating(function() {
-                return Auth::user()->role === 'admin';
-            }),
             Text::make('# Cad.', 'numero_cadenamiento')->sortable(),
             Text::make('Número de expediente', 'numero_expediente')->readonly(false)->size('w-1/3'),
             //HasMany::make('Válvulas', 'valves', Valve::class),
@@ -428,7 +425,7 @@ class Record extends Resource
             JSON::make('', 'documentacion', [
                 ...$this->addHideFieldUntilOptionIsSelected('Acta de elección de los órganos', 'aeo_ej', 'regimen_propiedad_inmueble', 'ej'),
                 ...$this->addHideFieldUntilOptionIsSelected('Resolución presidencial de dotación de tierras', 'rdt_ej', 'regimen_propiedad_inmueble', 'ej'),
-                ...$this->addHideFieldUntilOptionIsSelected('Carpeta básica del ejido', 'cbe_ej', 'regimen_propiedad_inmueble', 'ej'),
+                ...$this->addHideFieldUntilOptionIsSelected('ADDATE', 'cbe_ej', 'regimen_propiedad_inmueble', 'ej'),
                 ...$this->addHideFieldUntilOptionIsSelected('Plano general del ejido', 'pge_ej', 'regimen_propiedad_inmueble', 'ej'),
                 ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial de los representantes ejidales', 'ide_ej', 'regimen_propiedad_inmueble', 'ej'),
                 ...$this->addHideFieldUntilOptionIsSelected('Padrón vigente de ejidatarios', 'pve_ej', 'regimen_propiedad_inmueble', 'ej'),
@@ -446,7 +443,7 @@ class Record extends Resource
             JSON::make('', 'documentacion', [
                 ...$this->addHideFieldUntilOptionIsSelected('Acta de elección de los órganos', 'aeoca_ca', 'regimen_propiedad_inmueble', 'ca'),
                 ...$this->addHideFieldUntilOptionIsSelected('Resolución presidencial de dotación de tierras', 'rdtca_ca', 'regimen_propiedad_inmueble', 'ca'),
-                ...$this->addHideFieldUntilOptionIsSelected('Carpeta básica del ejido', 'cbeca_ca', 'regimen_propiedad_inmueble', 'ca'),
+                ...$this->addHideFieldUntilOptionIsSelected('ADDATE', 'cbeca_ca', 'regimen_propiedad_inmueble', 'ca'),
                 ...$this->addHideFieldUntilOptionIsSelected('Plano general del ejido', 'pgeca_ca', 'regimen_propiedad_inmueble', 'ca'),
                 ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial de los representantes ejidales', 'ideca_ca', 'regimen_propiedad_inmueble', 'ca'),
                 ...$this->addHideFieldUntilOptionIsSelected('Padrón vigente de ejidatarios', 'pveca_ca', 'regimen_propiedad_inmueble', 'ca'),
