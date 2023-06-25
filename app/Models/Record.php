@@ -19,6 +19,8 @@ class Record extends Model
         'dictamen_legal_fase_dos' => 'array',
     ];
 
+    protected $dates = ['fecha_dictamen'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
