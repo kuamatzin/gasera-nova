@@ -106,6 +106,9 @@ class Record extends Resource
     {
         return [
             //ID::make('ID')->sortable(),
+            BelongsTo::make('Gestor', 'user', User::class)->hideFromIndex()->hideFromDetail()->hideWhenUpdating()->showOnCreating(function() {
+                return Auth::user()->role === 'admin';
+            }),
             Text::make('# Cad.', 'numero_cadenamiento')->sortable(),
             Text::make('Número de expediente', 'numero_expediente')->readonly(false)->size('w-1/3'),
             //HasMany::make('Válvulas', 'valves', Valve::class),
@@ -484,7 +487,7 @@ class Record extends Resource
             Number::make('Monto aproximado (en pesos)', 'monto_aproximado')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
             Text::make('Terminos y condiciones para la celebración del Contrato Respectivo', 'terminos_condiciones_celebracion_contrato')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
             Text::make('Abogado emitió dictamen', 'abogado_emitio_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Date::make('Fecha', 'fecha_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            //Date::make('Fecha', 'fecha_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
         ];
     }
 
