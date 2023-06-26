@@ -489,7 +489,7 @@ class Record extends Resource
             Number::make('Monto aproximado (en pesos)', 'monto_aproximado')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
             Text::make('Terminos y condiciones para la celebración del Contrato Respectivo', 'terminos_condiciones_celebracion_contrato')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
             Text::make('Abogado emitió dictamen', 'abogado_emitio_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Date::make('Fecha', 'fecha_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            //Date::make('Fecha', 'fecha_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
         ];
     }
 
