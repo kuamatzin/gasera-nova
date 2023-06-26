@@ -429,7 +429,7 @@ class Record extends Resource
         return [
             JSON::make('', 'documentacion', [
                 ...$this->addHideFieldUntilOptionIsSelected('Acta de elección de los órganos', 'aeo_ej', 'regimen_propiedad_inmueble', 'ej'),
-                ...$this->addHideFieldUntilOptionIsSelected('Resolución presidencial de dotación de tierras', 'rdt_ej', 'regimen_propiedad_inmueble', 'ej'),
+                ...$this->addHideFieldUntilOptionIsSelected('Resolución presidencial dotación tierras', 'rdt_ej', 'regimen_propiedad_inmueble', 'ej'),
                 ...$this->addHideFieldUntilOptionIsSelected('ADDATE', 'cbe_ej', 'regimen_propiedad_inmueble', 'ej'),
                 ...$this->addHideFieldUntilOptionIsSelected('Plano general del ejido', 'pge_ej', 'regimen_propiedad_inmueble', 'ej'),
                 ...$this->addHideFieldUntilOptionIsSelected('Identificación oficial de los representantes ejidales', 'ide_ej', 'regimen_propiedad_inmueble', 'ej'),
