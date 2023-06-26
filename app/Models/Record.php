@@ -17,9 +17,8 @@ class Record extends Model
         'conyuge_bienes_mancomunados_documentacion' => 'array',
         'dictamen_legal_fase_uno' => 'array',
         'dictamen_legal_fase_dos' => 'array',
+        'fecha_dictamen' => 'date'
     ];
-
-    protected $dates = ['fecha_dictamen'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
