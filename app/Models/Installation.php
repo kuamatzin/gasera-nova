@@ -10,6 +10,8 @@ class Installation extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public $incrementing = true;
+
     protected $table = 'installations';
 
     protected $guarded = [];
