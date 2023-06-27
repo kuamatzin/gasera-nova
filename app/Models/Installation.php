@@ -38,8 +38,8 @@ class Installation extends Model
      */
     protected function setDocumentacionAttribute($documentation): bool|string
     {
-        $status_values = array_filter($documentation, fn($value, $key) => strpos($key, '_status', 0), ARRAY_FILTER_USE_BOTH);
-        $status_values = array_map(fn($value) => $value === null ? 'revision' : $value, $status_values);
+        $status_values = array_filter($documentation, fn ($value, $key) => strpos($key, '_status', 0), ARRAY_FILTER_USE_BOTH);
+        $status_values = array_map(fn ($value) => $value === null ? 'revision' : $value, $status_values);
         foreach ($status_values as $key => $value) {
             $documentation[$key] = $value;
         }
@@ -57,5 +57,10 @@ class Installation extends Model
             'ca' => 'Comunidad Agraria',
             default => '',
         };
+    }
+
+    public function getIncrementing()
+    {
+        return true;
     }
 }
