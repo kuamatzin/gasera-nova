@@ -106,10 +106,11 @@ class Installation extends Resource
     {
         return [
             //ID::make('ID')->sortable(),
-            BelongsTo::make('Gestor', 'user', User::class),
+            BelongsTo::make('Gestor', 'user', User::class)->hideFromIndex()->hideFromDetail()->hideWhenUpdating()->showOnCreating(function() {
+                return Auth::user()->role === 'admin';
+            }),
             Text::make('# Cad.', 'numero_cadenamiento')->sortable(),
             Text::make('Número de expediente', 'numero_expediente')->readonly(false)->size('w-1/3'),
-            //HasMany::make('Válvulas', 'valves', Valve::class),
             Select::make('Estatus', 'status')->options(function () {
                 if (Auth::user()->role === 'admin') {
                     return [
