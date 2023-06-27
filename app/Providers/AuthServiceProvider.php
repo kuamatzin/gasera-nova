@@ -16,7 +16,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         //
-        Record::class => RecordPolicy::class
+        Record::class => RecordPolicy::class,
+        Installation::class => InstallationPolicy::class,
     ];
 
     /**

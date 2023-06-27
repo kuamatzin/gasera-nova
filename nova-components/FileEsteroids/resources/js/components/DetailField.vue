@@ -12,7 +12,7 @@
             <span v-if="fieldValue && !imageUrl" class="break-words"></span>
 
             <span v-if="!fieldValue && !imageUrl">
-                <img src="https://files.inovuz.com/files/gasera/switch-off.png" style="width: 30px">
+                <img src="https://files.inovuz.com/files/gasera/switch-off.png" style="width: 60px">
             </span>
 
             <p v-if="shouldShowToolbar" class="flex items-center text-sm">
@@ -24,7 +24,7 @@
                     class="cursor-pointer text-gray-500 inline-flex items-center"
                 >
                     <span class="class mt-1">
-                        <img src="https://files.inovuz.com/files/gasera/on-button.png" style="width: 30px">
+                        <img src="https://files.inovuz.com/files/gasera/on-button.png" style="width: 60px">
                     </span>
                 </a>
             </p>
