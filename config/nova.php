@@ -163,7 +163,7 @@ return [
     */
 
     'brand' => [
-        //'logo' => resource_path('/img/logo.svg'),
+        'logo' => resource_path('/img/logo.svg'),
         'logo_src' => 'https://files.inovuz.com/files/logo_advisers.png',
         'logo_src_dark' => 'https://files.inovuz.com/files/logo_advisers.png',
         'logo_class' => 'h-12',
