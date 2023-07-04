@@ -28,10 +28,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         parent::boot();
 
         Nova::footer(function ($request) {
-        return Blade::render('
+            return Blade::render('
                 B&L Advisers
             ');
         });
+
+        Nova::withoutGlobalSearch();
     }
 
 
@@ -44,9 +46,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function routes()
     {
         Nova::routes()
-                ->withAuthenticationRoutes()
-                ->withPasswordResetRoutes()
-                ->register();
+            ->withAuthenticationRoutes()
+            ->withPasswordResetRoutes()
+            ->register();
     }
 
     /**
@@ -71,12 +73,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function dashboards()
     {
         return [
-            Main::make()->showRefreshButton()->canSee(function($request) {
+            Main::make()->showRefreshButton()->canSee(function ($request) {
                 if ($request->user()->role == 'admin' || $request->user()->role == 'cliente' || $request->user()->role == 'abogado') {
                     return true;
                 }
             }),
-            Sonora::make()->showRefreshButton()->canSee(function($request) {
+            Sonora::make()->showRefreshButton()->canSee(function ($request) {
                 if ($request->user()->role == 'admin' || $request->user()->role == 'cliente' || $request->user()->role == 'abogado') {
                     return true;
                 }
@@ -94,18 +96,18 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             //new NovaGridSystem
             //new LaravelNovaCsvImport,
-            (new MapKmz)->canSee(function($request) {
+            (new MapKmz)->canSee(function ($request) {
                 if ($request->user()->role == 'admin' || $request->user()->role == 'cliente' || ($request->user()->role == 'abogado' && $request->user()->entity == 'chihuahua')) {
                     return true;
                 }
             }),
-            (new MapKmzSonora)->canSee(function($request) {
+            (new MapKmzSonora)->canSee(function ($request) {
                 if ($request->user()->role == 'admin' || $request->user()->role == 'cliente' || ($request->user()->role == 'abogado' && $request->user()->entity == 'sonora')) {
                     return true;
                 }
             }),
             new CustomGridSystem,
-            NovaFileManager::make()->canSee(function($request) {
+            NovaFileManager::make()->canSee(function ($request) {
                 if ($request->user()->role == 'admin') {
                     return true;
                 }
