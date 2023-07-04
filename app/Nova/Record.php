@@ -463,8 +463,8 @@ class Record extends Resource
     public function dictamenLegalFields()
     {
         return [
-            BooleanSwitcher::make('Documentación completa para firmar contrato', 'documentación_completa_firmar_contrato')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/2'),
-            BooleanSwitcher::make('Cuenta con CLG/CVD', 'clg_cvd')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/2'),
+            BooleanSwitcher::make('Documentación completa para firmar contrato', 'documentación_completa_firmar_contrato')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            BooleanSwitcher::make('Cuenta con CLG/CVD', 'clg_cvd')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
             //Textarea::make('Dictamen Legal', 'dictamen_legal')->rows(35)->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-full'),
             FileEsteroids::make('Dictamen Legal', 'dictamen_legal')->storeAs(function ($request) {
                 return $request->numero_expediente . '_' . 'DIL' . '.pdf';
@@ -473,23 +473,23 @@ class Record extends Resource
                 'Si' => 'Si',
                 'No' => 'No',
                 'n/a' => 'N/A'
-            ])->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            BooleanSwitcher::make('Contrato definitivo', 'contrato_definitivo')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            BooleanSwitcher::make('Convenio sujeto a condición', 'convenio_sujeto_condicion')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            BooleanSwitcher::make('Indique si se identificó alguna inconsistencia importante', 'identificacion_inconsistencia_importante')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Text::make('Descripción', 'identificacion_inconsistencia_importante_contenido')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            BooleanSwitcher::make('Acción legal que se tendría que realizar para regularizar la Legal Tenencia de la Tierra', 'accion_legal_regularizar_tierra')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Text::make('Descripción', 'accion_legal_regularizar_tierra_contenido')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            ])->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            BooleanSwitcher::make('Contrato definitivo', 'contrato_definitivo')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            BooleanSwitcher::make('Convenio sujeto a condición', 'convenio_sujeto_condicion')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            BooleanSwitcher::make('Indique si se identificó alguna inconsistencia importante', 'identificacion_inconsistencia_importante')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            Text::make('Descripción', 'identificacion_inconsistencia_importante_contenido')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            BooleanSwitcher::make('Acción legal que se tendría que realizar para regularizar la Legal Tenencia de la Tierra', 'accion_legal_regularizar_tierra')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            Text::make('Descripción', 'accion_legal_regularizar_tierra_contenido')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
             Select::make('Clasificación de la contingencia de acuerdo a la inconsistencia detectada', 'clasificacion_contingencia_detectada')->options([
                 'simple' => 'Simple de resolver',
                 'requiere_accion_legal_gasto' => 'Requiere acción legal, gasto, etc',
                 'complejo_costoso_tiempo_extenso' => 'Complejo, costoso, tiempo extenso para resolver',
-            ])->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Number::make('Meses para resolver la contingencia', 'meses_regularizar_contingencia')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Number::make('Monto aproximado (en pesos)', 'monto_aproximado')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Text::make('Terminos y condiciones para la celebración del Contrato Respectivo', 'terminos_condiciones_celebracion_contrato')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Text::make('Abogado emitió dictamen', 'abogado_emitio_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
-            Date::make('Fecha', 'fecha_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/3'),
+            ])->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            Number::make('Meses para resolver la contingencia', 'meses_regularizar_contingencia')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            Number::make('Monto aproximado (en pesos)', 'monto_aproximado')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            Text::make('Terminos y condiciones para la celebración del Contrato Respectivo', 'terminos_condiciones_celebracion_contrato')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            Text::make('Abogado emitió dictamen', 'abogado_emitio_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
+            Date::make('Fecha', 'fecha_dictamen')->hideFromIndex()->showOnUpdating(fn () => Auth::user()->role === 'admin' || Auth::user()->role === 'abogado')->readonly(fn (NovaRequest $r) => $this->validateDictamenLegal($r))->size('w-1/4'),
         ];
     }
 
