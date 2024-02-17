@@ -350,7 +350,7 @@ class Record extends Resource
                 ...$this->fieldFileFasesDictamenLegal('Aviso de interés', 'ain'),
                 ...$this->fieldFileFasesDictamenLegal('Notificación SENER', 'sener'),
                 ...$this->fieldFileFasesDictamenLegal('Notificación SEDATU', 'sedatu'),
-                ...$this->fieldFileFasesDictamenLegal('Anuencia de conformidad', 'adc'),
+                ...$this->fieldFileFasesDictamenLegal('Anuencia de construcción', 'adc'),
                 ...$this->fieldFileFasesDictamenLegal('Contrato firmado', 'cto'),
                 ...$this->fieldFileFasesDictamenLegal('Notificación de acuerdo cerrado a CRE', 'cre'),
                 ...$this->fieldFileFasesDictamenLegal('Notificación de acuerdo cerrado a SEDATU', 'csedatu'),

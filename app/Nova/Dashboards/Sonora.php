@@ -41,7 +41,7 @@ class Sonora extends Dashboard
                 'type' => 'sedatu'
             ],
             [
-                'titulo' => 'Anuencia de conformidad',
+                'titulo' => 'Anuencia de construcción',
                 'fase' => '2',
                 'type' => 'adc'
             ],
